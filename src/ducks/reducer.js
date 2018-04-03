@@ -2,6 +2,7 @@ const iState = {
     name:null,
     user_id:null,
     picture:null,
+    email:null,
     address_count:0,
     addresses:[1,2],
 }
@@ -35,9 +36,10 @@ export default function (state=iState,action){
             return newState;
         case UPDATE_USER:
             newState.name = action.payload.name;
-            newState.user_id = action.payload.user_id;
+            newState.user_id = action.payload.auto_id;
             newState.picture = action.payload.picture;
             newState.address_count = action.payload.address_count;
+            newState.email = action.payload.email;
 
             if(action.payload.address_count !== 0){
 
