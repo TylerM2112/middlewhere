@@ -6,6 +6,7 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.1",
+    "excon": "^1.0.2",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "massive": "^4.7.1",
@@ -21,5 +22,14 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "main": "server/index.js",
+  "proxy": {
+    "/auth/callback": {
+      "target": "http://localhost:4000"
+    },
+    "/api": {
+      "target": "http://localhost:4000"
+    }
   }
 }
