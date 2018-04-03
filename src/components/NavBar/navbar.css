@@ -2,11 +2,10 @@
     /* border: 2px solid red; */
     display: flex;
     flex-direction: row;
-    position: fixed;
+    position: absolute;
     width: 99.7%;
-    top: 90%;
+    bottom: 0;
 }
-
 .nav_Link_Li    {
     background-color: white;
     display: inline-block;

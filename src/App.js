@@ -9,7 +9,7 @@ class App extends Component {
   render() {
     return (
      <div>
-       <Header TitleOfPage={"Page Title Here"}/>
+       <Header TitleOfPage={"WELCOME"}/>
        <NavBar/>
      </div>
     );
