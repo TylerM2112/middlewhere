@@ -26,6 +26,9 @@
     color: white;
 }
 
+.nav_Link_Li:hover {
+    cursor: pointer;
+}
 /* below is for styling color of calendar icon */
 
 .nav_Link_Li  img{
