@@ -1,0 +1,65 @@
+.parent-newEvents-div {
+     /* overflow: scroll; */
+     border: 2px solid black;
+     height: 40rem;
+     background-color: #e6e6e8;
+ }
+ 
+ span  {
+    display: inline-block;
+    /* border: 2px solid black; */
+    width: 99%;
+    text-align: center;
+    
+}
+
+.newEvent-input {
+    border: 2px solid black;
+    width: 80%;
+    height: 3rem;
+    border-radius: 10px;
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+.post-event-button{
+    border: 0.5rem;
+    border-radius: 5px;
+    height: 2rem;
+    background-color: #C43235;
+    position: relative;
+    z-index: -1rem;
+    top: 3rem;
+    left: 45%;
+    font-family: 'Dosis', sans-serif;
+    font-size: 24px;
+    color: white;
+}
+
+.new-event-h2 {
+    text-align: center;
+}
+
+@media(max-width: 1000px){
+    .post-event-button {
+        display: inline-block;
+        position: relative;
+        left:0;
+        margin-left: 43%;
+        
+
+    }
+}
+
+@media(max-width: 570px){
+    .post-event-button {
+        display: inline-block;
+        position: relative;
+        left:0;
+        margin-left: 33%;
+        
+
+    }
+
+}
+
