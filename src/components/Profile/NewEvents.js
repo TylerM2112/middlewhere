@@ -21,10 +21,11 @@ class NewEvent extends Component {
         }
     }
 
-    postEvent(){
+    postEvent(id){
         const {name, date, startTime, endTime, event_location, picture, place, event_description} = this.state
         console.log('hit')
-        axios.post('/api/new/event', {
+        axios.post(`/api/new/event`, {
+            user_id: this.props.state.user_id,
             event_name: name, 
             event_date: date, 
             event_start: startTime, 
@@ -34,6 +35,16 @@ class NewEvent extends Component {
             event_description: event_description})
         .then((resp) => {
             console.log('resp.data', resp.data)
+            this.setState({
+                name:'',
+                date:'',
+                event_description: '',
+                startTime:'',
+                endTime:'',
+                picture:'',
+                place: '',
+
+            })
         })
         console.log('this.state', this.state)
     }
