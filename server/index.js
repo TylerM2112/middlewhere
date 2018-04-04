@@ -26,6 +26,7 @@ app.use(session({
 
 //USER INFORMATION
 app.get('/api/getUserInfo/:user_id', userController.getUserInfo)
+app.post('/api/addUserAddress/:user_id', userController.addUserAddress)
 
 //Yelp Controller
 app.post('/api/yelp/search', yc.search)
