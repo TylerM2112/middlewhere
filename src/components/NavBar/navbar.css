@@ -2,12 +2,13 @@
     /* border: 2px solid red; */
     display: flex;
     flex-direction: row;
-    position: absolute;
+    position: fixed;
+    z-index: 11;
     width: 99.7%;
     bottom: 0;
 }
 .nav_Link_Li    {
-    background-color: white;
+    background-color: #c43235;
     display: inline-block;
     border-left: 0.5px solid gray;
     border-right: 0.5px solid gray;
@@ -17,6 +18,7 @@
     position: relative;
     width: 13rem;
     text-align: center;
+    color: white;
    
 }
 
