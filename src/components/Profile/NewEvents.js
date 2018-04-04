@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './newEvents.css';
+import {connect} from 'react-redux';
 
-export default class NewEvent extends Component {
+
+class NewEvent extends Component {
     constructor(props){
         super(props)
 
@@ -52,3 +54,11 @@ export default class NewEvent extends Component {
         );
     }
 }
+
+const mapStateToProps = state =>{
+    return{
+        state:state,
+    }
+}
+
+export default connect(mapStateToProps)(NewEvent)
