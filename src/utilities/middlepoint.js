@@ -1,5 +1,7 @@
 
-function middlepoint(lat, long) {
+
+
+function convertToCoordinates(lat, long) {
     //Converts lat and long into radians
     lat = lat * (Math.PI / 180);
     long = long * (Math.PI / 180);
@@ -11,10 +13,10 @@ function middlepoint(lat, long) {
     return {x: x, y: y, z: z};
 }
 
-function middlepoint2(x, y, z) { 
-    long = Math.atan2(y, x);
+function findMiddlepoint(x, y, z) { 
+    let long = Math.atan2(y, x);
     let hyp = Math.sqrt((x * x) + (y * y));
-    lat = Math.atan2(z, hyp);
+    let lat = Math.atan2(z, hyp);
     
     lat = lat * (180/Math.PI);
     long = long * (180/Math.PI);
@@ -23,9 +25,9 @@ function middlepoint2(x, y, z) {
 }
 
 
-function addedcoords(array){
+export function middlepoint(array){
   let arr =[];
-  array.map(e => e.map(item => arr.push(middlepoint(item.lat, item.long))));
+  array.map(item => arr.push(convertToCoordinates(item.lat, item.long)));
   console.log(arr);
 let x = 0;
 let y = 0;
@@ -39,9 +41,7 @@ for(let i = 0; i < arr.length; i++){
 x = x/arr.length;
 y = y/arr.length;
 z = z/arr.length;
-  return middlepoint2(x, y, z);
+  return findMiddlepoint(x, y, z);
   // console.log(x, y, z);
 }
 
-// console.log(array);
-console.log(addedcoords(array));

@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import "./navbar.css"
+import Btn from '../Assets/Button/Btn';
+import calendar from '../../assets/images/calendar.png'
+import add_group from '../../assets/images/add_group.png'
+import friends from '../../assets/images/friends-512.png'
 export default class NavBar extends Component {
     render() {
         return (
             <div className="nav_parent_div">
-              <div className="nav_Link_Li"> <img src={require('../../assets/images/calendar.png')}/><h5>EVENTS</h5> </div>
-              <div className="nav_Link_Li"><img src={require('../../assets/images/add_group.png')}/><h5>GROUPS</h5></div>
-              <div className="nav_Link_Li"><img src={require('../../assets/images/friends-512.png')}/><h5>FRIENDS</h5></div>
+                <Btn label="EVENTS" link="/" img={calendar}/>
+                <Btn label="GROUPS" link="/" img= {add_group}/>
+                <Btn label="FRIENDS" link="/" img= {friends}/>
+        
+    
           </div>
         );
     }

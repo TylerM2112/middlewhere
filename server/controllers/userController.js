@@ -63,5 +63,19 @@ module.exports = {
     //         }
     //     ]
     // }
+  },
+  addUserAddress:(req,res) =>{
+    console.log(req.body);
+    console.log(req.params)
+
+    const {newAddress1,newCity,newState,newPostalcode,newPlaceName,newLat,newLong} = req.body;
+
+    const {user_id} = req.params;
+
+    const db = req.app.get('db');
+
+    db.add_user_address([newAddress1,newCity,newState,newPostalcode,newPlaceName,newLat,newLong,user_id])
+      .then(()=>res.status(200).end())
+      .catch(err=>console.log(err))
   }
 }
