@@ -13,11 +13,11 @@
 }
 
 .nav_parent_div > *{
-    flex:1 1;
+    flex:1;
 }
 
 .nav_Link_Li    {
-    background-color: white;
+    background-color: #C43235;
     border-left: 0.5px solid gray;
     border-right: 0.5px solid gray;
     border-top: 1px solid gray;
@@ -54,7 +54,13 @@
 @media(min-width: 780px){
     
     .nav_Link_Li {
-        width: 35%;
+        width: 100%;
     }
 
 }
+/* @media(min-width: 1000px){
+    .nav_Link_Li {
+        width: 100%;
+    }
+
+} */

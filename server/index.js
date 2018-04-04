@@ -9,12 +9,9 @@ const axios = require('axios');
 //Controllers
 const userController = require('./controllers/userController');
 const eventController = require('./controllers/eventController')
-<<<<<<< HEAD
 const friendController = require('./controllers/friendController.js')
-=======
 const yc = require('./controllers/yelpController');
 
->>>>>>> 9123b6094d2afed50344a70f8e29088ed993d296
 
 require('dotenv').config();
 
@@ -34,12 +31,9 @@ app.use(session({
 
 //USER INFORMATION
 app.get('/api/getUserInfo/:user_id', userController.getUserInfo)
-<<<<<<< HEAD
 //GET FRIENDS
 app.get('/api/friends', friendController.get_friends)
-=======
 
->>>>>>> 9123b6094d2afed50344a70f8e29088ed993d296
 //POST EVENT
 app.post('/api/new/event', eventController.post_event)
 app.post('/api/addUserAddress/:user_id', userController.addUserAddress)

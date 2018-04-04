@@ -8,9 +8,9 @@ export default class NavBar extends Component {
     render() {
         return (
             <div className="nav_parent_div">
-                <Btn label="EVENTS" link="/" img={calendar}/>
-                <Btn label="GROUPS" link="/" img= {add_group}/>
-                <Btn label="FRIENDS" link="/" img= {friends}/>
+                <Btn label="EVENTS" link="/events" img={calendar}/>
+                <Btn label="GROUPS" link="/groups" img= {add_group}/>
+                <Btn label="FRIENDS" link="/friends" img= {friends}/>
         
     
           </div>
