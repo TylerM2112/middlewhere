@@ -3,16 +3,16 @@ import logo from './logo.svg';
 import NavBar from './components/NavBar/NavBar.js'
 import Header from './components/Header/Header.js'
 import './App.css';
-import Tester from './Tester';
-import {excon} from 'excon'
+import { excon } from 'excon'
+import Map from './components/Map/Map';
 
 class App extends Component {
   render() {
     return (
      <div>
-       <Header TitleOfPage={"Page Title Here"}/>
+        <Header TitleOfPage={"Page Title Here"} />
+        <Map />
        <NavBar/>
-       <Tester/>
      </div>
     );
   }
