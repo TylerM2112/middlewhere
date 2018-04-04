@@ -6,6 +6,7 @@ const axios = require('axios');
 
 //Controllers
 const userController = require('./controllers/userController');
+const yc = require('./controllers/yelpController');
 
 require('dotenv').config();
 
@@ -26,6 +27,9 @@ app.use(session({
 //USER INFORMATION
 app.get('/api/getUserInfo/:user_id', userController.getUserInfo)
 app.post('/api/addUserAddress/:user_id', userController.addUserAddress)
+
+//Yelp Controller
+app.post('/api/yelp/search', yc.search)
 
 const PORT = process.env.SERVER_PORT || 4000;
 app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
