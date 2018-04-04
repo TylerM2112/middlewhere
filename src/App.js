@@ -19,7 +19,7 @@ class App extends Component {
         <Map />
        <NavBar/>
        <NewEvent/>
-       <Profile />
+       {/* <Profile /> */}
      </div>
     );
   }
