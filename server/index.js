@@ -4,9 +4,12 @@ const massive = require('massive');
 const session = require('express-session');
 const axios = require('axios');
 
+
 //Controllers
 const userController = require('./controllers/userController');
+const eventController = require('./controllers/eventController')
 const yc = require('./controllers/yelpController');
+
 
 require('dotenv').config();
 
@@ -26,6 +29,9 @@ app.use(session({
 
 //USER INFORMATION
 app.get('/api/getUserInfo/:user_id', userController.getUserInfo)
+
+//POST EVENT
+app.post('/api/new/event', eventController.post_event)
 app.post('/api/addUserAddress/:user_id', userController.addUserAddress)
 
 //Yelp Controller
