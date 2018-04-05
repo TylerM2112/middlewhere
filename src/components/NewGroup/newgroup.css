@@ -1,0 +1,35 @@
+.group-friends-option {
+    /* border:2px solid blue; */
+
+}
+
+/* .group-friends-option  select{
+   
+} */
+
+
+.group-friends-option .initial {
+    transition: 1s;
+    border:2px solid black;
+    border-radius: 10px;
+    height: 10rem;
+    font-size: 24px;
+    margin-top: 10px;
+    width: 60%;
+    position: relative;
+    left: 20%;
+    
+}
+
+.group-friends-option .secondary {
+    transition: 1s;
+    border:2px solid black;
+    border-radius: 10px;
+    height: 3rem;
+    font-size: 24px;
+    margin-top: 10px;
+    width: 60%;
+    position: relative;
+    left: 20%;
+    
+}

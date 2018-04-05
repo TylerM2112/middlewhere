@@ -32,7 +32,10 @@ app.use(session({
 
 //USER INFORMATION
 app.get('/api/getUserInfo/:user_id', userController.getUserInfo)
+
+
 //GET FRIENDS
+////////////////////////testing friend selector/////////////////////////////////
 app.get('/api/friends', friendController.get_friends)
 
 //POST EVENT
@@ -46,6 +49,9 @@ app.post('/api/addUserAddress/:user_id', userController.addUserAddress)
 
 //Yelp Controller
 app.post('/api/yelp/search', yc.search)
+
+
+
 
 const PORT = process.env.SERVER_PORT || 4000;
 app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
