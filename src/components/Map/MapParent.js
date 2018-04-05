@@ -3,8 +3,8 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 
 const MapWithAMarker = withScriptjs(withGoogleMap(props =>
     <GoogleMap
-      defaultZoom={8}
-      defaultCenter={{ lat: props.middlepoint[0], lng: props.middlepoint[1] }}
+    defaultZoom={8}
+    defaultCenter={{ lat: props.middlepoint[0], lng: props.middlepoint[1] }}
   >
     {props.array.map(e => {
       // console.log(e.lat);

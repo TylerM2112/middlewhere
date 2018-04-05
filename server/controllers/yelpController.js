@@ -6,6 +6,7 @@ module.exports = {
         client.search({
             term: '',
             radius: 40000,
+            offset: 50,
             latitude: `${+req.body.middlepoint[0]}`,
             longitude: `${+req.body.middlepoint[1]}`,
             

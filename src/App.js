@@ -13,14 +13,12 @@ import Map from './components/Map/Map';
 class App extends Component {
   render() {
     return (
-     <div>
-
-       <Header TitleOfPage={"WELCOME"}/>
+      <div>
+        <Header TitleOfPage={"WELCOME"} />
         <Map />
-       <NavBar/>
-       <NewEvent/>
-       {/* <Profile /> */}
-     </div>
+        <NavBar />
+        <NewEvent />
+      </div>
     );
   }
 }

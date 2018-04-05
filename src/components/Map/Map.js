@@ -34,7 +34,7 @@ export default class Map extends Component {
     if (this.state.middlepoint !== null) {
       return (
         <MapWithAMarker
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
+          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSrFGEyQytdhP2uxK_GEuYK_Qj1zPnn4c&v=3.exp&libraries=geometry,places"
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: `400px` }} />}
           mapElement={<div style={{ height: `100%` }} />}
@@ -76,9 +76,6 @@ export default class Map extends Component {
       <div>
         <div>
           {this.displayMap()}
-        </div>
-        <div>
-          {this.displayYelp()}
         </div>
       </div>
 
