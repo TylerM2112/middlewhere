@@ -1,0 +1,121 @@
+
+.mainMapContainer{
+    position: fixed;
+    width:100%;
+    top:0;
+    z-index:15
+    /* margin-bottom:200px; */
+}
+
+.mainYelpList{
+    margin-top:200px;
+    margin-right: -14px !important;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height:800px;
+    /* margin-bottom:1000px; */
+}
+
+.yelpList{
+    /* margin-right: -14px !important;
+ overflow-y: scroll;
+ overflow-x: hidden; */
+ /* height:400px; */
+ margin-top:20px;
+
+}
+.yelpList > div{
+    width: 97%;
+    height: 50%;
+    margin-bottom:1px;
+
+    
+}
+
+.yelpListContainer{
+    font-family: 'Open Sans';
+    /* font-weight:bold; */
+    letter-spacing:1px;
+    font-size:16px;
+    position: relative;
+    overflow: hidden;
+    height:400px;
+    cursor: pointer;
+    /* border:solid transparent 8px; */
+}
+
+
+.yelpListContainer:hover{
+    /* border:solid green 8px; */
+}
+
+.yelpListContainer .detailsContainer{
+    z-index:5;
+    color:white;
+    padding:10px;
+    /* position: absolute; */
+    /* bottom:20px; */
+    /* text-align: center; */
+}
+
+.yelpListContainer .detailsContainer .yelpName{
+    text-align:center;
+    font-size:30px;
+    margin-bottom:60px;
+    text-align:center;
+    font-family: 'Dosis'
+    
+}
+
+.yelpListContainer .detailsContainer .yelpDistance{
+    font-weight: 400;
+    margin-top:10px;
+    font-size:12px;
+}
+
+.yelpListContainer .detailsContainer h2{
+    text-align:center;
+    font-family: 'Dosis'
+}
+
+.yelpListContainer img{
+    position: absolute;
+    z-index:-2;
+}
+
+.yelpListContainer .blackout{
+    width:100%;
+    position: absolute;
+    background-color:black;
+    height:100%;
+    z-index:-1;
+    opacity: .5;
+}
+
+.yelpListContainer .border{
+    width:95%;
+    position: absolute;
+    border:solid green 10px;
+    height:90%;
+    z-index:-1;
+    /* display:none; */
+    /* opacity: .5; */
+}
+
+.yelpListContainer:hover .border{
+    display:inherit;
+}
+
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+
+.infoBox{
+    position: absolute;
+    /* border:solid red 10px; */
+    padding:10px;
+    background-color:white;
+    font-size:20px;
+    z-index:100;
+}
