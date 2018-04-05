@@ -34,6 +34,7 @@ class App extends Component {
          <Route path="/friends" component={FriendsView}/>
        
       </Switch>
+      <NavBar/>
      </div>
     );
   }
