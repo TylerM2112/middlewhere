@@ -5,10 +5,15 @@ const session = require('express-session');
 const axios = require('axios');
 
 
+
 //Controllers
 const userController = require('./controllers/userController');
 const eventController = require('./controllers/eventController')
+
+const friendController = require('./controllers/friendController.js')
+
 const yc = require('./controllers/yelpController');
+
 
 
 require('dotenv').config();
@@ -29,6 +34,9 @@ app.use(session({
 
 //USER INFORMATION
 app.get('/api/getUserInfo/:user_id', userController.getUserInfo)
+
+//GET FRIENDS
+app.get('/api/friends', friendController.get_friends)
 
 //POST EVENT
 app.post('/api/new/event', eventController.post_event)

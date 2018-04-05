@@ -3,18 +3,17 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 
 const MapWithAMarker = withScriptjs(withGoogleMap(props =>
     <GoogleMap
-    defaultZoom={8}
-    defaultCenter={{ lat: props.middlepoint[0], lng: props.middlepoint[1] }}
-  >
-    {props.array.map(e => {
-      // console.log(e.lat);
-      return (
-      <Marker position={{ lat: e.lat, lng: e.long }}
-      />)
+      defaultZoom={10}
+      defaultCenter={{ lat: props.middlepoint[0], lng: props.middlepoint[1] }}
+  > {console.log("markers",props.markers)}
+    {props.markers.map(e=>{
+      if(e.checked){
+        return <Marker position={{lat:e.coordinates.latitude,lng:e.coordinates.longitude}}
+        onClick={(i)=>{props.displayInfoBox({i:i,name:e.name})}} />
+      }
     })}
-    {/* {console.log(props.middlepoint)} */}
-    <Marker position={{ lat: props.middlepoint[0], lng: props.middlepoint[1] }}
-      />
+
+    <Marker position={{ lat: props.middlepoint[0], lng: props.middlepoint[1] }}/>
     </GoogleMap>
   ));
 
