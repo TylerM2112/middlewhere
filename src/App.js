@@ -5,11 +5,15 @@ import Header from './components/Header/Header.js'
 import Profile from './components/Profile/Profile';
 import NewEvent from './components/Profile/NewEvents'
 import FriendsList from './components/friends/friends'
+
 import LoginView from './components/views/LoginView'
 import EventsView from './components/views/EventsView'
 import FriendsView from './components/views/FriendsView'
 import GroupsView from './components/views/GroupsView'
 import {Switch, Route} from 'react-router-dom';
+
+
+import GroupEvent from './components/GroupEvent/GroupEvent';
 
 import './App.css';
 
@@ -20,7 +24,8 @@ import Map from './components/Map/Map';
 class App extends Component {
   render() {
     return (
-     <div>
+     <div className="App">
+
 
        {/* <Header TitleOfPage={"WELCOME"}/>
         <Map />

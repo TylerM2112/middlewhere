@@ -1,11 +1,11 @@
 .nav_parent_div     {
     /* border: 2px solid red; */
     display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: space-around;
-	align-items: stretch;
-	align-content: space-between;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: space-between;
     position: fixed;
     z-index: 11;
     width: 99.7%;
@@ -16,12 +16,19 @@
     flex:1;
 }
 
+.nav_parent_div a{
+    text-decoration: none;
+}
+
 .nav_Link_Li    {
     background-color: #C43235;
     border-left: 0.5px solid gray;
     border-right: 0.5px solid gray;
     border-top: 1px solid gray;
     border-radius: 5px;
+    /*if there is something underneath the nav bar it will show in the gaps*/
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     margin: 0 auto;
     position: relative;
     /* width: 13rem; */

@@ -32,8 +32,6 @@ app.use(session({
 
 //USER INFORMATION
 app.get('/api/getUserInfo/:user_id', userController.getUserInfo)
-
-
 //GET FRIENDS
 ////////////////////////testing friend selector/////////////////////////////////
 app.get('/api/friends', friendController.get_friends)
