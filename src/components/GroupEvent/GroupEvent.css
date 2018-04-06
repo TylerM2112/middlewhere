@@ -1,15 +1,13 @@
 
 
+
 .mainYelpList{
-    margin-top:180px;
+    margin-top:-20px;
     margin-right: -14px !important;
     overflow-y: scroll;
     overflow-x: hidden;
-    height:800px;
-    z-index:-1;
-    transform: translate3d(0,0,0);
--webkit-transform: translate3d(0,0,0);
-will-change: transform;
+    height:100vh;
+    z-index: -5;
     /* margin-bottom:1000px; */
 }
 
@@ -25,7 +23,6 @@ will-change: transform;
     width: 97%;
     height: 50%;
     margin-bottom:1px;
-    z-index:-1;
 
     
 }
@@ -118,23 +115,30 @@ will-change: transform;
     z-index:100;
 }
 
-.moveMap{
-    /* animation:moveMapAni 1s;
-    animation-fill-mode: forwards; */
-    height:200px;
-    z-index:100;
-    overflow:hidden;
-    /* display: none; */
+.mapContainer{
+    /* display:inline; */
 }
 
-.mapContainer{
-    position: absolute;
+.mainMapContainer{
+    /* position: fixed; */
     width:100%;
     top:0;
     z-index:15
     /* margin-bottom:200px; */
 }
 
-@keyframes moveMapAni{
+.mapMoveUp{
+    animation: mapMoveAniUp 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+    height:200px;
+    /* border:solid red 10px; */
+    position: relative;
+    overflow: hidden;
+    
+}
+
+@keyframes mapMoveAniUp{
+    /* from{height:200px;} */
     to{height:0;}
 }
