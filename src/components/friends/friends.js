@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './friends.css'
+import './Friends.css'
 
 
-export default class friendsList extends Component {
+export default class Friends extends Component {
     constructor(props){
         super(props)
 

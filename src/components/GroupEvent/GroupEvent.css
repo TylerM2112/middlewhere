@@ -2,7 +2,6 @@
 
 
 .mainYelpList{
-    margin-top:0px;
     margin-right: -14px !important;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -77,6 +76,11 @@
     position: absolute;
     z-index:-2;
 }
+.logo-filler{
+    margin-top: 5px;
+    margin-left: 11%;
+    width: 250px;
+}
 
 .yelpListContainer .blackout{
     width:100%;
@@ -88,10 +92,10 @@
 }
 
 .yelpListContainer .border{
-    width:95%;
+    width:96%;
     position: absolute;
-    border:solid green 10px;
-    height:90%;
+    border:solid green 5px;
+    height:95%;
     z-index:-1;
     /* display:none; */
     /* opacity: .5; */
@@ -115,9 +119,6 @@
     z-index:100;
 }
 
-.mapContainer{
-    /* display:inline; */
-}
 
 .mainMapContainer{
     /* position: fixed; */
@@ -129,7 +130,7 @@
 }
 
 .mapMoveUp{
-    animation: mapMoveAniUp 1s;
+    animation: mapMoveAniUp .5s;
     animation-fill-mode: forwards;
     animation-timing-function: linear;
     /* height:200px; */
@@ -153,8 +154,22 @@
     to{height:0;}
 }
 
+.mapMoveDown{
+    animation: mapMoveAniDown .5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+    height:200px;
+    /* border:solid red 10px; */
+    position: relative;
+    overflow: hidden;
+    
+}
+
 @keyframes mapMoveAniDown{
-    from{height:0;}
+    from{height:0px;}
     to{height:200px;}
 }
 
+.containerForBtn{
+    background-color:black;
+}

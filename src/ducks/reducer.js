@@ -7,6 +7,14 @@ const iState = {
     addresses:[1,2],
 }
 
+const ADD_ADDRESS = "ADD_ADDRESS";
+export function addAddress(data){
+    return{
+        type:ADD_ADDRESS,
+        payload:data,
+    }
+}
+
 const UPDATE_ADDRESS="UPDATE_ADDRESS"
 export function updateAddress(data){
     return{
@@ -28,7 +36,20 @@ export default function (state=iState,action){
     let addresses = state.addresses.slice();
     let addressObj = state.addresses.slice();
     switch(action.type){
+        case ADD_ADDRESS:
+        const {newAddress1,newCity,newState,newPostalcode,newPlaceName,newLat,newLong} = action.payload;
+        const obj = {
+            address1:newAddress1,
+            city:newCity,
+            state:newState,
+            postalcode:newPostalcode,
+            place:newPlaceName,
+            lat:newLat,
+            long:newLong,
+            auto_id:null,
+        }
 
+        newState.addresses.push(obj)
         case UPDATE_ADDRESS:
             addresses[0].address1 = action.payload.address1;
             newState.addresses = addresses;

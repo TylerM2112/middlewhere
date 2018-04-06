@@ -67,8 +67,10 @@ export default class Map extends Component {
       return (
         <MapWithAMarker
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSrFGEyQytdhP2uxK_GEuYK_Qj1zPnn4c&v=3.exp&libraries=geometry,drawing,places"
+
           loadingElement={<div style={{ height: `100%`,width:`100%` }} />}
           containerElement={<div style={{ height: `200px`,width:`100%` }} />}
+
           mapElement={<div style={{ height: `100%` }} />}
           array={this.state.locations}
           middlepoint={this.state.middlepoint}
@@ -112,7 +114,6 @@ export default class Map extends Component {
           {this.displayInfoBox()}
           {this.displayMap()}
         </div>
-
       </div>
 
     )
