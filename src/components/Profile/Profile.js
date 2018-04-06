@@ -21,7 +21,7 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        axios.get('/api/getUserInfo/10')
+        axios.get('/api/getUserInfo/191')
             .then(res=>{
             
                 this.props.updateUser(res.data);
@@ -72,7 +72,7 @@ class Profile extends Component {
                     newAddress1:`${add[0].short_name} ${add[1].short_name}`,
                     newCity:add[3].short_name,
                     newState:add[5].short_name,
-                    newPostalcode:add[7].short_name,
+                    newPostalcode:+add[6].short_name,
                     newLat:lat,
                     newLong:long,
                 },()=>this.addAddressToDatabase())

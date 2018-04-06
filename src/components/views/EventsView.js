@@ -8,7 +8,6 @@ export default class EventsView extends Component {
         return (
             <div>
                 <Header TitleOfPage={"Events"}/> 
-                <Map/>
             </div>
         );
     }

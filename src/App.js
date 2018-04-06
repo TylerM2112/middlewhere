@@ -4,7 +4,7 @@ import NavBar from './components/NavBar/NavBar.js'
 import Header from './components/Header/Header.js'
 import Profile from './components/Profile/Profile';
 import NewEvent from './components/Profile/NewEvents'
-import FriendsList from './components/friends/friends'
+import FriendsList from './components/Friends/Friends'
 
 import LoginView from './components/views/LoginView'
 import EventsView from './components/views/EventsView'
@@ -37,9 +37,11 @@ class App extends Component {
          <Route path="/events" component={EventsView}/>
          <Route path="/groups" component={GroupsView}/>
          <Route path="/friends" component={FriendsView}/>
-       
-      </Switch>
-      <NavBar/>
+         <Route path="/profile" component={Profile}/>
+        </Switch>
+      {/* {window.location.pathname !== '/' &&  
+      <NavBar/>} */}
+      <NavBar />  
      </div>
     );
   }

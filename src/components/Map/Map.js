@@ -114,7 +114,6 @@ export default class Map extends Component {
           {this.displayInfoBox()}
           {this.displayMap()}
         </div>
-
       </div>
 
     )
