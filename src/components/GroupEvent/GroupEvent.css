@@ -2,7 +2,7 @@
 
 
 .mainYelpList{
-    margin-top:-20px;
+    margin-top:0px;
     margin-right: -14px !important;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -16,7 +16,7 @@
  overflow-y: scroll;
  overflow-x: hidden; */
  /* height:400px; */
- margin-top:20px;
+ /* margin-top:20px; */
 
 }
 .yelpList > div{
@@ -123,7 +123,8 @@
     /* position: fixed; */
     width:100%;
     top:0;
-    z-index:15
+    z-index:15;
+    height:180px;
     /* margin-bottom:200px; */
 }
 
@@ -131,14 +132,29 @@
     animation: mapMoveAniUp 1s;
     animation-fill-mode: forwards;
     animation-timing-function: linear;
-    height:200px;
+    /* height:200px; */
     /* border:solid red 10px; */
     position: relative;
     overflow: hidden;
     
 }
 
+.mapMoveDown{
+    animation: mapMoveAniDown 1s;
+    /* animation-direction: reverse; */
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+    position: relative;
+    overflow: hidden;
+    
+}
 @keyframes mapMoveAniUp{
-    /* from{height:200px;} */
+    from{height:200px;} 
     to{height:0;}
 }
+
+@keyframes mapMoveAniDown{
+    from{height:0;}
+    to{height:200px;}
+}
+

@@ -8,7 +8,7 @@ export default class GroupEvent extends Component {
     this.state={
       yelp:[],
       markers:[],
-      scrollPosition:0,
+      scrollPosition:-1,
     }
 
     this.getYelp = this.getYelp.bind(this)
@@ -80,11 +80,13 @@ export default class GroupEvent extends Component {
     return (
       <div className="mainGroupEventContainer">
         {this.state.scrollPosition < 380 ?
-        <div className="mapContainer">
+
+        <div className="mapContainer mapMoveDown">
         <Map getYelp={this.getYelp} getMarkers={this.state.yelp} getSelectedInfoBox={this.getSelectedInfoBox}/>
-        </div> : <div className="mapContainer mapMoveUp">
-        <Map getYelp={this.getYelp} getMarkers={this.state.yelp} getSelectedInfoBox={this.getSelectedInfoBox}/>
-        </div>}
+        </div> 
+        : <div className="mapContainer mapMoveUp">
+            <Map getYelp={this.getYelp} getMarkers={this.state.yelp} getSelectedInfoBox={this.getSelectedInfoBox}/>
+          </div>}
         <div className="mainYelpList" id="mainYelpList" onscroll={this.scrollPosition()}>
         <div className="yelpList" id="yelpList"  onscroll={()=>this.scrollPosition()}>
           {this.displayYelp()}
