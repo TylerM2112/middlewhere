@@ -7,15 +7,17 @@ export default class GroupEvent extends Component {
 
     this.state={
       yelp:[],
-      markers:[]
+      markers:[],
+      scrollPosition:0,
     }
 
     this.getYelp = this.getYelp.bind(this)
+    this.scrollPosition = this.scrollPosition.bind(this);
   }
 
   componentDidMount() {
     let main = document.getElementById("mainYelpList")
-    main.addEventListener("scroll",console.log("scroll"))
+    main.addEventListener("scroll",this.scrollPosition)
   }
 
   getYelp(arr){
@@ -54,8 +56,13 @@ export default class GroupEvent extends Component {
   }
 
   scrollPosition(){
-    alert("ran")
-    // console.log(document.getElementById("mainYelpList").scrollTop)
+    
+    if(document.getElementById("mainYelpList")){
+      let main = document.getElementById("mainYelpList").scrollTop;
+      if(main !== this.state.scrollPosition){
+        this.setState({scrollPosition:main})
+      }
+    }
   }
 
   getSelectedInfoBox(e){
@@ -72,7 +79,12 @@ export default class GroupEvent extends Component {
   render() {
     return (
       <div className="mainGroupEventContainer">
+        {this.state.scrollPosition < 380 ?
+        <div className="mapContainer">
         <Map getYelp={this.getYelp} getMarkers={this.state.yelp} getSelectedInfoBox={this.getSelectedInfoBox}/>
+        </div> : <div className="mapContainer mapMoveUp">
+        <Map getYelp={this.getYelp} getMarkers={this.state.yelp} getSelectedInfoBox={this.getSelectedInfoBox}/>
+        </div>}
         <div className="mainYelpList" id="mainYelpList" onscroll={this.scrollPosition()}>
         <div className="yelpList" id="yelpList"  onscroll={()=>this.scrollPosition()}>
           {this.displayYelp()}
