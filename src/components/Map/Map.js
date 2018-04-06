@@ -109,7 +109,7 @@ export default class Map extends Component {
     return (
       <div className="mainMapContainer">
         <div>
-          {this.displayInfoBox()};
+          {this.displayInfoBox()}
           {this.displayMap()}
         </div>
 

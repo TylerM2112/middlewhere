@@ -1,18 +1,15 @@
 
-.mainMapContainer{
-    position: fixed;
-    width:100%;
-    top:0;
-    z-index:15
-    /* margin-bottom:200px; */
-}
 
 .mainYelpList{
-    margin-top:200px;
+    margin-top:180px;
     margin-right: -14px !important;
     overflow-y: scroll;
     overflow-x: hidden;
     height:800px;
+    z-index:-1;
+    transform: translate3d(0,0,0);
+-webkit-transform: translate3d(0,0,0);
+will-change: transform;
     /* margin-bottom:1000px; */
 }
 
@@ -28,6 +25,7 @@
     width: 97%;
     height: 50%;
     margin-bottom:1px;
+    z-index:-1;
 
     
 }
@@ -118,4 +116,25 @@
     background-color:white;
     font-size:20px;
     z-index:100;
+}
+
+.moveMap{
+    /* animation:moveMapAni 1s;
+    animation-fill-mode: forwards; */
+    height:200px;
+    z-index:100;
+    overflow:hidden;
+    /* display: none; */
+}
+
+.mapContainer{
+    position: absolute;
+    width:100%;
+    top:0;
+    z-index:15
+    /* margin-bottom:200px; */
+}
+
+@keyframes moveMapAni{
+    to{height:0;}
 }

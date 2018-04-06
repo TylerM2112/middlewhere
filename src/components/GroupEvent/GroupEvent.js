@@ -7,15 +7,17 @@ export default class GroupEvent extends Component {
 
     this.state={
       yelp:[],
-      markers:[]
+      markers:[],
+      scrollPosition:0,
+      closeMap:false,
     }
 
     this.getYelp = this.getYelp.bind(this)
+    this.scrollPosition = this.scrollPosition.bind(this);
   }
 
   componentDidMount() {
-    let main = document.getElementById("mainYelpList")
-    main.addEventListener("scroll",console.log("scroll"))
+    document.getElementById("mainYelpList").addEventListener("scroll",this.scrollPosition)
   }
 
   getYelp(arr){
@@ -54,8 +56,28 @@ export default class GroupEvent extends Component {
   }
 
   scrollPosition(){
-    alert("ran")
-    // console.log(document.getElementById("mainYelpList").scrollTop)
+    let main = document.getElementById("mainYelpList")
+    if(main && this.state.scrollPosition !== main.scrollTop){
+      if(main.scrollTop > 300 || (this.state.scrollPosition - main.scrollTop) < 100) {
+        console.log("MOVEMAPHEIGHT")
+      this.setState({scrollPosition:main.scrollTop,closeMap:true})
+        if(180-main.scrollTop < -300){
+          document.getElementById('mainYelpList').style.marginTop = (300-main.scrollTop) + "px";
+        // document.getElementById('mainYelpList').style.height = "101vh";
+        }
+      document.getElementById('mainYelpList').style.marginTop =  "-100px"; 
+      if(document.getElementById('moveMap').style.height < 20){
+        document.getElementById('moveMap').style.height = 0 + "px";
+      }
+      else{
+      document.getElementById('moveMap').style.height = (280-main.scrollTop) + "px";
+      }
+      }
+      else{
+        this.setState({scrollPosition:main.scrollTop,closeMap:false})
+        document.getElementById('mainYelpList').style.marginTop = "0px";
+      }
+    }
   }
 
   getSelectedInfoBox(e){
@@ -71,8 +93,15 @@ export default class GroupEvent extends Component {
   }
   render() {
     return (
+      
       <div className="mainGroupEventContainer">
+        {this.state.closeMap ? <div className="moveMap" id="moveMap">
         <Map getYelp={this.getYelp} getMarkers={this.state.yelp} getSelectedInfoBox={this.getSelectedInfoBox}/>
+        </div> :
+        <div className="mapContainer">
+        <Map getYelp={this.getYelp} getMarkers={this.state.yelp} getSelectedInfoBox={this.getSelectedInfoBox}/>
+        </div>
+        }
         <div className="mainYelpList" id="mainYelpList" onscroll={this.scrollPosition()}>
         <div className="yelpList" id="yelpList"  onscroll={()=>this.scrollPosition()}>
           {this.displayYelp()}
