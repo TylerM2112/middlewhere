@@ -21,7 +21,7 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        axios.get('/api/getUserInfo/191')
+        axios.get('/api/getUserInfo/10')
             .then(res=>{
             
                 this.props.updateUser(res.data);

@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Friends.css'
 
 
-export default class friendsList extends Component {
+export default class Friends extends Component {
     constructor(props){
         super(props)
 

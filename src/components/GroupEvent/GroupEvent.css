@@ -2,7 +2,6 @@
 
 
 .mainYelpList{
-    margin-top:-20px;
     margin-right: -14px !important;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -16,7 +15,7 @@
  overflow-y: scroll;
  overflow-x: hidden; */
  /* height:400px; */
- margin-top:20px;
+ /* margin-top:20px; */
 
 }
 .yelpList > div{
@@ -93,10 +92,10 @@
 }
 
 .yelpListContainer .border{
-    width:95%;
+    width:96%;
     position: absolute;
-    border:solid green 10px;
-    height:90%;
+    border:solid green 5px;
+    height:95%;
     z-index:-1;
     /* display:none; */
     /* opacity: .5; */
@@ -120,20 +119,43 @@
     z-index:100;
 }
 
-.mapContainer{
-    /* display:inline; */
-}
 
 .mainMapContainer{
     /* position: fixed; */
     width:100%;
     top:0;
-    z-index:15
+    z-index:15;
+    height:180px;
     /* margin-bottom:200px; */
 }
 
 .mapMoveUp{
-    animation: mapMoveAniUp 1s;
+    animation: mapMoveAniUp .5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+    /* height:200px; */
+    /* border:solid red 10px; */
+    position: relative;
+    overflow: hidden;
+    
+}
+
+.mapMoveDown{
+    animation: mapMoveAniDown 1s;
+    /* animation-direction: reverse; */
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+    position: relative;
+    overflow: hidden;
+    
+}
+@keyframes mapMoveAniUp{
+    from{height:200px;} 
+    to{height:0;}
+}
+
+.mapMoveDown{
+    animation: mapMoveAniDown .5s;
     animation-fill-mode: forwards;
     animation-timing-function: linear;
     height:200px;
@@ -143,7 +165,11 @@
     
 }
 
-@keyframes mapMoveAniUp{
-    /* from{height:200px;} */
-    to{height:0;}
+@keyframes mapMoveAniDown{
+    from{height:0px;}
+    to{height:200px;}
+}
+
+.containerForBtn{
+    background-color:black;
 }
