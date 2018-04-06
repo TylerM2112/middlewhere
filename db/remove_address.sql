@@ -1,0 +1,1 @@
+DELETE FROM mw_address WHERE user_id = $1 AND place = $2;
