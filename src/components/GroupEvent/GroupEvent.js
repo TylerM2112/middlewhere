@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Map from './../Map/Map';
 import './GroupEvent.css'
+import logo from '../../assets/images/mw.png';
 export default class GroupEvent extends Component {
   constructor(){
     super();
@@ -35,8 +36,14 @@ export default class GroupEvent extends Component {
   displayYelp(){
     if(this.state.yelp){
     return this.state.yelp.map(e=>{
-      return(<div className="yelpListContainer" id={encodeURI(e.name)} onClick={()=>this.displayBorder(e.id)} onscroll={()=>this.scrollPosition()}>
-      <img src={e.image_url} />
+      return (<div className="yelpListContainer" id={encodeURI(e.name)} onClick={() => this.displayBorder(e.id)} onscroll={() => this.scrollPosition()}>
+
+      {e.image_url ?  
+        <img src={e.image_url} />
+        :
+        <img className="logo-filler" src={logo} />}
+
+
       <div className="blackout"></div>
       {e.checked ? <div className="border"></div> : ''}
       <div className="detailsContainer">
@@ -54,7 +61,7 @@ export default class GroupEvent extends Component {
   }
 
   scrollPosition(){
-    alert("ran")
+    // alert("ran")
     // console.log(document.getElementById("mainYelpList").scrollTop)
   }
 
