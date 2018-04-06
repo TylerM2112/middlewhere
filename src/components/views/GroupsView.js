@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header'
 import NewGroup from '../NewGroup/NewGroup';
+import GroupEvent from '../GroupEvent/GroupEvent'
 import {connect} from 'react-redux'
 import './groupsview.css'
 
@@ -24,11 +25,11 @@ class GroupsView extends Component {
           })
         return (
             <div>
-                <Header TitleOfPage={"Groups"}/>
+                {/* <Header TitleOfPage={"Groups"}/> */}
                
                    
-                
-                <NewGroup/>
+                <GroupEvent/>
+                {/* <NewGroup/> */}
             </div>
         );
     }
