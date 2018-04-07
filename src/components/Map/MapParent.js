@@ -1,6 +1,6 @@
 import React from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-
+import logo from './../../assets/images/mwLogoSmallpng.png'
 const MapWithAMarker = withScriptjs(withGoogleMap(props =>
     <GoogleMap
       defaultZoom={10}
@@ -16,7 +16,7 @@ const MapWithAMarker = withScriptjs(withGoogleMap(props =>
       :
       <div></div>}
 
-    <Marker position={{ lat: props.middlepoint[0], lng: props.middlepoint[1] }}/>
+    <Marker icon={logo} position={{ lat: props.middlepoint[0], lng: props.middlepoint[1] }}/>
     </GoogleMap>
   ));
 
