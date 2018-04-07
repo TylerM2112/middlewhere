@@ -1,0 +1,1 @@
+DELETE FROM mw_address WHERE auto_id = $1;

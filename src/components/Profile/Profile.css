@@ -1,0 +1,26 @@
+.toggleOff{
+  display: none;
+}
+
+input{
+  border: 1px black solid;
+}
+
+.editAddress{
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  margin: 10px;
+  
+}
+
+.addressContainer{
+  border: 1px blue solid;
+  margin: 10px;
+  
+}
+
+.basicInfoContainer{
+  border: 1px purple solid;
+  margin: 10px;
+}
