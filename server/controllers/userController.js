@@ -79,6 +79,20 @@ module.exports = {
       .then(response=>res.status(200).send(response))
       .catch(err=>console.log(err))
   },
+
+  get_users: (req,res) => {
+    const dbInstance = req.app.get('db')
+
+    dbInstance.get_users()
+    .then((users) =>{
+        res.status(200).send(users)
+    })
+    .catch((err) => {
+        console.log('err', err)
+        res.status(500).send(err)
+    })
+  }
+
   removeAddress: (req, res) => {
     const { auto_id } = req.params;
     const db = req.app.get('db');
