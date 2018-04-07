@@ -2,7 +2,6 @@
 
 
 .mainYelpList{
-    margin-top:-20px;
     margin-right: -14px !important;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -11,12 +10,16 @@
     /* margin-bottom:1000px; */
 }
 
+.pic{
+    filter:blur(1px)
+}
+
 .yelpList{
     /* margin-right: -14px !important;
  overflow-y: scroll;
  overflow-x: hidden; */
  /* height:400px; */
- margin-top:20px;
+ /* margin-top:20px; */
 
 }
 .yelpList > div{
@@ -45,7 +48,7 @@
 }
 
 .yelpListContainer .detailsContainer{
-    z-index:5;
+    z-index:10;
     color:white;
     padding:10px;
     /* position: absolute; */
@@ -66,6 +69,14 @@
     font-weight: 400;
     margin-top:10px;
     font-size:12px;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: flex-end;
+    align-content: flex-end;
+    padding-top:5px;
+    /* border: solid black 1px; */
 }
 
 .yelpListContainer .detailsContainer h2{
@@ -75,7 +86,13 @@
 
 .yelpListContainer img{
     position: absolute;
-    z-index:-2;
+    z-index:-1;
+}
+.logo-filler{
+    margin-top: 5px;
+    margin-left: 11%;
+    width: 250px;
+    filter:blur(1px)
 }
 
 .yelpListContainer .blackout{
@@ -87,11 +104,15 @@
     opacity: .5;
 }
 
+.detailsContainer img{
+    /* margin-top:-14px; */
+}
+
 .yelpListContainer .border{
-    width:95%;
+    width:96%;
     position: absolute;
-    border:solid green 10px;
-    height:90%;
+    border:solid  rgb(3, 235, 3) 5px;
+    height:95%;
     z-index:-1;
     /* display:none; */
     /* opacity: .5; */
@@ -113,22 +134,46 @@
     background-color:white;
     font-size:20px;
     z-index:100;
+    color:black;
 }
 
-.mapContainer{
-    /* display:inline; */
-}
 
 .mainMapContainer{
     /* position: fixed; */
     width:100%;
     top:0;
-    z-index:15
+    z-index:15;
+    height:180px;
     /* margin-bottom:200px; */
 }
 
 .mapMoveUp{
-    animation: mapMoveAniUp 1s;
+    animation: mapMoveAniUp .5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+    /* height:200px; */
+    /* border:solid red 10px; */
+    position: relative;
+    overflow: hidden;
+    
+}
+
+.mapMoveDown{
+    animation: mapMoveAniDown 1s;
+    /* animation-direction: reverse; */
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+    position: relative;
+    overflow: hidden;
+    
+}
+@keyframes mapMoveAniUp{
+    from{height:200px;} 
+    to{height:0;}
+}
+
+.mapMoveDown{
+    animation: mapMoveAniDown .5s;
     animation-fill-mode: forwards;
     animation-timing-function: linear;
     height:200px;
@@ -138,7 +183,67 @@
     
 }
 
-@keyframes mapMoveAniUp{
-    /* from{height:200px;} */
-    to{height:0;}
+@keyframes mapMoveAniDown{
+    from{height:0px;}
+    to{height:200px;}
+}
+
+.containerForBtn{
+    background-color:black;
+    position:sticky;
+    color:white;
+    padding:5px;
+    /* padding:3px 10px; */
+    /* padding-left:15%; */
+}
+
+.containerForBtn button{
+    width:80px;
+    margin-left:20%;
+    margin-bottom:10px;
+    margin-right:10px;
+}
+
+.flexContainer{
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: flex-end;
+	align-content: flex-end;
+    /* padding: 0 10px; */
+    /* border:solid black 1px; */
+}
+
+.flexContainer > div{
+    bottom:0;
+}
+
+.peopleGoing{
+    border:solid rgb(3, 235, 3) 3px;
+    padding:5px;
+    border-radius: 5px;
+    margin-right:16px;
+}
+
+.byYelp{
+    width:64px;
+    font-size:12px;
+    /* margin-top:10px; */
+    padding-top:10px;
+    /* margin-left:20px; */
+    /* border:solid black 1px; */
+}
+
+.byYelp img{
+    width:64px;
+    opacity: 1;
+    margin-left:5px;
+    margin-top:-35px;
+    padding:0;
+    /* display:inline; */
+}
+
+.rating{
+    font-size:12px;
 }

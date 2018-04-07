@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Header from '../Header/Header';
 import NewButton from '../Assets/Button/NewButton'
 import axios from 'axios';
+import Friends from '../Friends/Friends';
+
 export default class FriendsView extends Component {
     constructor(props){
         super(props)
@@ -31,7 +33,6 @@ export default class FriendsView extends Component {
         return (
             <div>
                 <Header TitleOfPage={"Friends"} NewButtonIsShown={true} buttonName={'add friend'}/> 
-
             </div>
         );
     }

@@ -46,7 +46,8 @@ app.post('/api/new/event', eventController.post_event)
 app.post('/api/new/group', checkBody, groupController.post_group)
 
 //POST USER ADDRESS 
-app.post('/api/addUserAddress/:user_id', userController.addUserAddress)
+app.post('/api/addUserAddress/:user_id', userController.addUserAddress);
+app.delete('/api/removeAddress/:auto_id', userController.removeAddress);
 
 //Yelp Controller
 app.post('/api/yelp/search', yc.search)

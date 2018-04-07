@@ -1,6 +1,7 @@
 module.exports = {
   getUserInfo: (req, res) => {
     const db = req.app.get('db');
+    console.log(req.params);
     const { user_id } = req.params;
 
     var addresses = '';
@@ -75,9 +76,10 @@ module.exports = {
     const db = req.app.get('db');
 
     db.add_user_address([newAddress1,newCity,newState,newPostalcode,newPlaceName,newLat,newLong,user_id])
-      .then(()=>res.status(200).end())
+      .then(response=>res.status(200).send(response))
       .catch(err=>console.log(err))
   },
+
   get_users: (req,res) => {
     const dbInstance = req.app.get('db')
 
@@ -90,4 +92,14 @@ module.exports = {
         res.status(500).send(err)
     })
   }
+
+  removeAddress: (req, res) => {
+    const { auto_id } = req.params;
+    const db = req.app.get('db');
+
+    db.remove_address([ auto_id ]).then(() => {
+      res.status(200).end()
+    }).catch(err => console.log(err));
+   }
+
 }

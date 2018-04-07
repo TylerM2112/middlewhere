@@ -1,13 +1,16 @@
 module.exports = {
     //Yelp API Search Call using passed in middlepoint.
     search: (req, res) => {
-        console.log("HELP")
-        
+        // console.log("HELP ")
         const yelp = require('yelp-fusion');
         const client = yelp.client(process.env.YELP_APIKEY);
+      
         client.search({
             term: '',
             radius: 40000,
+            limit: 50,
+            offset: 51,
+            sort_by: "distance",
             latitude: `${+req.body.middlepoint[0]}`,
             longitude: `${+req.body.middlepoint[1]}`,
             
