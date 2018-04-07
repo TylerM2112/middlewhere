@@ -3,6 +3,7 @@ import { excon } from 'excon'
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { updateUser, addAddress, removeAddress } from './../../ducks/reducer';
+import profilepic from '../../assets/images/bestpicture.jpg';
 
 import './Profile.css';
 class Profile extends Component {
@@ -130,8 +131,20 @@ class Profile extends Component {
         return (
             <div className="ProfileMainContainer">
                 {this.displayProfile()}
-                <div>Addresses
-             {this.displayAddresses()}
+                <div className="notificationsContainer">
+                    <div className="friendsNotification">
+                        <div>    
+                            <p>New Friend Request!</p>
+                        </div>
+                        <div className="userRequestContainer">
+                            <img src={profilepic} alt="profilepic" />    
+                            <p>User2112</p>    
+                        </div>    
+                        <button>Approve</button>
+                        <button>Decline</button>
+                    </div>    
+                </div>    
+                <div>Addresses {this.displayAddresses()}
                 </div>
                 <button onClick={this.toggle}>Add Address</button>
                 <div className={this.state.editToggle ? "toggleOn editAddress" : "toggleOff"}>
