@@ -4,6 +4,7 @@ module.exports = {
         // console.log("HELP ")
         const yelp = require('yelp-fusion');
         const client = yelp.client(process.env.YELP_APIKEY);
+      
         client.search({
             term: '',
             radius: 40000,

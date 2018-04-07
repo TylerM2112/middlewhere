@@ -1,6 +1,8 @@
 module.exports = {
     post_group: (req, res) => {
         const dbInstance = req.app.get('db')
+        console.log('req.body', req.body)
+
         const {group_title, group_members, group_purpose} = req.body
 
         dbInstance.post_group([group_title, group_purpose, group_members])
