@@ -10,6 +10,10 @@
     /* margin-bottom:1000px; */
 }
 
+.pic{
+    filter:blur(1px)
+}
+
 .yelpList{
     /* margin-right: -14px !important;
  overflow-y: scroll;
@@ -44,7 +48,7 @@
 }
 
 .yelpListContainer .detailsContainer{
-    z-index:5;
+    z-index:10;
     color:white;
     padding:10px;
     /* position: absolute; */
@@ -65,6 +69,14 @@
     font-weight: 400;
     margin-top:10px;
     font-size:12px;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: flex-end;
+    align-content: flex-end;
+    padding-top:5px;
+    /* border: solid black 1px; */
 }
 
 .yelpListContainer .detailsContainer h2{
@@ -74,12 +86,13 @@
 
 .yelpListContainer img{
     position: absolute;
-    z-index:-2;
+    z-index:-1;
 }
 .logo-filler{
     margin-top: 5px;
     margin-left: 11%;
     width: 250px;
+    filter:blur(1px)
 }
 
 .yelpListContainer .blackout{
@@ -91,10 +104,14 @@
     opacity: .5;
 }
 
+.detailsContainer img{
+    /* margin-top:-14px; */
+}
+
 .yelpListContainer .border{
     width:96%;
     position: absolute;
-    border:solid green 5px;
+    border:solid  rgb(3, 235, 3) 5px;
     height:95%;
     z-index:-1;
     /* display:none; */
@@ -117,6 +134,7 @@
     background-color:white;
     font-size:20px;
     z-index:100;
+    color:black;
 }
 
 
@@ -172,4 +190,60 @@
 
 .containerForBtn{
     background-color:black;
+    position:sticky;
+    color:white;
+    padding:5px;
+    /* padding:3px 10px; */
+    /* padding-left:15%; */
+}
+
+.containerForBtn button{
+    width:80px;
+    margin-left:20%;
+    margin-bottom:10px;
+    margin-right:10px;
+}
+
+.flexContainer{
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: flex-end;
+	align-content: flex-end;
+    /* padding: 0 10px; */
+    /* border:solid black 1px; */
+}
+
+.flexContainer > div{
+    bottom:0;
+}
+
+.peopleGoing{
+    border:solid rgb(3, 235, 3) 3px;
+    padding:5px;
+    border-radius: 5px;
+    margin-right:16px;
+}
+
+.byYelp{
+    width:64px;
+    font-size:12px;
+    /* margin-top:10px; */
+    padding-top:10px;
+    /* margin-left:20px; */
+    /* border:solid black 1px; */
+}
+
+.byYelp img{
+    width:64px;
+    opacity: 1;
+    margin-left:5px;
+    margin-top:-35px;
+    padding:0;
+    /* display:inline; */
+}
+
+.rating{
+    font-size:12px;
 }
