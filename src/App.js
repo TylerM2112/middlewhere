@@ -4,7 +4,7 @@ import NavBar from './components/NavBar/NavBar.js'
 import Header from './components/Header/Header.js'
 import Profile from './components/Profile/Profile';
 import NewEvent from './components/Profile/NewEvents'
-import FriendsList from './components/Friends/Friends'
+import Friends from './components/Friends/Friends'
 
 import LoginView from './components/views/LoginView'
 import EventsView from './components/views/EventsView'

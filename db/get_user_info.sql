@@ -4,4 +4,3 @@ SELECT *,
 FROM mw_users
 WHERE mw_users.auto_id = $1
 
--- //Ryan needs to know what this does>>>>> does it return a count which we then use to conditional render somewhere

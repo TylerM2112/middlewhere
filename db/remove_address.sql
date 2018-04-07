@@ -1,1 +1,1 @@
-DELETE FROM mw_address WHERE user_id = $1 AND place = $2;
+DELETE FROM mw_address WHERE auto_id = $1;

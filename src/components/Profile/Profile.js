@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { excon } from 'excon'
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { updateUser } from './../../ducks/reducer';
+import { updateUser, addAddress, removeAddress } from './../../ducks/reducer';
 
 import './Profile.css';
 class Profile extends Component {
@@ -21,12 +21,13 @@ class Profile extends Component {
         this.displayProfile = this.displayProfile.bind(this);
         this.addAddress = this.addAddress.bind(this);
         this.toggle = this.toggle.bind(this);
+        this.removeAddress = this.removeAddress.bind(this);
     }
 
     componentDidMount() {
-        axios.get('/api/getUserInfo/191')
+        axios.get('/api/getUserInfo/111')
             .then(res => {
-
+                console.log(res.data);
                 this.props.updateUser(res.data);
             })
             .catch(err => console.log(err));
@@ -50,11 +51,12 @@ class Profile extends Component {
         let html = [];
         if (this.props.state.addresses.length !== 0) {
             this.props.state.addresses.map(e => {
+                console.log(e)
                 html.push(<div className="addressContainer">
                     <p>{e.place}</p>    
                     <p>{e.address1}</p>
                     <p>{e.city}, {e.state} {e.postalcode}</p>
-                    <button>Remove</button>
+                    <button onClick={() => this.removeAddress(e.auto_id)}>Remove</button>
                 </div>)
             })
         }
@@ -71,32 +73,57 @@ class Profile extends Component {
                 this.toggle(),
                 console.log(res.data.results[0])
                 let add = res.data.results[0].address_components;
-                let lat = res.data.results[0].geometry.location.lat
-                let long = res.data.results[0].geometry.location.lng
+                let lat = res.data.results[0].geometry.location.lat;
+                let long = res.data.results[0].geometry.location.lng;
                 console.log(add)
-                this.setState({
+                var addressObj = {
                     newAddress1: `${add[0].short_name} ${add[1].short_name}`,
                     newCity: add[3].short_name,
                     newState: add[5].short_name,
-                    newPostalcode: +add[6].short_name,
+                    newPostalcode: +add[7].short_name,
                     newLat: lat,
                     newLong: long,
-                }, () => this.addAddressToDatabase())
+                    newPlaceName: this.state.newPlaceName,
+                }
+                this.addAddressToDatabase(addressObj)
+                
             })
             .catch(err => console.log(err))
-            this.props.updateUser(this.state);
+       
     }
 
-    addAddressToDatabase() {
-        axios.post(`/api/addUserAddress/${this.props.state.user_id}`, this.state)
-            .then(res => alert("yay"))
+    addAddressToDatabase(obj) {
+        console.log(obj)
+        axios.post(`/api/addUserAddress/${this.props.state.user_id}`, obj)
+            .then(res => {
+                console.log("BOOGERS",res.data)
+                obj.auto_id = res.data.auto_id;
+                this.props.addAddress(obj)
+
+            })
             .catch(err => alert(err))
+        
+        this.setState({
+            newAddress1: null,
+            newCity: null,
+            newState: null,
+            newPostalcode: null,
+            newPlaceName: null,
+            editToggle: false,
+        })
     }
 
     toggle() {
         this.setState({
             editToggle: !this.state.editToggle,
         })
+    }
+
+    removeAddress(id) { 
+        axios.delete(`/api/removeAddress/${id}`).then(res => {
+            alert("yay")
+        }).catch(err => alert(err));
+        this.props.removeAddress(id);
     }
 
     render() {
@@ -109,15 +136,15 @@ class Profile extends Component {
                 <button onClick={this.toggle}>Add Address</button>
                 <div className={this.state.editToggle ? "toggleOn editAddress" : "toggleOff"}>
                     <label>Location Label</label>
-                    <input onChange={e => this.setState({ newPlaceName: e.target.value })} />
+                    <input onChange={e => this.setState({ newPlaceName: e.target.value })} value={this.state.newPlaceName}/>
                     <label>Address</label>
-                    <input onChange={e => this.setState({ newAddress1: e.target.value })} />
+                    <input onChange={e => this.setState({ newAddress1: e.target.value })} value={this.state.newAddress1}/>
                     <label>City</label>
-                    <input onChange={e => this.setState({ newCity: e.target.value })} />
+                    <input onChange={e => this.setState({ newCity: e.target.value })} value={this.state.newCity}/>
                     <label>State</label>
-                    <input onChange={e => this.setState({ newState: e.target.value })} />
+                    <input onChange={e => this.setState({ newState: e.target.value })} value={this.state.newState}/>
                     <label>ZipCode</label>
-                    <input onChange={e => this.setState({ newPostalcode: e.target.value })} />
+                    <input onChange={e => this.setState({ newPostalcode: e.target.value })} value={this.state.newPostalcode}/>
                     <button onClick={e => this.addAddress()}>Submit</button>
                 </div>
             </div>
@@ -131,4 +158,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { updateUser })(Profile);
+export default connect(mapStateToProps, { updateUser, addAddress, removeAddress })(Profile);

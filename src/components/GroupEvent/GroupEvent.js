@@ -10,6 +10,7 @@ export default class GroupEvent extends Component {
       yelp:[],
       markers:[],
       scrollPosition:0,
+      showMap:false,
     }
 
     this.getYelp = this.getYelp.bind(this)
@@ -31,14 +32,14 @@ export default class GroupEvent extends Component {
     
     newYelp[index].checked = !newYelp[index].checked
 
-    this.setState({yelp:newYelp});
+    this.setState({yelp:newYelp})
     
   }
 
   displayYelp(){
     if(this.state.yelp){
     return this.state.yelp.map(e=>{
-      return (<div className="yelpListContainer" id={encodeURI(e.name)} onClick={() => this.displayBorder(e.id)} onscroll={() => this.scrollPosition()}>
+      return (<div className="yelpListContainer" id={encodeURI(e.name)} onClick={() => this.displayBorder(e.id)}>
 
       {e.image_url ?  
         <img src={e.image_url} />
@@ -51,7 +52,7 @@ export default class GroupEvent extends Component {
       <div className="detailsContainer">
         <div className="yelpName">{e.name}</div>
         
-        <div>Price:{e.price} <br/> Rating:{e.rating}</div>
+        <div>Rating:{e.rating}</div>
         <div className="yelpDistance">{(e.distance.toFixed(0)/1609.34).toFixed(2)} mi away from midpoint</div>
       </div>
     </div>)
@@ -63,36 +64,37 @@ export default class GroupEvent extends Component {
   }
 
   scrollPosition(){
-    // alert("ran")
-    // console.log(document.getElementById("mainYelpList").scrollTop)
     
-    if(document.getElementById("mainYelpList")){
-      let main = document.getElementById("mainYelpList").scrollTop;
-      if(main !== this.state.scrollPosition){
-        this.setState({scrollPosition:main})
-      }
-    }
+    // if(document.getElementById("mainYelpList")){
+    //   let main = document.getElementById("mainYelpList").scrollTop;
+    //   if(main !== this.state.scrollPosition){
+    //     this.setState({scrollPosition:main,showMap:false})
+    //   }
+    // }
   }
 
   getSelectedInfoBox(e){
     let id = document.getElementById(encodeURI(e)).offsetTop
     let start = document.getElementById("mainYelpList").scrollTop
-    // for (var i = start; i >= id-220; i++) {
-    //   (function(index) {
-    //       setTimeout(function() { document.getElementById("mainYelpList").scrollTo(0,index) }, i * 100);
-    //   })(i);
-    // }
-    // document.getElementById("mainYelpList").scrollTo(0,id-220)
-      // window.scroll(0,id.y+500)
+
+    document.getElementById("mainYelpList").scrollTo(0,id-220)
   }
   render() {
     return (
       <div className="mainGroupEventContainer">
-        {this.state.scrollPosition < 380 ?
-        <div className="mapContainer">
+        {this.state.showMap ?
+        <div className="containerForBtn">
+        <button onClick={(e)=>{(e)=>e.preventDefault(); this.setState({showMap:!this.state.showMap})}} href="#">Hide Map</button>
+        <div className="mapContainer mapMoveDown">
         <Map getYelp={this.getYelp} getMarkers={this.state.yelp} getSelectedInfoBox={this.getSelectedInfoBox}/>
-        </div> : <div className="mapContainer mapMoveUp">
+        </div>
+        </div> : 
+        <div  className="containerForBtn">
+        <button onClick={(e)=>{(e)=>e.preventDefault(); this.setState({showMap:!this.state.showMap})}} href="#">Show Map</button>
+         
+        <div className="mapContainer mapMoveUp">
         <Map getYelp={this.getYelp} getMarkers={this.state.yelp} getSelectedInfoBox={this.getSelectedInfoBox}/>
+        </div>
         </div>}
         <div className="mainYelpList" id="mainYelpList" onscroll={this.scrollPosition()}>
         <div className="yelpList" id="yelpList"  onscroll={()=>this.scrollPosition()}>
