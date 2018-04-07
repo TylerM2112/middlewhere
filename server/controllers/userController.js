@@ -77,5 +77,17 @@ module.exports = {
     db.add_user_address([newAddress1,newCity,newState,newPostalcode,newPlaceName,newLat,newLong,user_id])
       .then(()=>res.status(200).end())
       .catch(err=>console.log(err))
+  },
+  get_users: (req,res) => {
+    const dbInstance = req.app.get('db')
+
+    dbInstance.get_users()
+    .then((users) =>{
+        res.status(200).send(users)
+    })
+    .catch((err) => {
+        console.log('err', err)
+        res.status(500).send(err)
+    })
   }
 }

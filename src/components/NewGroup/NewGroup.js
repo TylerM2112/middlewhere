@@ -21,24 +21,32 @@ class NewGroup extends Component {
             selectClass:'initial',
         }
         this.postGroup = this.postGroup.bind(this)
-        this.addToInvites = this.addToInvites.bind(this)
-        this.toggleSelect = this.toggleSelect.bind(this)
+        // this.inputValidation =  this.inputValidation.bind(this)
     }
     
     addToInvites(i){
         console.log('i', i)
     }
 
+    // inputValidation() {
+    //   const {groupName, groupPurpose, groupMembers} = this.state
+    //   return (groupName === '' ? alert('please, fill out a groupname.') : (groupPurpose === '' ? alert('please fillout a group Purpose') : (groupMembers.length === 0  ? alert('please select group members.') : alert('form submission sucessful'))))}
+
+
     postGroup(){
       const {groupName, groupPurpose, groupMembers} = this.state
+
+      
       console.log('hit new Group')
+
       axios.post(`/api/new/group`, {group_title: groupName, group_members: groupMembers, group_purpose: groupPurpose})
       .then((resp) => {
         console.log('resp.data', resp.data)
-        alert(resp.data + 'has been posted to db')
+        alert(resp.data)
         })
         .catch((err) => {
-            console.log('err', err)
+
+            console.log('err', err.response.data)
         })
 
         this.setState({
@@ -47,6 +55,7 @@ class NewGroup extends Component {
           groupAdmin: '',
               //having trouble with ressetting state after post to db
           })
+        
     }
 
     componentDidMount(){
@@ -58,18 +67,6 @@ class NewGroup extends Component {
         })
       })
     }
-
-    toggleSelect(){
-      if (this.state.selectClass === "initial"){
-     this.setState({
-      selectClass: "secondary",
-     })
-       } else {
-         this.setState({
-           selectClass: "initial",
-         })
-       }
-     }
 
 
      pushElem(elem){
@@ -92,8 +89,8 @@ class NewGroup extends Component {
               <span><input className="newEvent-input" value={this.state.groupPurpose} type="text" onChange={(e) => { this.setState({groupPurpose: e.target.value})}} placeholder="Group Purpose"/> </span>
              {/* <span>  <input className="newEvent-input" type="text" onChange={(e) => { this.setState({groupAdmin: e.target.value})}} placeholder="Date"/></span> */}
                 
-                <div className="group-friends-option" onClick={() => this.toggleSelect()}>
-                  <select className={this.state.selectClass} multiple={true}>
+                <div className="group-friends-option">
+                  <select className="initial" multiple={true}>
                     {displayFriendsOptions}
                   </select>
                 </div>

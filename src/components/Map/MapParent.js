@@ -6,12 +6,15 @@ const MapWithAMarker = withScriptjs(withGoogleMap(props =>
       defaultZoom={10}
       defaultCenter={{ lat: props.middlepoint[0], lng: props.middlepoint[1] }}
   > {console.log("markers",props.markers)}
-    {props.markers.map(e=>{
+  {props.marker ? 
+    props.markers.map(e=>{
       if(e.checked){
         return <Marker position={{lat:e.coordinates.latitude,lng:e.coordinates.longitude}}
         onClick={(i)=>{props.displayInfoBox({i:i,name:e.name})}} />
       }
-    })}
+    })
+    : <div></div>
+  }
 
     <Marker position={{ lat: props.middlepoint[0], lng: props.middlepoint[1] }}/>
     </GoogleMap>
