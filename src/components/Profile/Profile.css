@@ -1,8 +1,10 @@
-.toggleOff{
-  display: none;
+.ProfileMainContainer{
+  width: 90%;
+  background-color: #e6e6e8;
+  margin: auto;
 }
 
-input{
+.editAddress input{
   border: 1px black solid;
 }
 
@@ -10,17 +12,116 @@ input{
   display: flex;
   flex-direction: column;
   width: 200px;
-  margin: 10px;
-  
+  margin: auto;
 }
 
 .addressContainer{
   border: 1px blue solid;
-  margin: 10px;
-  
 }
 
 .basicInfoContainer{
-  border: 1px purple solid;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+
+.basicInfoPic{
+  width: 110px;
+}
+
+.basicInfoText{
+}
+
+.notificationsContainer{
   margin: 10px;
+}
+
+.notification{
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0px;
+  box-sizing: border-box;
+}
+
+.notificationTab{
+  background-color: #BC2C2F;
+  margin-bottom: 5px;
+  padding: 3px 0px;
+  width: 100%;
+  margin: auto;
+}
+
+.locationTab{
+  display: flex;
+  justify-content: space-between; 
+  background-color: #BC2C2F;
+}
+
+.singleAddressContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.singleAddressTab{
+  margin: auto;
+  border: 1px solid red;
+  padding-left: 5px;
+}
+
+.notificationLabel{
+  width: 50%;
+  margin: auto;
+}
+
+.singleAddressLabel{
+}
+
+.requestContainer{
+  background-color: #06000a;
+  color: white;
+  display: flex;
+  flex-direction: row;
+}
+
+.requestInfoContainer{
+  margin: auto;
+}
+
+.friendsOff{
+  display: none;
+}
+
+.groupsOff{
+  display: none;
+}
+
+.eventsOff{
+  display: none;
+}
+
+.addressOff{
+  display: none;
+}
+
+.locationsOff{
+  display: none;
+}
+.addAddressOff{
+  display: none;
+}
+
+.approveButton{
+  color: white;
+  border: 1px white solid;
+  background-color: green;
+}
+
+.declineButton{
+  color: white;
+  border: 1px white solid;
+  background-color: red;
+}
+
+.locationLabel{
+  padding-left: 20px;
 }
