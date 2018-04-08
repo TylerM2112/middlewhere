@@ -28,8 +28,8 @@ class GroupsView extends Component {
                 {/* <Header TitleOfPage={"Groups"}/> */}
                
                    
-                <GroupEvent/>
-                {/* <NewGroup/> */}
+                <NewGroup/>
+                {/* <GroupEvent/> */}
             </div>
         );
     }

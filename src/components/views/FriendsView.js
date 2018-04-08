@@ -36,4 +36,4 @@ export default class FriendsView extends Component {
             </div>
         );
     }
-}
+}``
