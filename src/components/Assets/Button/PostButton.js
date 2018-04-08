@@ -11,7 +11,7 @@ export default class PostBttn extends Component {
     render() {
         return (
             
-           <button onClick={this.props.postGroup} className={this.props.class}>
+           <button className="PostBttn" onClick={this.props.postGroup} className={this.props.class}>
            {this.props.label}
            </button>
         
