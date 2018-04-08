@@ -10,7 +10,7 @@ export default class NavBar extends Component {
             <div className="nav_parent_div">
                 <Btn label="EVENTS" link="/events" img={calendar}/>
                 <Btn label="GROUPS" link="/groups" img= {add_group}/>
-                <Btn label="FRIENDS" link="/friends" img= {friends}/>
+                <Btn label="PROFILE" link="/profile" img= {friends}/>
         
     
           </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './Friends.css'
+import './friends.css'
 
 
 export default class Friends extends Component {

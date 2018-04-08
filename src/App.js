@@ -27,11 +27,6 @@ class App extends Component {
      <div className="App">
 
 
-       {/* <Header TitleOfPage={"WELCOME"}/>
-        <Map />
-       <NavBar/>
-       <FriendsList/>
-       <NewEvent/> */}
       <Switch>
          <Route exact path="/" component={LoginView}/>
          <Route path="/events" component={EventsView}/>
@@ -39,8 +34,6 @@ class App extends Component {
          <Route path="/friends" component={FriendsView}/>
          <Route path="/profile" component={Profile}/>
         </Switch>
-      {/* {window.location.pathname !== '/' &&  
-      <NavBar/>} */}
       <NavBar />  
      </div>
     );
