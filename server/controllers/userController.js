@@ -91,7 +91,7 @@ module.exports = {
         console.log('err', err)
         res.status(500).send(err)
     })
-  }
+  },
 
   removeAddress: (req, res) => {
     const { auto_id } = req.params;
