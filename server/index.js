@@ -13,6 +13,9 @@ const friendController = require('./controllers/friendController.js')
 const groupController = require('./controllers/groupController.js')
 const yc = require('./controllers/yelpController');
 
+//Middlewares
+const checkBody = require('./middlewares/checkBody.js')
+
 
 require('dotenv').config();
 
@@ -34,13 +37,13 @@ app.use(session({
 app.get('/api/getUserInfo/:user_id', userController.getUserInfo)
 //GET FRIENDS
 ////////////////////////testing friend selector/////////////////////////////////
-app.get('/api/friends', friendController.get_friends)
+app.get('/api/users', userController.get_users)
 
 //POST EVENT
 app.post('/api/new/event', eventController.post_event)
 
 //POST GROUP
-app.post('/api/new/group', groupController.post_group)
+app.post('/api/new/group', checkBody, groupController.post_group)
 
 //POST USER ADDRESS 
 app.post('/api/addUserAddress/:user_id', userController.addUserAddress);
