@@ -33,3 +33,71 @@
     left: 20%;
     
 }
+
+.newGroupInput{
+    position: fixed;
+    background-color:inherit;
+    height:280px;
+    border-bottom:solid black 2px;
+    z-index:10;
+    
+}
+
+.friendsDiv{
+    margin-top:300px;
+
+    
+}
+
+.singleFriendDiv{
+    display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: baseline;
+    align-content: center;
+    /* border:solid black 1px; */
+    /* margin:0 10px; */
+    /* padding-bottom:10px; */
+    /* margin-bottom:10px; */
+    /* border-bottom:solid black 2px; */
+    font-family: 'Dosis';
+    font-weight:bold;
+    position: relative;
+    margin:0 10px;
+    padding-bottom:5px;
+    margin-bottom:10px;
+
+
+}
+
+.singleFriendDiv button{
+    width:80px;
+}
+
+.singleFriendDiv *{
+    margin:auto 10px;
+}
+
+.friendsDiv img{
+    /* margin-top:20px; */
+    border-radius:50%;
+    width:60px;
+}
+
+.singleFriendDiv .border{
+    position: absolute;
+    border:solid rgb(3, 235, 3) 3px;
+    width:98%;
+    margin:auto;
+    height:100%;
+    margin-left:-10px;
+    padding:0 10px;
+    /* padding-top:10px; */
+    margin-top:-5px;
+    /* padding:10px; */
+    /* margin:-5px; */
+
+}
+
+

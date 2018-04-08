@@ -1,7 +1,11 @@
 .parent-newEvents-div {
-     /* overflow: scroll; */
-     border: 2px solid black;
-     height: 40rem;
+     overflow: scroll;
+     /* border: 2px solid black; */
+     /* height: 40rem; */
+     /* width:100%; */
+     /* margin:0 25%; */
+     height:100vh;
+     /* border:solid black 1px; */
      background-color: #e6e6e8;
  }
  
