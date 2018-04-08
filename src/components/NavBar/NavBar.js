@@ -10,10 +10,15 @@ export default class NavBar extends Component {
             <div className="nav_parent_div">
                 <Btn label="EVENTS" link="/events" img={calendar}/>
                 <Btn label="GROUPS" link="/groups" img= {add_group}/>
+<<<<<<< HEAD
                 <Btn label="PROFILE" link="/profile" img= {friends}/>
         
     
           </div>
+=======
+                <Btn label="PROFILE" link="/profile"/>
+            </div>
+>>>>>>> dev
         );
     }
 }

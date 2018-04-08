@@ -44,7 +44,7 @@ class NewGroup extends Component {
         })
         .catch((err) => {
 
-            console.log('err', err.response.data)
+            console.log('err', err.resp.data)
         })
 
         this.setState({
