@@ -35,7 +35,7 @@ class NewGroup extends Component {
       console.log('hit new Group')
       axios.post(`/api/new/group`, {group_admin:groupAdmin,group_title: groupName, group_members: newGroupFriends, group_purpose: groupPurpose})
       .then((resp) => {
-        // console.log('resp.data', resp.data)
+        console.log('resp.data', resp.data)
         // alert(resp.data + 'has been posted to db')
         })
         .catch((err) => {
