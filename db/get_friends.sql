@@ -1,4 +1,12 @@
-select * from mw_users
-ORDER BY name;
+SELECT *,
+CASE 
+    WHEN user_id = 4 THEN (SELECT mw_users.name FROM mw_users WHERE auto_id = friend_id)
+    WHEN friend_id = 4 THEN (SELECT mw_users.name FROM mw_users WHERE auto_id = user_id)
+END as friend_name,
 
--- right now database query is set to return ALL users OK for tsting selector,--> needs changing
+CASE 
+    WHEN user_id = 4 THEN (SELECT mw_users.picture FROM mw_users WHERE auto_id = friend_id)
+    WHEN friend_id = 4 THEN (SELECT mw_users.picture FROM mw_users WHERE auto_id = user_id)
+END as friend_picture
+
+FROM friends

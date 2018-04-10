@@ -35,12 +35,16 @@ app.use(session({
 
 //USER INFORMATION
 app.get('/api/getUserInfo/:user_id', userController.getUserInfo)
-//GET FRIENDS
+
 ////////////////////////testing friend selector/////////////////////////////////
 app.get('/api/users', userController.get_users)
-
+//GET FRIENDS
 app.get('/api/friends', friendController.get_friends)
 app.post('/api/friends', friendController.confirm_friend)
+
+
+//POST FRIENDS 
+app.post('/api/friends/:id', friendController.post_friends)
 
 //NOTIFICATIONS
 app.get(`/api/notifications/:user_id`, userController.getNotifications)
@@ -48,6 +52,7 @@ app.delete('/api/notifications/:notification_id', userController.remove_notifica
 
 //GET GROUPS FOR USER
 app.get('/api/getGroups/:user_id',groupController.getGroups);
+
 //POST EVENT
 app.post('/api/new/event', eventController.post_event)
 app.post('/api/events', eventController.approve_event)
