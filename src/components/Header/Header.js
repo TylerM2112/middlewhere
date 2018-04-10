@@ -23,10 +23,12 @@ export default class Header extends Component {
   }
 
   render() {
+    console.log(this.props)
     return ( 
       <div className="header-parent-div">
+      <NewButton propsFunction={this.props.getUserFunction} buttonTxt={'add new friends'}/>
         <h1 className="pageTitle">{this.state.pageTitle}</h1> 
-        {this.props.NewButtonIsShown ? <NewButton buttonTxt={this.props.buttonName}/> : null}
+        <div>{this.props.newButton}</div>
       </div>
     )
   }

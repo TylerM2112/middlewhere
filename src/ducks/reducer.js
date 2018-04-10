@@ -5,6 +5,7 @@ const iState = {
     email:null,
     address_count:0,
     addresses:[1,2],
+    users:[],
 }
 
 const ADD_ADDRESS = "ADD_ADDRESS";
@@ -36,6 +37,18 @@ export function updateUser(data){
     return{
         type:UPDATE_USER,
         payload:data,
+    }
+}
+
+
+//needing to dispatch action to store users in redux state in order to rerender friends
+
+
+const GET_USER = "GET_USER";
+export function getUser(data){
+    return {
+        type:GET_USER,
+        payload: data,
     }
 }
 
@@ -96,7 +109,8 @@ export default function (state=iState,action){
             console.log("SNOT", index)
             newState.addresses.splice(index, 1);
             return newState;
-        
+            break;
+
         default:
             return state;
     }

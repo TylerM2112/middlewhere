@@ -8,3 +8,25 @@
     background-color: #C43235;
     color: white;
 }
+
+.addToFriendsButton{
+    background-color: #C43235;
+    color: white;
+    border: 1px;
+    border-radius: 5px;
+}
+
+/* how are we going to handle friend requests
+i need to know so I can start working on that code. */
+
+
+/* change user table to add column friends Array */
+
+/*  */
+
+
+/* make Notifications table withs columns: notification_auto_id, to, from, type{group friend event}, type_id */
+
+/* thinking about changing button file names to FunctionalButton and LinkButton for dryer code 
+potential use: 
+<FunctnlBttn label="SAVE GROUP"  FunctnlButtonFunctionProp={this.postGroup} class={"post-event-button"}/> */

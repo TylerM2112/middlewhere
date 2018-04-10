@@ -117,7 +117,8 @@ class NewGroup extends Component {
               <h2 className="new-event-h2">Make a new event</h2>
               <span><input className="newEvent-input" value={this.state.groupName} type="text" onChange={(e) => { this.setState({groupName: e.target.value})}} placeholder="Group Name"/> </span>
               <span><input className="newEvent-input" value={this.state.groupPurpose} type="text" onChange={(e) => { this.setState({groupPurpose: e.target.value})}} placeholder="Group Purpose"/> </span>
-               <PostBttn label="SAVE GROUP"  postGroup={this.postGroup} class={"post-event-button"}/>
+              {/* PostButton - prop-name: postButton is Universal prop */}
+               <PostBttn label="SAVE GROUP"  postButtonFunctionProp={this.postGroup} class={"post-event-button"}/>
               </div>
              {/* <span>  <input className="newEvent-input" type="text" onChange={(e) => { this.setState({groupAdmin: e.target.value})}} placeholder="Date"/></span> */}
                 

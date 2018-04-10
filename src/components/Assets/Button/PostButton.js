@@ -5,13 +5,11 @@ export default class PostBttn extends Component {
     constructor(props){
         super(props);
     }
-    componentDidMount(){
-        console.log("this.props",this.props)
-    }
     render() {
         return (
-            
-           <button className="PostBttn" onClick={this.props.postGroup} className={this.props.class}>
+            //might have error with multiple props from a components having the same propname passed to them 
+            //made for easy use of PostButton component
+           <button className="PostBttn" onClick={this.props.postButtonFunctionProp} className={this.props.class}>
            {this.props.label}
            </button>
         
