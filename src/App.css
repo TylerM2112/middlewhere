@@ -4,6 +4,11 @@
   margin-bottom:60px;
   box-sizing: content-box;
   /* overflow:hidden; */
+  background-color:#e6e6e8;
+}
+
+html{
+  background-color:#e6e6e8;
 }
 
 .App-logo {
