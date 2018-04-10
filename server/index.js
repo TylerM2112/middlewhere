@@ -40,18 +40,25 @@ app.get('/api/getUserInfo/:user_id', userController.getUserInfo)
 app.get('/api/users', userController.get_users)
 
 app.get('/api/friends', friendController.get_friends)
+app.post('/api/friends', friendController.confirm_friend)
 
+//NOTIFICATIONS
+app.get(`/api/notifications/:user_id`, userController.getNotifications)
+app.delete('/api/notifications/:notification_id', userController.remove_notification)
 
 //GET GROUPS FOR USER
 app.get('/api/getGroups/:user_id',groupController.getGroups);
 //POST EVENT
 app.post('/api/new/event', eventController.post_event)
+app.post('/api/events', eventController.approve_event)
 
 //POST GROUP
 app.post('/api/new/group', checkBody, groupController.post_group)
+app.post('/api/groups', groupController.approve_group)
 
 //POST USER ADDRESS 
 app.post('/api/addUserAddress/:user_id', userController.addUserAddress);
+app.put(`/api/address/:auto_id`, userController.editAddress)
 app.delete('/api/removeAddress/:auto_id', userController.removeAddress);
 
 //Yelp Controller

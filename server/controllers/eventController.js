@@ -13,5 +13,17 @@ module.exports = {
         .catch((err) => {
             console.log('err', err)
         })
-    }
+    }, 
+
+    approve_event: (req, res) => {
+        const dbInstance = req.app.get('db')
+        const { receiver, type_id } = req.body
+
+        dbInstance.confirm_event([+receiver, +type_id])
+            .then(res => { 
+            })
+            .catch(err => {
+                console.log("Confirm Event Controller Error", err)
+             })
+     }
 }
