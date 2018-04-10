@@ -5,9 +5,6 @@ export default class Btn extends Component {
     constructor(props){
         super(props);
     }
-    componentDidMount(){
-        console.log("this.props",this.props)
-    }
     render() {
         return (
             <Link to={this.props.link}>

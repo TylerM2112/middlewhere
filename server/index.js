@@ -46,6 +46,8 @@ app.post('/api/friends', friendController.confirm_friend)
 app.get(`/api/notifications/:user_id`, userController.getNotifications)
 app.delete('/api/notifications/:notification_id', userController.remove_notification)
 
+//GET GROUPS FOR USER
+app.get('/api/getGroups/:user_id',groupController.getGroups);
 //POST EVENT
 app.post('/api/new/event', eventController.post_event)
 app.post('/api/events', eventController.approve_event)
