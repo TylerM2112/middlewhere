@@ -1,0 +1,116 @@
+.mainGroupContainer{
+    background-color:#e6e6e8;
+    animation: mainGroupContainerAni .3s linear;
+}
+
+@keyframes mainGroupContainerAni {
+    from{margin-left:-500px}
+    to{margin-left:0;}
+}
+
+.groupContainer{
+    /* transition:all .5s; */
+    background-color:#c43235;
+    color:white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    /* margin:auto; */
+    margin-bottom:5px;
+    height:75px;
+    /* width:95%; */
+    margin-left:-500px;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
+    animation: groupContainerAni .3s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    width:100vw !important;
+}
+
+@keyframes groupContainerAni{
+    from{margin-left:-500px;display:none;}
+    to{margin-left:0;display:block;}
+}
+
+.groupContainer > div{
+    margin:0 10px;
+    padding:10px 0;
+}
+
+
+
+
+
+.groupContainer > div{
+    font-family: 'Open Sans';
+    font-size:12px;
+    user-select: none;
+}
+
+.groupContainer .groupTitle{
+    font-size:20px;
+    font-family: 'Dosis';
+    font-weight: bold;
+    /* text-align:left; */
+}
+
+.groupContainer .groupPurpose{
+    font-size:12px;
+    font-family: 'Open Sans'
+}
+
+.groupContainer .groupPicture{
+    width:60px;
+    border-radius: 50%;
+    margin:0;
+    padding:0;
+}
+
+button:focus{
+    outline:0;
+}
+
+.groupDetails{
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+    align-content: center;
+    height:75px;
+    background-color:#c43235;
+    color:white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    animation:groupDetailsAni .2s;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+@keyframes groupDetailsAni{
+    to{opacity: 1;}
+}
+
+.groupDetails button{
+    border:none;
+    width:100px;
+    padding:10px;
+    font-size:12px;
+    font-family: 'Dosis';
+    font-weight:bold;
+    border-radius: 5px;
+    color:#e6e6e8;
+
+}
+
+.groupDetails .btn1{
+    background-color:#300032;
+}
+
+.groupDetails .btn2{
+    background-color:#06000a;
+}
+

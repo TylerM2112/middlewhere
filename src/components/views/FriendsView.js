@@ -5,6 +5,8 @@ import axios from 'axios';
 import Friends from '../Friends/Friends';
 import DisplayUsers from '../DisplayUsers/DisplayUsers';
 import {connect} from "react-redux"
+import ReactSwipe from 'react-swipe';
+
 
 class FriendsView extends Component {
     constructor(props){
@@ -73,6 +75,7 @@ class FriendsView extends Component {
                 <div><h1>{this.state.confirmationMessage ? this.state.confirmationMessage : null}</h1></div>
                 {this.state.userBool ? <DisplayUsers/> : null}
                 <div>{displayFriends}</div>
+
             </div>
         );
     }

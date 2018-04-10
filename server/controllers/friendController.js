@@ -23,5 +23,17 @@ module.exports = {
         .catch((err) => {
             console.log('err', err)
         })
+    },
+  
+    confirm_friend: (req, res) => {
+        const dbInstance = req.app.get('db')
+        let { receiver, sender } = req.body
+
+        dbInstance.confirm_friend([+receiver, +sender])
+            .then(res => { 
+            })
+            .catch(err => {
+                console.log("Confirm Friend Controller Error", err)
+             })
     }
 }
