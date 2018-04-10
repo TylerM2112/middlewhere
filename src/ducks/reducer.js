@@ -91,9 +91,10 @@ export default function (state=iState,action){
             break;
         
         case REMOVE_ADDRESS:
-            index = newState.addresses.findIndex(e => e.id === action.payload);
-            console.log(index)
-            newState.addresses.splice(index.auto_id, 1);
+        console.log("HEY ME", JSON.stringify(newState.addresses))    
+            index = newState.addresses.findIndex(e => e.auto_id === action.payload);
+            console.log("SNOT", index)
+            newState.addresses.splice(index, 1);
             return newState;
         
         default:

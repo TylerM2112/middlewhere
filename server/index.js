@@ -38,7 +38,9 @@ app.get('/api/getUserInfo/:user_id', userController.getUserInfo)
 //GET FRIENDS
 ////////////////////////testing friend selector/////////////////////////////////
 app.get('/api/users', userController.get_users)
-app.get('/api/friends',friendController.get_friends);
+
+app.get('/api/friends', friendController.get_friends)
+
 
 //GET GROUPS FOR USER
 app.get('/api/getGroups/:user_id',groupController.getGroups);

@@ -30,8 +30,8 @@ export default class GroupEvent extends Component {
   }
 
   componentDidMount() {
-    let main = document.getElementById("mainYelpList")
-    main.addEventListener("scroll",this.scrollPosition)
+    // let main = document.getElementById("mainYelpList")
+    // main.addEventListener("scroll",this.scrollPosition)
   }
 
   getYelp(arr){

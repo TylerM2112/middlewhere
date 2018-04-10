@@ -97,8 +97,8 @@ module.exports = {
     const { auto_id } = req.params;
     const db = req.app.get('db');
 
-    db.remove_address([ auto_id ]).then(() => {
-      res.status(200).end()
+    db.remove_address([ auto_id ]).then(response => {
+      res.status(200).send(response.auto_id)
     }).catch(err => console.log(err));
    }
 
