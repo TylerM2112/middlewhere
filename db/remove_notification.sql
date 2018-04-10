@@ -1,0 +1,1 @@
+DELETE FROM notification WHERE notification_auto_id = $1;
