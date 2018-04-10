@@ -3,6 +3,7 @@ import Header from '../Header/Header';
 import NewButton from '../Assets/Button/NewButton'
 import axios from 'axios';
 import Friends from '../Friends/Friends';
+import ReactSwipe from 'react-swipe';
 
 export default class FriendsView extends Component {
     constructor(props){
@@ -31,8 +32,9 @@ export default class FriendsView extends Component {
 
     render() {
         return (
-            <div>
+            <div className="mainFriendsContainer">
                 <Header TitleOfPage={"Friends"} NewButtonIsShown={true} buttonName={'add friend'}/> 
+                
             </div>
         );
     }
