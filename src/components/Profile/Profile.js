@@ -43,7 +43,7 @@ class Profile extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('/api/getUserInfo/22')
+		axios.get('/api/getUserInfo/111')
 			.then(res => {
 				this.props.updateUser(res.data);
 			})
