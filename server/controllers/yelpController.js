@@ -1,7 +1,6 @@
 module.exports = {
     //Yelp API Search Call using passed in middlepoint.
     search: (req, res) => {
-        // console.log("HELP ")
         const yelp = require('yelp-fusion');
         const client = yelp.client(process.env.YELP_APIKEY);
       

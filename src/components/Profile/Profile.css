@@ -1,5 +1,5 @@
 .ProfileMainContainer{
-  width: 90%;
+  /* width: 90%; */
   background-color: #e6e6e8;
   margin: auto;
 }
@@ -26,20 +26,30 @@
 }
 
 .basicInfoContainer{
+  /* border: 2px solid #300032; */
+  background-color: #300032;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.picInfoContainer{
   display: flex;
   flex-direction: row;
-  margin-top: 10px;
 }
 
 .basicInfoPic{
+  margin: 5px;
   width: 110px;
 }
 
 .basicInfoText{
+  display: flex;
+  flex-direction: column;
 }
 
 .notificationsContainer{
-  margin: 10px;
 }
 
 .notification{
@@ -61,36 +71,63 @@
   display: flex;
   justify-content: space-between; 
   background-color: #BC2C2F;
+  color: white;
 }
 
 .singleAddressContainer{
   display: flex;
   flex-direction: column;
+  margin-bottom: 5px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);  
 }
 
 .singleAddressTab{
-  margin: auto;
-  border: 1px solid red;
+  background-color: #fdfdfd;  
   padding-left: 5px;
+  color: rgb(0, 0, 0);
+  margin-bottom: 5px;
+  border: 1px #BC2C2F solid;
+}
+
+.addressLabelText{
+}
+
+.addressButtonContainer{
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+}
+
+.editAddressButtonContainer{
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  margin: auto;
 }
 
 .notificationLabel{
-  width: 60%;
+  /* width: 60%; */
   margin: auto;
   position: sticky;
 }
 
 .singleAddressLabel{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .requestContainer{
-  background-color: #06000a;
+  background-color: #300032;
   color: white;
   display: flex;
   flex-direction: row;
   animation: requestContainerAni 1s;
   animation-fill-mode: forwards;
-  overflow:hidden;
+  overflow: hidden;
+  margin-bottom: 5px;
+  border: 2px solid #BC2C2F;
 }
 
 @keyframes requestContainerAni{

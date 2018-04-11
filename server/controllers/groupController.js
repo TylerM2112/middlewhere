@@ -24,9 +24,9 @@ module.exports = {
              })
      },
   
-    getGroups:(req,res) =>{
+    getGroups: (req, res) => {
         const db = req.app.get('db');
-        const {user_id}  = req.params;
+        const { user_id } = req.params;
 
         db.get_user_groups(+user_id)
             .then(groups=>res.status(200).send(groups))
