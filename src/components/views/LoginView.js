@@ -15,7 +15,7 @@ class LoginView extends Component {
         return(
             <div>
                 <h1>Login</h1>
-                {/* <Auth0Form/> */}
+                <Auth0Form/>
             </div>
         );
     }

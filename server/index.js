@@ -74,7 +74,25 @@ app.delete('/api/friends/:id', friendController.delete_friend)
 //Yelp Controller
 app.post('/api/yelp/search', yc.search)
 
+////////////////////////auth0//////////////////////////////////////////////////
+var request = require("request");
 
+var options = { method: 'POST',
+  url: 'https://__AUTH0_NAMESPACE__/dbconnections/signup',
+  headers: { 'content-type': 'application/json' },
+  body: 
+   { client_id: '__AUTH0_CLIENT_ID__',
+     email: '$(\'#signup-email\').val()',
+     password: '$(\'#signup-password\').val()',
+     user_metadata: { name: 'john', color: 'red' } },
+  json: true };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+//////////////////////////////////////////////////////////////////////////////
 
 
 const PORT = process.env.SERVER_PORT || 4000;
