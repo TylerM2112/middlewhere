@@ -52,7 +52,8 @@ app.delete('/api/notifications/:notification_id', userController.remove_notifica
 
 //GET GROUPS FOR USER
 app.get('/api/getGroups/:user_id',groupController.getGroups);
-
+app.get('/api/getGroupMembers/:group_id',groupController.getGroupMembers)
+app.delete('/api/deleteUserFromGroup/:group_id/:user_id',groupController.deleteUserFromGroup)
 //POST EVENT
 app.post('/api/new/event', eventController.post_event)
 app.post('/api/events', eventController.approve_event)

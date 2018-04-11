@@ -14,8 +14,10 @@
     color:white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     /* margin:auto; */
-    margin-bottom:5px;
+    margin-bottom:1px;
     height:75px;
+    padding:5px 0;
+    /* margin:0 40px; */
     /* width:95%; */
     margin-left:-500px;
     display: flex;
@@ -48,6 +50,7 @@
     font-family: 'Open Sans';
     font-size:12px;
     user-select: none;
+    margin-right:20px;
 }
 
 .groupContainer .groupTitle{
@@ -81,13 +84,15 @@ button:focus{
 	align-items: center;
     align-content: center;
     height:75px;
-    background-color:#c43235;
+    /* background-color:#c43235; */
+    background-color:#300032;
     color:white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     animation:groupDetailsAni .2s;
-    animation-delay: 2s;
+    animation-delay: 1s;
     animation-fill-mode: forwards;
     opacity: 0;
+    padding:5px 0;
 }
 
 @keyframes groupDetailsAni{
@@ -107,10 +112,28 @@ button:focus{
 }
 
 .groupDetails .btn1{
-    background-color:#300032;
+    background-color:#c43235;
 }
 
 .groupDetails .btn2{
-    background-color:#06000a;
+    background-color:#e6e6e8;
+    color:#06000a;
 }
 
+.mainGroupContainer .groupHeader{
+    font-size:20px;
+    font-family: 'Dosis';
+    font-weight:bold;
+    padding:10px;
+    /* margin:0 10px; */
+    background-color:#300032;
+    color:#e6e6e8;
+    margin-bottom:1px;
+}
+
+@keyframes removeGroupAni{
+    0%{position: inherit;}
+    /* 90%{position:fixed;display:none;} */
+    99%{position:fixed; display:none;}
+    100%{margin-left:-1000px;position:fixed; display:none;}
+}
