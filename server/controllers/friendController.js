@@ -35,5 +35,18 @@ module.exports = {
             .catch(err => {
                 console.log("Confirm Friend Controller Error", err)
              })
+    },
+
+    delete_friend: (req,res) => {
+        const dbInstance = req.app.get('db')
+        let {id} = req.params
+
+        dbInstance.delete_friend([id])
+            .then(() => {
+                res.status(200).send('friend deleted')
+            })
+            .catch(err => {
+                console.log("err", err)
+             })
     }
 }

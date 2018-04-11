@@ -2,7 +2,7 @@
     display: inline-block;
     position: relative;
     left: 30%;
-    height: 7rem;
+    height: 3rem;
     border-radius: 5px;
     font-size: 24px;
     background-color: #C43235;
@@ -13,8 +13,33 @@
     background-color: #C43235;
     color: white;
     border: 1px;
+    height: 3rem;
+    position: relative;
+    left: 35%;
+    width: 40%;
+    top: -5.5rem;
     border-radius: 5px;
 }
+
+.DeleteButton{
+    background-color: #C43235;
+    color: white;
+    border: 1px;
+    border-radius: 5px;
+}
+
+.search_button {
+    /* border: 3px solid red; */
+    border: 1px;
+    color: white;
+    height: 3.6rem;
+    width: 31%;
+    background-color: #C43235;
+    position: fixed;
+    left: 68%;
+    z-index: 20;
+}
+
 
 /* how are we going to handle friend requests
 i need to know so I can start working on that code. */

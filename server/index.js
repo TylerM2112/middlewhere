@@ -32,7 +32,11 @@ app.use(session({
 
 //USER CONTROLLER
 app.get('/api/getUserInfo/:user_id', userController.getUserInfo)
+
+//FIND USER
+app.get('/api/users:users', userController.search_user)
 app.get('/api/users', userController.get_users)
+
 //NOTIFICATION ENDPOINTS
 app.get(`/api/notifications/:user_id`, userController.getNotifications)
 app.delete('/api/notifications/:notification_id', userController.remove_notification)
@@ -60,7 +64,24 @@ app.delete('/api/deleteUserFromGroup/:group_id/:user_id',groupController.deleteU
 app.post('/api/new/event', eventController.post_event)
 app.post('/api/events', eventController.approve_event)
 
-//YELP CONTROLLER
+//POST GROUP
+app.post('/api/new/group', checkBody, groupController.post_group)
+app.post('/api/groups', groupController.approve_group)
+//GET GROUPS FOR USER
+app.get('/api/getGroups/:user_id',groupController.getGroups);
+app.get('/api/getGroupMembers/:group_id',groupController.getGroupMembers)
+app.delete('/api/deleteUserFromGroup/:group_id/:user_id',groupController.deleteUserFromGroup)
+
+//POST USER ADDRESS 
+app.post('/api/addUserAddress/:user_id', userController.addUserAddress);
+app.put(`/api/address/:auto_id`, userController.editAddress)
+app.delete('/api/removeAddress/:auto_id', userController.removeAddress);
+
+//DELETE FRIENDS
+app.delete('/api/friends/:id', friendController.delete_friend)
+
+//Yelp Controller
+
 app.post('/api/yelp/search', yc.search)
 
 
