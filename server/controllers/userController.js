@@ -143,6 +143,21 @@ module.exports = {
       .catch(err => {
         console.log("Edit Address userController Error", err)
        })
+   },
+
+   search_user: (req, res) => {
+    const dbInstance = req.app.get('db');
+    let { users } = req.params
+
+    console.log('users', users)
+
+    dbInstance.search_user([users])
+    .then((usersFromDb) => {
+      res.status(200).send(usersFromDb)
+    })
+    .catch((err) => {
+      console.log('err', err)
+    })
    }
 
 }
