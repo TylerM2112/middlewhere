@@ -4,18 +4,15 @@ const massive = require('massive');
 const session = require('express-session');
 const axios = require('axios');
 
-
-
-//Controllers
+//CONTROLLERS
 const userController = require('./controllers/userController');
 const eventController = require('./controllers/eventController')
 const friendController = require('./controllers/friendController.js')
 const groupController = require('./controllers/groupController.js')
 const yc = require('./controllers/yelpController');
 
-//Middlewares
+//MIDDLEWARE
 const checkBody = require('./middlewares/checkBody.js')
-
 
 require('dotenv').config();
 
@@ -33,43 +30,34 @@ app.use(session({
   },
 }));
 
-//USER INFORMATION
+//USER CONTROLLER
 app.get('/api/getUserInfo/:user_id', userController.getUserInfo)
-
-////////////////////////testing friend selector/////////////////////////////////
 app.get('/api/users', userController.get_users)
-//GET FRIENDS
-app.get('/api/friends', friendController.get_friends)
-app.post('/api/friends', friendController.confirm_friend)
-
-
-//POST FRIENDS 
-app.post('/api/friends/:id', friendController.post_friends)
-
-//NOTIFICATIONS
+//NOTIFICATION ENDPOINTS
 app.get(`/api/notifications/:user_id`, userController.getNotifications)
 app.delete('/api/notifications/:notification_id', userController.remove_notification)
+//ADDRESS ENDPOINTS
+app.post('/api/addUserAddress/:user_id', userController.addUserAddress);
+app.put(`/api/address/:auto_id`, userController.editAddress)
+app.put(`/api/address/default/:user_id`, userController.updateDefaults)
+app.delete('/api/removeAddress/:auto_id', userController.removeAddress);
 
-//GET GROUPS FOR USER
-app.get('/api/getGroups/:user_id',groupController.getGroups);
+//FRIENDS CONTROLLER
+app.get('/api/friends', friendController.get_friends)
+app.post('/api/friends', friendController.confirm_friend)
+app.post('/api/friends/:id', friendController.post_friends)
 
-//POST EVENT
-app.post('/api/new/event', eventController.post_event)
-app.post('/api/events', eventController.approve_event)
-
-//POST GROUP
+//GROUP CONTROLLER
+app.get('/api/getGroups/:user_id', groupController.getGroups);
 app.post('/api/new/group', checkBody, groupController.post_group)
 app.post('/api/groups', groupController.approve_group)
 
-//POST USER ADDRESS 
-app.post('/api/addUserAddress/:user_id', userController.addUserAddress);
-app.put(`/api/address/:auto_id`, userController.editAddress)
-app.delete('/api/removeAddress/:auto_id', userController.removeAddress);
+//EVENTS CONTROLLER
+app.post('/api/new/event', eventController.post_event)
+app.post('/api/events', eventController.approve_event)
 
-//Yelp Controller
+//YELP CONTROLLER
 app.post('/api/yelp/search', yc.search)
-
-
 
 
 const PORT = process.env.SERVER_PORT || 4000;

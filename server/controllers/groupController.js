@@ -22,15 +22,14 @@ module.exports = {
             .catch(err => {
                 console.log("Confirm Friend Controller Error", err)
              })
-     }
-    },
+     },
   
-    getGroups:(req,res) =>{
+    getGroups: (req, res) => {
         const db = req.app.get('db');
-        const {user_id}  = req.params;
+        const { user_id } = req.params;
 
         db.get_user_groups(+user_id)
-            .then(groups=>res.status(200).send(groups))
-            .catch(err=>res.status(500).send(err));
+            .then(groups => res.status(200).send(groups))
+            .catch(err => res.status(500).send(err));
     }
 }

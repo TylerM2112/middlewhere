@@ -27,4 +27,4 @@ FROM notification
 
 JOIN mw_users
 ON mw_users.auto_id = notification.sender
-WHERE receiver = 88;
+WHERE receiver = $1;
