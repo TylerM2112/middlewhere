@@ -7,5 +7,6 @@ SET
   long = $6,
   lat = $7,
   place = $8
+
 WHERE auto_id = $1
 RETURNING *;

@@ -5,6 +5,7 @@ import Header from './components/Header/Header.js'
 import Profile from './components/Profile/Profile';
 import NewEvent from './components/Profile/NewEvents'
 import Friends from './components/Friends/Friends'
+import GroupDetails from './components/GroupDetails/GroupDetails';
 
 import LoginView from './components/views/LoginView'
 import EventsView from './components/views/EventsView'
@@ -33,6 +34,7 @@ class App extends Component {
          <Route path="/groups" component={GroupsView}/>
          <Route path="/friends" component={FriendsView}/>
          <Route path="/profile" component={Profile}/>
+         <Route path="/groupDetails" component={GroupDetails}/>
         </Switch>
       <NavBar />  
      </div>
