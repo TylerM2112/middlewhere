@@ -1,0 +1,1 @@
+DELETE from friends where auto_id = $1

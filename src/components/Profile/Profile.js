@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { excon } from 'excon'
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { updateUser, addAddress, removeAddress } from './../../ducks/reducer';
-import profilepic from '../../assets/images/bestpicture.jpg';
+import { updateUser, addAddress, removeAddress, updateAddress, updateAllAddresses } from './../../ducks/reducer';
 import friends from '../../assets/images/friends-512.png';
 import Btn from '../Assets/Button/Btn';
+import logo from "../../assets/images/mwLogoSmallpng.png";
 
 import './Profile.css';
 class Profile extends Component {
@@ -19,15 +19,11 @@ class Profile extends Component {
 			newPostalcode: '',
 			newPlaceName: '',
 			toggleFriends: false,
-			friendsNotification: 1,
 			toggleGroups: false,
-			groupsNotification: 0,
 			toggleEvents: false,
-			eventsNotification: 0,
 			toggleLocations: false,
 			toggleAddAddress: false,
 			toggleAddress: false,
-			toggleEditAddress: false,
 			notifications: [],
 		}
 
@@ -40,15 +36,17 @@ class Profile extends Component {
 		this.displayLocations = this.displayLocations.bind(this);
 		this.approved = this.approved.bind(this);
 		this.removeNotification = this.removeNotification.bind(this);
+		this.setAsDefault = this.setAsDefault.bind(this);
+
 	}
 
 	componentDidMount() {
-		axios.get('/api/getUserInfo/111')
+		axios.get(`/api/getUserInfo/${this.props.state.user_id}`)
 			.then(res => {
-				this.props.updateUser(res.data);
+				this.props.updateUser(res.data[0]);
 			})
 			.catch(err => console.log(err));
-		axios.get(`/api/notifications/50`).then(res => {
+		axios.get(`/api/notifications/${this.props.state.user_id}`).then(res => {
 			this.setState({
 				notifications: res.data
 			})
@@ -62,12 +60,17 @@ class Profile extends Component {
 		if (this.props.state.name) {
 			html =
 				<div className="basicInfoContainer">
-					<div >
-						<img className="basicInfoPic" src={this.props.state.picture} />
+					<div className="picInfoContainer">
+						<div >
+							<img className="basicInfoPic" src={this.props.state.picture} alt="user" />
+						</div>
+						<div className="basicInfoText">
+							<p>{this.props.state.name}</p>
+							<p>{this.props.state.email}</p>
+						</div>
 					</div>
-					<div className="basicInfoText">
-						<p>{this.props.state.name}</p>
-						<p>{this.props.state.email}</p>
+					<div>
+						<Btn label="FRIENDS" link="/friends" img={friends} />
 					</div>
 				</div>
 		}
@@ -88,7 +91,7 @@ class Profile extends Component {
 				let long = res.data.results[0].geometry.location.lng;
 				let newAddress1 = add.find(e => e.types[0] === 'street_number').short_name;
 				let newAddress2 = add.find(e => e.types[0] === 'route').short_name;
-				
+
 				var addressObj = {
 					newAddress1: `${newAddress1} ${newAddress2}`,
 					newCity: add.find(e => e.types[0] === 'locality').short_name,
@@ -99,29 +102,43 @@ class Profile extends Component {
 					newPlaceName: this.state.newPlaceName,
 					auto_id: this.state.auto_id,
 				}
-				if (this.state.auto_id) { 
+				// var editAddressObj = {
+				// 	address1: `${newAddress1} ${newAddress2}`,
+				// 	city: add.find(e => e.types[0] === 'locality').short_name,
+				// 	state: add.find(e => e.types[0] === 'administrative_area_level_1').short_name,
+				// 	postalcode: add.find(e => e.types[0] === 'postal_code').short_name,
+				// 	lat: lat,
+				// 	long: long,
+				// 	place: this.state.newPlaceName,
+				// 	auto_id: this.state.auto_id,
+				// 	defaultaddress: this.state.defaultaddress,
+				// }
+				if (this.state.auto_id) {
 					this.editAddress(addressObj)
+					this.toggle("ADDRESS_CLOSE");
+					this.setState({
+						auto_id: null,
+					});
 				}
 				else {
 					this.addAddressToDatabase(addressObj)
-				}	
+					this.toggle("ADDRESS_CLOSE");
+				}
 			})
-			.catch(err => console.log(err))
+			.catch(err => {
+				alert("Please review and re-enter your address.")
+				console.log("Google Geocode Error", err)
+			})
 
 	}
 
 	addAddressToDatabase(obj) {
-		console.log(obj)
 		axios.post(`/api/addUserAddress/${this.props.state.user_id}`, obj)
 			.then(res => {
-				console.log("BOOGERS", res.data[0].auto_id)
 				obj.auto_id = res.data[0].auto_id;
-				console.log("BOOGERS2", obj)
-				this.props.addAddress(obj)
-
+				this.props.addAddress(obj);
 			})
 			.catch(err => alert(err))
-		this.toggle()
 		this.setState({
 			newAddress1: '',
 			newCity: '',
@@ -155,27 +172,31 @@ class Profile extends Component {
 				break;
 			case "ADDRESS_ADD":
 				this.setState({
-					// toggleAddAddress: !this.state.toggleAddAddress,
 					newAddress1: '',
 					newCity: '',
 					newState: '',
 					newPostalcode: '',
 					newPlaceName: '',
-					// toggleEditAddress: true,
+					auto_id: null,
 				})
 				if (this.state.toggleLocations & !this.state.toggleAddAddress) {
 					this.setState({
 						toggleAddAddress: true,
-						toggleLocations: true,
 					})
-				} else if (!this.state.toggleLocations) {
+				} else if (!this.state.toggleLocations && !this.state.toggleAddAddress) {
 					this.setState({
-						toggleLocations: !this.state.toggleLocations,
+						toggleLocations: true,
+						toggleAddAddress: true,
 					})
 				}
 				break;
 			case "ADDRESS_CANCEL":
 				this.setState({
+					newAddress1: '',
+					newCity: '',
+					newState: '',
+					newPostalcode: '',
+					newPlaceName: '',
 					toggleAddAddress: !this.state.toggleLocations,
 				})
 				break;
@@ -184,9 +205,18 @@ class Profile extends Component {
 					toggleAddress: !this.state.toggleAddress,
 				})
 				break;
+			case "ADDRESS_CLOSE":
+				this.setState({
+					newAddress1: '',
+					newCity: '',
+					newState: '',
+					newPostalcode: '',
+					newPlaceName: '',
+					toggleAddAddress: !this.state.toggleAddAddress,
+				})
+				break;
 			case "EDIT_ADDRESS":
 				this.setState({
-					// toggleEditAddress: !this.state.toggleEditAddress,
 					newAddress1: e.address1,
 					newCity: e.city,
 					newPlaceName: e.place,
@@ -195,16 +225,10 @@ class Profile extends Component {
 					toggleAddAddress: true,
 					auto_id: e.auto_id,
 				})
-				// if (this.state.toggleEditAddress) {
-				// 	document.getElementById(e.auto_id).style.display = "inherit";
-				// }
-				// else { 
-				// 	document.getElementById(e.auto_id).style.display = "none";
-					// document.querySelectorAll("editAddressContainer").style.display = "none";
-				}
-				// break;
-
-		// }
+				break;
+			default:
+				break;
+		}
 	}
 
 	removeAddress(id) {
@@ -218,22 +242,21 @@ class Profile extends Component {
 				if (this.state.newState !== null) {
 					if (this.state.newPostalcode !== null) {
 						if (this.state.newPlaceName !== null) {
-							this.addAddress();
-							return;
+								this.addAddress();
+								return;
 						}
 					}
 				}
 			}
 		}
-		alert('Please fill in all the fields.')
+		alert('Please make sure all the fields are filled in.')
 	}
 
 	displayNotifications() {
 		if (this.state.notifications.length !== 0) {
-			console.log(this.state.notifications);
 			return (
 
-				< div className="notificationsContainer" >
+				<div className="notificationsContainer" >
 					{this.state.notifications[0].length > 0 &&
 						<div className="notification">
 
@@ -292,7 +315,6 @@ class Profile extends Component {
 								</div>
 							</div>
 							{this.state.notifications[2].map(e => {
-								console.log("IM THE TYPE ID", e);
 								return (
 									<div className={this.state.toggleEvents ? "requestContainer" : "eventsOff"}>
 										<div className="requestPicContainer">
@@ -309,7 +331,7 @@ class Profile extends Component {
 							})}
 						</div>
 					}
-				</div >
+				</div>
 			)
 		}
 	}
@@ -321,33 +343,21 @@ class Profile extends Component {
 				html.push(
 					<div className="singleAddressTab" >
 						<div className="singleAddressLabel" onClick={() => this.toggle("ADDRESS")}>
-							<div>{e.place} - {e.address1}</div>
+							<div className="addressLabelText">{e.place} - {e.address1}</div>
+							{e.defaultaddress == true ? <div><img src={logo} alt="logo" /></div> : <div></div>}
 						</div>
 
 						<div className={this.state.toggleAddress ? "singleAddressContainer" : "addressOff"}>
 							<div>{e.city}, {e.state} {e.postalcode}</div>
-							<div id={e.auto_id}className="editAddressContainer editAddressOff">
-
-								<label>Location Label</label>
-								<input type="text" onChange={e => this.setState({ newPlaceName: e.target.value })} value={this.state.newPlaceName} />
-								<label>Address</label>
-								<input type="text" onChange={e => this.setState({ newAddress1: e.target.value })} value={this.state.newAddress1} />
-								<label>City</label>
-								<input type="text" onChange={e => this.setState({ newCity: e.target.value })} value={this.state.newCity} />
-								<label>State</label>
-								<input type="text" onChange={e => this.setState({ newState: e.target.value })} value={this.state.newState} />
-								<label>Zip Code</label>
-								<input type="text" onChange={e => this.setState({ newPostalcode: e.target.value })} value={this.state.newPostalcode} />
-								<button onClick={this.editAddress}>Submit</button>
-
-							</div>
 							<div className="addressButtonContainer">
 								<button onClick={() => this.toggle("EDIT_ADDRESS", e)}>Edit</button>
 								<button onClick={() => this.removeAddress(e.auto_id)}>Remove</button>
+								<button onClick={() => this.setAsDefault(e)}>Set as Default</button>
 							</div>
 						</div>
 					</div>
 				)
+				return html;
 			})
 		}
 
@@ -357,14 +367,12 @@ class Profile extends Component {
 	displayLocations() {
 		return (
 			<div className="notification">
-
 				<div className="locationTab">
 					<div className="locationLabel" onClick={() => this.toggle("LOCATIONS")}>
 						<p>Saved Locations</p>
 					</div>
 					<button onClick={() => this.toggle("ADDRESS_ADD")}>Add Address</button>
 				</div>
-
 				<div className={this.state.toggleLocations ? "addressesContainer" : "eventsOff"}>
 					<div className={this.state.toggleAddAddress ? "editAddress" : "addAddressOff"}>
 						<label>Location Label</label>
@@ -377,12 +385,13 @@ class Profile extends Component {
 						<input type="text" onChange={e => this.setState({ newState: e.target.value })} value={this.state.newState} />
 						<label>Zip Code</label>
 						<input type="text" onChange={e => this.setState({ newPostalcode: e.target.value })} value={this.state.newPostalcode} />
-						<button onClick={this.submitAddress}>Submit</button>
-						<button onClick={() => this.toggle("ADDRESS_CANCEL")}>Cancel</button>
+						<div className="editAddressButtonContainer">
+							<button onClick={this.submitAddress}>Submit</button>
+							<button onClick={() => this.toggle("ADDRESS_CANCEL")}>Cancel</button>
+						</div>
 					</div>
 					{this.displayAddresses()}
 				</div>
-
 			</div>
 		)
 	}
@@ -416,7 +425,6 @@ class Profile extends Component {
 	}
 
 	removeNotification(e) {
-		console.log(e)
 		axios.delete(`/api/notifications/${e.notification_auto_id}`)
 			.then(response => {
 			})
@@ -446,20 +454,36 @@ class Profile extends Component {
 
 	editAddress(obj) {
 		axios.put(`/api/address/${obj.auto_id}`, obj)
-			.then()
-			.catch(err => { 
-			console.log("Edit Address Put Error", err)
-		})
+			.then(res => {
+				this.props.updateAddress(res.data[0]);
+				axios.put(`/api/address`, res.data[0])
+					.then(response => {
+					})
+					.catch(err => {
+						console.log("Update Default error", err)
+					})
+			})
+			.catch(err => {
+				console.log("Edit Address Put Error", err)
+			})
+	}
+
+	setAsDefault(e) {
+		axios.put(`/api/address/default/${this.props.state.user_id}`, e)
+					.then(response => {
+						this.props.updateAllAddresses(response);
+					})
+					.catch(err => {
+						console.log("Update Default error", err)
+					})
 	 }
 
 	render() {
 		return (
 			<div className="ProfileMainContainer">
 				{this.displayProfile()}
-				<Btn label="FRIENDS" link="/friends" img={friends} />
 				{this.displayNotifications()}
 				{this.displayLocations()}
-
 			</div>
 		);
 	}
@@ -471,4 +495,4 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps, { updateUser, addAddress, removeAddress })(Profile);
+export default connect(mapStateToProps, { updateUser, addAddress, removeAddress, updateAddress, updateAllAddresses })(Profile);

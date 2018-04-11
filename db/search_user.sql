@@ -1,0 +1,1 @@
+SELECT * FROM mw_users WHERE lower(name) LIKE concat('%', $1, '%');

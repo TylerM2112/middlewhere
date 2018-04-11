@@ -26,10 +26,18 @@ export default class Header extends Component {
     console.log(this.props)
     return ( 
       <div className="header-parent-div">
-      <NewButton propsFunction={this.props.getUserFunction} buttonTxt={'add new friends'}/>
+    
         <h1 className="pageTitle">{this.state.pageTitle}</h1> 
         <div>{this.props.newButton}</div>
       </div>
     )
   }
 }
+
+//took getUser button out of header to put under header and width 100%;
+
+//implement animation slide in from Brandons CSS 
+
+//fix friends h1 in header
+
+

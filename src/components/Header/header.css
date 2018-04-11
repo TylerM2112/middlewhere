@@ -4,10 +4,11 @@
     text-align: center;
     font-family: 'Dosis', sans-serif;
     height: 7rem;
+    width: 100%;
 }
 
 .pageTitle {
     display: inline-block;
     position: absolute;
-    left: 50%;
+    left: 45%;
 }
