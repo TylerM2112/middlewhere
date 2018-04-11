@@ -29,7 +29,7 @@ class GroupsView extends Component {
                 {/* <Header TitleOfPage={"Groups"}/> */}
                
                 <Groups/>
-                {/* <NewGroup/> */}
+                <NewGroup/>
                 {/* <GroupEvent/> */}
             </div>
         );

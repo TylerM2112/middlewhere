@@ -1,0 +1,12 @@
+.display_friends_array{
+    animation: friendsAnim .3s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    width:100vw !important;
+    z-index: 200;
+}
+
+@keyframes friendsAnim{
+    from{opacity: 0;margin-left:250px;}
+    to{opacity: 1;margin-left:0;}
+}
