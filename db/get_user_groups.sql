@@ -1,4 +1,4 @@
-SELECT 
+SELECT DISTINCT
 groups.group_id,
 groups.group_title,
 groups.group_purpose,

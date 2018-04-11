@@ -34,9 +34,9 @@ class FriendsView extends Component {
 
    
     componentDidMount(){
-        axios.get('/api/friends')
+        axios.get(`/api/friends/${this.props.state.user_id}`)
         .then((resp) => {
-            console.log(resp.data)
+            console.log("GET FRIENDS CDM",resp.data)
               this.setState({
                    friends: resp.data
              })
@@ -48,24 +48,8 @@ class FriendsView extends Component {
     
     getUserFunction(){
         console.log('hit')
-        axios.get('/api/users')
-        .then((resp) => {
-            if(this.state.userBool === false) {
-              this.setState({
-              users: resp.data,
-              userBool: true,
-              addNewUser: 'X'
-            })
-        } else {
-            this.setState({
-                userBool: false,
-                addNewUser: 'add new friend'
-              })
-        }
-          })
-        .catch((err) => {
-              console.log('err', err)
-              })
+        
+        this.setState({userBool:!this.state.userBool})
     }
 
       deleteFriends(id){
@@ -75,9 +59,9 @@ class FriendsView extends Component {
           .then((resp) => {
                 console.log('resp', resp)
             /////////////////////////////////
-                axios.get('/api/friends')
+                axios.get(`/api/friends/${this.props.state.user_id}`)
                      .then((resp) => {
-                                console.log(resp.data)
+                                console.log("DELETE FRIENDS",resp.data)
                                 this.setState({
                                 friends: resp.data
                                 })
@@ -114,8 +98,8 @@ class FriendsView extends Component {
                 <Header TitleOfPage={"Friends"} NewButtonIsShown={true} getUserFunction={this.getUserFunction} />
                 <NewButton propsFunction={this.getUserFunction} buttonTxt={this.state.addNewUser}/>
                 <div><h1>{this.state.confirmationMessage ? this.state.confirmationMessage : null}</h1></div>
-                {this.state.userBool ? <DisplayUsers/> : null}
-                <div>{displayFriends}</div>
+                {this.state.userBool ? <DisplayUsers/> : <div>{displayFriends}</div>}
+                
                 
 
             </div>

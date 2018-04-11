@@ -256,7 +256,7 @@ class Profile extends Component {
 		if (this.state.notifications.length !== 0) {
 			return (
 
-				< div className="notificationsContainer" >
+				<div className="notificationsContainer" >
 					{this.state.notifications[0].length > 0 &&
 						<div className="notification">
 
@@ -331,7 +331,7 @@ class Profile extends Component {
 							})}
 						</div>
 					}
-				</div >
+				</div>
 			)
 		}
 	}
