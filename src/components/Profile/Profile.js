@@ -43,7 +43,7 @@ class Profile extends Component {
 	componentDidMount() {
 		axios.get(`/api/getUserInfo/${this.props.state.user_id}`)
 			.then(res => {
-				this.props.updateUser(res.data);
+				this.props.updateUser(res.data[0]);
 			})
 			.catch(err => console.log(err));
 		axios.get(`/api/notifications/${this.props.state.user_id}`).then(res => {
@@ -256,7 +256,7 @@ class Profile extends Component {
 		if (this.state.notifications.length !== 0) {
 			return (
 
-				< div className="notificationsContainer" >
+				<div className="notificationsContainer" >
 					{this.state.notifications[0].length > 0 &&
 						<div className="notification">
 
@@ -331,7 +331,7 @@ class Profile extends Component {
 							})}
 						</div>
 					}
-				</div >
+				</div>
 			)
 		}
 	}

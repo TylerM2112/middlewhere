@@ -17,6 +17,8 @@ class Groups extends Component {
     }
   }
   componentDidMount() {
+
+    console.log("user_id",this.props.state.user_id)
     axios.get(`/api/getGroups/${this.props.state.user_id}`)
       .then(res => { console.log(res.data); this.setState({ groups: res.data, loading: true }) })
       .catch(err => console.log(err));
@@ -38,16 +40,16 @@ class Groups extends Component {
 
   displayGroups(){
     let html = [];
-    if (this.state.groups.length > 0) {
+    if (this.state.groups.length > 0 ) {
       let timer = 0;
       let style = {};
       this.state.groups.map((e, i) => {
         timer = i;
-        style = { animationDelay: `${timer/100}s` }
+        style = { animationDelay: `${timer/20}s` }
         if (e.group_admin == this.props.state.user_id) {
 
           html.push(
-            <ReactSwipe className="carousel" swipeOptions={{ continuous: false }} >
+            <ReactSwipe className="carousel" swipeOptions={{ continuous: false }} key={e.group_id + i} id={"id" + e.group_id}>
               <div style={style} className="groupContainer">
                 <div className={!e.flipCard ? "leftContainer" : "leftContainer colorChange"}>
                   <div className="groupTitle">{e.group_title}</div>
@@ -70,12 +72,12 @@ class Groups extends Component {
       html.push(<div className="groupHeader">Groups You're Apart Of</div>)
       this.state.groups.map((e, i) => {
         timer = (timer+1);
-        style = { animationDelay: `${timer/100}s` }
+        style = { animationDelay: `${timer/20}s` }
         if (e.group_admin != this.props.state.user_id) {
 
           html.push(
             <ReactSwipe className="carousel" swipeOptions={{ continuous: false }} key={e.group_id + i} id={"id" + e.group_id}>
-              <div style={style} className="groupContainer"id={"id" + e.group_id} >
+              <div style={style} className="groupContainer" >
                 <div className={!e.flipCard ? "leftContainer" : "leftContainer colorChange"}>
                   <div className="groupTitle">{e.group_title}</div>
                   <div className="groupPurpose">{e.group_purpose}</div>
@@ -86,7 +88,7 @@ class Groups extends Component {
                   <img className="groupPicture" src={e.picture} />
                 </div>
               </div>
-              <div className="groupDetails" id={"id2" + e.group_id}>
+              <div className="groupDetails">
                 <Link to={{pathname:"/groupDetails",state:{e}}}><button className="btn1">SHOW GROUP</button></Link>
                 <button className="btn2" onClick={()=>this.leaveGroup(e.group_id)}>LEAVE GROUP</button>
               </div>
@@ -104,7 +106,7 @@ class Groups extends Component {
   }
 
   leaveGroup(group_id){
-    document.getElementById("id"+ group_id).style.animation = "removeGroupAni .5s linear"
+    document.getElementById("id"+ group_id).style.animation = "removeGroupAni .7s linear"
     document.getElementById("id"+ group_id).style.animationFillMode = "forwards"
     // document.getElementById("id2"+ group_id).style.animation = "removeGroupAni 5s"
       // axios.delete(`/api/deleteUserFromGroup/${group_id}/${this.props.state.user_id}`)
@@ -112,7 +114,13 @@ class Groups extends Component {
       // .catch(err=>console.log(err))
     
   }
+
+  deleteGroup(group_id){
+    document.getElementById("id"+ group_id).style.animation = "removeGroupAni .7s linear"
+    document.getElementById("id"+ group_id).style.animationFillMode = "forwards"
+  }
   render() {
+    {document.getElementsByClassName("react-swipe-container") ? document.getElementsByClassName("react-swipe-container").offsetWidth = window.innerWidth : ''}
     return (
       <div className="mainGroupContainer">
         {this.state.loading ?

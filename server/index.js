@@ -47,9 +47,10 @@ app.put(`/api/address/default/:user_id`, userController.updateDefaults)
 app.delete('/api/removeAddress/:auto_id', userController.removeAddress);
 
 //FRIENDS CONTROLLER
-app.get('/api/friends', friendController.get_friends)
+app.get('/api/friends/:user_id', friendController.get_friends)
 app.post('/api/friends', friendController.confirm_friend)
 app.post('/api/friends/:id', friendController.post_friends)
+app.delete('/api/friends/:id', friendController.delete_friend)
 
 //GROUP CONTROLLER
 app.get('/api/getGroups/:user_id', groupController.getGroups);
@@ -74,8 +75,6 @@ app.post('/api/addUserAddress/:user_id', userController.addUserAddress);
 app.put(`/api/address/:auto_id`, userController.editAddress)
 app.delete('/api/removeAddress/:auto_id', userController.removeAddress);
 
-//DELETE FRIENDS
-app.delete('/api/friends/:id', friendController.delete_friend)
 
 //Yelp Controller
 

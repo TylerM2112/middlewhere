@@ -12,7 +12,7 @@ module.exports = {
         user[0].address_count = +user[0].address_count
         userInfo = user[0];
 
-        if (userInfo.address_count !== 0) {
+        if (userInfo.address_count !== 0 || typeof userInfo.address_count === 'undefined') {
           db.get_user_addresses([user_id])
             .then(address => {
               let userObj = Object.assign({}, userInfo);
@@ -149,8 +149,8 @@ module.exports = {
     .catch((err) => {
       console.log('err', err)
     })
-      })
-  }, 
+    },
+    
   updateDefaults: (req, res) => {
     const db = req.app.get('db');
     const { auto_id } = req.body;

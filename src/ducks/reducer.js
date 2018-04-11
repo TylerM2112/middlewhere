@@ -1,10 +1,10 @@
 const iState = {
     name: '',
-    user_id: 45,
+    user_id: 400,
     picture: null,
     email: null,
     address_count: 0,
-    addresses: [1, 2],
+    addresses: [],
     users: [],
 }
 
@@ -77,13 +77,17 @@ export default function (state = iState, action) {
             return newState;
             break;
         case UPDATE_USER:
+            console.log('action.payload',action.payload)
             newState.name = action.payload.name;
             newState.user_id = action.payload.auto_id;
             newState.picture = action.payload.picture;
             newState.address_count = action.payload.address_count;
             newState.email = action.payload.email;
+            console.log("hi")
+            if(action.payload.address_count == 0){console.log("hi");return newState}
+            if(typeof action.payload.addresses === 'undefined'){ return newState}
 
-            if (action.payload.address_count !== 0) {
+            if (action.payload.addresses.length !== 0) {
 
                 let addressArr = action.payload.addresses;
                 addressObj = [];
