@@ -31,5 +31,24 @@ module.exports = {
         db.get_user_groups(+user_id)
             .then(groups=>res.status(200).send(groups))
             .catch(err=>res.status(500).send(err));
+    },
+    getGroupMembers:(req,res)=>{
+        const db = req.app.get('db');
+        const {group_id} = req.params;
+        db.get_group_members([+group_id])
+            .then(users=>res.status(200).send(users))
+            .catch(err=>res.status(500).send(err));
+    },
+    deleteUserFromGroup:(req,res)=>{
+        const db = req.app.get('db');
+        const {group_id,user_id} = req.params;
+
+        db.remove_user_from_group([+group_id,+user_id])
+            .then(e=>{
+                db.get_user_groups([+user_id])
+                    .then(groups=>res.status(200).send(groups))
+                    .catch(err=>res.status(500).send(err))
+            })
+            .catch(err=>res.status(500).send(err));
     }
 }
