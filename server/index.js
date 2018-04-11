@@ -51,6 +51,10 @@ app.post('/api/friends/:id', friendController.post_friends)
 app.get('/api/getGroups/:user_id', groupController.getGroups);
 app.post('/api/new/group', checkBody, groupController.post_group)
 app.post('/api/groups', groupController.approve_group)
+//GET GROUPS FOR USER
+app.get('/api/getGroups/:user_id',groupController.getGroups);
+app.get('/api/getGroupMembers/:group_id',groupController.getGroupMembers)
+app.delete('/api/deleteUserFromGroup/:group_id/:user_id',groupController.deleteUserFromGroup)
 
 //EVENTS CONTROLLER
 app.post('/api/new/event', eventController.post_event)
