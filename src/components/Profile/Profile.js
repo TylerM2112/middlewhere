@@ -43,7 +43,11 @@ class Profile extends Component {
 	componentDidMount() {
 		axios.get(`/api/getUserInfo/${this.props.state.user_id}`)
 			.then(res => {
-				this.props.updateUser(res.data[0]);
+				console.log(res.data)
+				if (res.data.address_count) { this.props.updateUser(res.data) }
+				else {
+					this.props.updateUser(res.data[0]);
+				}
 			})
 			.catch(err => console.log(err));
 		axios.get(`/api/notifications/${this.props.state.user_id}`).then(res => {
