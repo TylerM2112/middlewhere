@@ -1,42 +1,50 @@
 const iState = {
     name: '',
-    user_id:111,
-    picture:null,
-    email:null,
-    address_count:0,
-    addresses:[1,2],
-    users:[],
+    user_id: 78,
+    picture: null,
+    email: null,
+    address_count: 0,
+    addresses: [],
+    users: [],
 }
 
 const ADD_ADDRESS = "ADD_ADDRESS";
-export function addAddress(data){
-    return{
-        type:ADD_ADDRESS,
-        payload:data,
+export function addAddress(data) {
+    return {
+        type: ADD_ADDRESS,
+        payload: data,
+    }
+}
+
+const UPDATE_ALL_ADDRESSES = "UPDATE_ALL_ADDRESSES";
+export function updateAllAddresses(data) {
+    return {
+        type: UPDATE_ALL_ADDRESSES,
+        payload: data,
     }
 }
 
 const REMOVE_ADDRESS = "REMOVE_ADDRESS";
-export function removeAddress(data) { 
+export function removeAddress(data) {
     return {
         type: REMOVE_ADDRESS,
         payload: data,
     }
 }
 
-const UPDATE_ADDRESS="UPDATE_ADDRESS"
-export function updateAddress(data){
-    return{
-        type:UPDATE_ADDRESS,
-        payload:data
+const UPDATE_ADDRESS = "UPDATE_ADDRESS"
+export function updateAddress(data) {
+    return {
+        type: UPDATE_ADDRESS,
+        payload: data
     }
 }
 
 const UPDATE_USER = "UPDATE_USER";
-export function updateUser(data){
-    return{
-        type:UPDATE_USER,
-        payload:data,
+export function updateUser(data) {
+    return {
+        type: UPDATE_USER,
+        payload: data,
     }
 }
 
@@ -45,49 +53,59 @@ export function updateUser(data){
 
 
 const GET_USER = "GET_USER";
-export function getUser(data){
+export function getUser(data) {
     return {
-        type:GET_USER,
+        type: GET_USER,
         payload: data,
     }
 }
 
-export default function (state=iState,action){
-    let newState = {...state};
+export default function (state = iState, action) {
+    let newState = { ...state };
     let addresses = state.addresses.slice();
     let addressObj = state.addresses.slice();
     let index = '';
-    switch(action.type){
-        
-        
+    switch (action.type) {
         case UPDATE_ADDRESS:
-            addresses[0].address1 = action.payload.address1;
-            newState.addresses = addresses;
-
+            if (action.payload.defaultaddress == true) {
+                newState.addresses.map(i => {
+                    i.defaultaddress = false;
+                })
+            }
+            index = newState.addresses.findIndex(e => e.auto_id === action.payload.auto_id);
+            newState.addresses[index] = action.payload
             return newState;
-        
+            break;
         case UPDATE_USER:
-        console.log(action.payload.name)    
+            console.log('action.payload',action.payload)
             newState.name = action.payload.name;
             newState.user_id = action.payload.auto_id;
             newState.picture = action.payload.picture;
             newState.address_count = action.payload.address_count;
             newState.email = action.payload.email;
+            console.log("hi")
+            if(action.payload.address_count == 0){console.log("hi");return newState}
+            if(typeof action.payload.addresses === 'undefined'){ return newState}
 
-            if(action.payload.address_count !== 0){
+            if (action.payload.addresses.length !== 0) {
 
                 let addressArr = action.payload.addresses;
                 addressObj = [];
-                for(let i = 0;i<addressArr.length;i++){
+                for (let i = 0; i < addressArr.length; i++) {
                     addressObj.push(addressArr[i]);
                 }
                 newState.addresses = addressObj;
             }
-
             return newState;
             break;
-        
+
         case ADD_ADDRESS:
+            if (action.payload.defaultaddress == true) {
+                newState.addresses.map(i => {
+                    i.defaultaddress = false;
+                })
+            }
+            console.log(action.payload)
             const obj = {
                 address1: action.payload.newAddress1,
                 city: action.payload.newCity,
@@ -97,20 +115,28 @@ export default function (state=iState,action){
                 lat: action.payload.newLat,
                 long: action.payload.newLong,
                 auto_id: action.payload.auto_id,
+                defaultaddress: action.payload.defaultaddress,
             }
 
             newState.addresses.push(obj)
             return newState;
             break;
-        
+
         case REMOVE_ADDRESS:
-        console.log("HEY ME", JSON.stringify(newState.addresses))    
             index = newState.addresses.findIndex(e => e.auto_id === action.payload);
-            console.log("SNOT", index)
             newState.addresses.splice(index, 1);
             return newState;
             break;
 
+        case UPDATE_ALL_ADDRESSES:   
+            let addressArr = action.payload.data;
+            addressObj = [];
+            for (let i = 0; i < addressArr.length; i++) {
+                addressObj.push(addressArr[i]);
+            }
+            newState.addresses = addressObj;
+            return newState;
+        
         default:
             return state;
     }

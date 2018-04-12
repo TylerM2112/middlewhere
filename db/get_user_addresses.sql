@@ -1,1 +1,1 @@
-SELECT auto_id,address1,city,state,postalcode,long,lat,place FROM mw_address WHERE user_id = $1;
+SELECT auto_id,address1,city,state,postalcode,long,lat,place, defaultaddress FROM mw_address WHERE user_id = $1;

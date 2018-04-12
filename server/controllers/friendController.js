@@ -1,8 +1,8 @@
 module.exports = {
     get_friends: (req,res) => {
         const dbInstance = req.app.get('db')
-        
-        dbInstance.get_friends()
+        const {user_id} = req.params;
+        dbInstance.get_friends([+user_id])
         .then((friends) =>{
             res.status(200).send(friends)
         })

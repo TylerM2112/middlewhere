@@ -26,7 +26,7 @@ export default class Header extends Component {
     console.log(this.props)
     return ( 
       <div className="header-parent-div">
-      
+    
         <h1 className="pageTitle">{this.state.pageTitle}</h1> 
         <div>{this.props.newButton}</div>
       </div>

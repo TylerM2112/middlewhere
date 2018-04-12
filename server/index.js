@@ -4,18 +4,15 @@ const massive = require('massive');
 const session = require('express-session');
 const axios = require('axios');
 
-
-
-//Controllers
+//CONTROLLERS
 const userController = require('./controllers/userController');
 const eventController = require('./controllers/eventController')
 const friendController = require('./controllers/friendController.js')
 const groupController = require('./controllers/groupController.js')
 const yc = require('./controllers/yelpController');
 
-//Middlewares
+//MIDDLEWARE
 const checkBody = require('./middlewares/checkBody.js')
-
 
 require('dotenv').config();
 
@@ -33,31 +30,41 @@ app.use(session({
   },
 }));
 
-//USER INFORMATION
+//USER CONTROLLER
 app.get('/api/getUserInfo/:user_id', userController.getUserInfo)
+
 //FIND USER
 app.get('/api/users:users', userController.search_user)
 
-////////////////////////testing friend selector/////////////////////////////////
 app.get('/api/users', userController.get_users)
-//GET FRIENDS
-app.get('/api/friends', friendController.get_friends)
-app.post('/api/friends', friendController.confirm_friend)
-
-
-//POST FRIENDS 
-app.post('/api/friends/:id', friendController.post_friends)
-
-//NOTIFICATIONS
+//NOTIFICATION ENDPOINTS
 app.get(`/api/notifications/:user_id`, userController.getNotifications)
 app.delete('/api/notifications/:notification_id', userController.remove_notification)
+//ADDRESS ENDPOINTS
+app.post('/api/addUserAddress/:user_id', userController.addUserAddress);
+app.put(`/api/address/:auto_id`, userController.editAddress)
+app.put(`/api/address/default/:user_id`, userController.updateDefaults)
+app.delete('/api/removeAddress/:auto_id', userController.removeAddress);
 
+//FRIENDS CONTROLLER
+app.get('/api/friends/:user_id', friendController.get_friends)
+app.post('/api/friends', friendController.confirm_friend)
+app.post('/api/friends/:id', friendController.post_friends)
+app.delete('/api/friends/:id', friendController.delete_friend)
+
+//GROUP CONTROLLER
+app.get('/api/getGroups/:user_id', groupController.getGroups);
+app.post('/api/new/group', checkBody, groupController.post_group)
+app.post('/api/groups', groupController.approve_group)
 //GET GROUPS FOR USER
 app.get('/api/getGroups/:user_id',groupController.getGroups);
+app.get('/api/getGroupMembers/:group_id',groupController.getGroupMembers)
+app.delete('/api/deleteUserFromGroup/:group_id/:user_id',groupController.deleteUserFromGroup)
 
-//POST EVENT
+//EVENTS CONTROLLER
 app.post('/api/new/event', eventController.post_event)
 app.post('/api/events', eventController.approve_event)
+
 
 //POST GROUP
 app.post('/api/new/group', checkBody, groupController.post_group)
@@ -68,31 +75,10 @@ app.post('/api/addUserAddress/:user_id', userController.addUserAddress);
 app.put(`/api/address/:auto_id`, userController.editAddress)
 app.delete('/api/removeAddress/:auto_id', userController.removeAddress);
 
-//DELETE FRIENDS
-app.delete('/api/friends/:id', friendController.delete_friend)
 
 //Yelp Controller
+
 app.post('/api/yelp/search', yc.search)
-
-////////////////////////auth0//////////////////////////////////////////////////
-var request = require("request");
-
-var options = { method: 'POST',
-  url: 'https://__AUTH0_NAMESPACE__/dbconnections/signup',
-  headers: { 'content-type': 'application/json' },
-  body: 
-   { client_id: '__AUTH0_CLIENT_ID__',
-     email: '$(\'#signup-email\').val()',
-     password: '$(\'#signup-password\').val()',
-     user_metadata: { name: 'john', color: 'red' } },
-  json: true };
-
-request(options, function (error, response, body) {
-  if (error) throw new Error(error);
-
-  console.log(body);
-});
-//////////////////////////////////////////////////////////////////////////////
 
 
 const PORT = process.env.SERVER_PORT || 4000;

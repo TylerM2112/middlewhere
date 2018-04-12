@@ -19,17 +19,17 @@ class DisplayUsers extends Component {
     }
 
     componentDidMount(){
-        //get Users setstate on mount
-        axios.get('/api/users')
-        .then((resp) => {
-            // console.log('resp.data', resp.data)
-            this.setState({
-                users: resp.data
-            })
-        })
-        .catch((err) => {
-            console.log('err', err)
-        })
+        
+        // axios.get('/api/users')
+        // .then((resp) => {
+           
+        //     this.setState({
+        //         users: resp.data
+        //     })
+        // })
+        // .catch((err) => {
+        //     console.log('err', err)
+        // })
     }
 
     addToFriendsFunc(id, index){
@@ -43,15 +43,15 @@ class DisplayUsers extends Component {
             this.setState({
                 confirmationMessage: "request has been sent to " + this.state.users[index].name,
             })
-            axios.get('api/friends/')
-            .then((resp) => {
-                this.setState({
-                    newDBfriends: resp.data
-                })
-            })
-            .catch((err) => {
-                console.log('err', err)
-            })
+            // axios.get('api/friends/')
+            // .then((resp) => {
+            //     this.setState({
+            //         newDBfriends: resp.data
+            //     })
+            // })
+            // .catch((err) => {
+            //     console.log('err', err)
+            // })
         })
         .catch((err) => {
             console.log('err', err)
