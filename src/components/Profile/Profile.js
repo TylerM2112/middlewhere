@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { excon } from 'excon'
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { updateUser, addAddress, removeAddress, updateAddress, updateAllAddresses } from './../../ducks/reducer';
