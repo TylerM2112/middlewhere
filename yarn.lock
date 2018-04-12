@@ -2591,10 +2591,6 @@ evp_bytestokey@^1.0.0, evp_bytestokey@^1.0.3:
     md5.js "^1.3.4"
     safe-buffer "^5.1.1"
 
-excon@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/excon/-/excon-1.0.2.tgz#eae081f40f9bea4cd88669089cfae47cba8623bb"
-
 exec-sh@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/exec-sh/-/exec-sh-0.2.1.tgz#163b98a6e89e6b65b47c2a28d215bc1f63989c38"

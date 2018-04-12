@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './Friends.css'
+import './Friends.css';
 import NewButton from '../Assets/Button/NewButton';
 import DeleteButton from '../Assets/Button/DeleteButton'
 
@@ -20,7 +20,6 @@ export default class Friends extends Component {
             this.setState({
                 friends: resp.data
             })
-        
         })
         .catch((err) => {
             console.log('err', err)

@@ -3,7 +3,8 @@ import axios from 'axios';
 import './newgroup.css';
 import PostBttn from '../Assets/Button/PostButton';
 import {connect} from 'react-redux';
-import calendar from '../../assets/images/calendar.png'
+import calendar from '../../assets/images/calendar.png';
+import ReactSwipe from 'react-swipe';
 
 
 class NewGroup extends Component {
@@ -23,6 +24,13 @@ class NewGroup extends Component {
         }
         this.postGroup = this.postGroup.bind(this)
         // this.inputValidation =  this.inputValidation.bind(this)
+    }
+
+    componentDidMount() {
+
+      axios.get(`/api/friends/${this.props.state.user_id}`)
+        .then(res=>this.setState({friends:res.data}))
+        .catch(err=>console.log(err))
     }
     
     addToInvites(i){
@@ -44,7 +52,7 @@ class NewGroup extends Component {
         })
         .catch((err) => {
 
-            console.log('err', err.resp.data)
+            console.log('err', err)
         })
 
         this.setState({
@@ -54,16 +62,6 @@ class NewGroup extends Component {
               //having trouble with ressetting state after post to db
           })
         
-    }
-
-    componentDidMount(){
-      axios.get('/api/friends')
-      .then((resp) => {
-        console.log('resp.data', resp.data)
-        this.setState({
-            friends: resp.data
-        })
-      })
     }
 
 
@@ -88,17 +86,32 @@ class NewGroup extends Component {
 
      displayFriends(){
       if(this.state.friends !== []){
-        return this.state.friends.map(e=>{
-          let index = this.state.newGroupFriends.indexOf(e.auto_id);
+        let timer = 0;
+        let style = {};
+        return this.state.friends.map((e,i)=>{
+          timer = i;
+          style = { animationDelay: `${timer/20}s` }
+          let index = this.state.newGroupFriends.indexOf(+e.friend_id);
             return(
-              <div className="singleFriendDiv" onClick={()=>this.addFriendToGroup(e.auto_id)}>
+
+              <ReactSwipe className="carousel" swipeOptions={{ continuous: false }} key={e.group_id + i} id={"id" + e.group_id}>
+
+                <div style={style} className={index === -1 ? "groupContainer singleFriendDiv" :"groupContainer singleFriendDiv purple" }onClick={()=>this.addFriendToGroup(+e.friend_id)}>
+                  <div className="groupTitle">{e.friend_name}</div>
+                  <img className="groupPicture" src={e.friend_picture}/>
+                  {index !== -1 ?
+                  <div className="border"></div>
+                :
+                  ''}
+                </div>
+              {/* <div className="singleFriendDiv" onClick={()=>this.addFriendToGroup(+e.friend_id)}>
                 {index !== -1 ?
                   <div className="border"></div>
                 :
                   ''}
-                <img src={e.picture}/><div>{e.name}</div> 
-              
-              </div>
+                <img src={e.friend_picture}/><div>{e.friend_name}</div> 
+              </div> */}
+              </ReactSwipe>
           )
         })
       }
@@ -120,15 +133,7 @@ class NewGroup extends Component {
               {/* PostButton - prop-name: postButton is Universal prop */}
                <PostBttn label="SAVE GROUP"  postButtonFunctionProp={this.postGroup} class={"post-event-button"}/>
               </div>
-             {/* <span>  <input className="newEvent-input" type="text" onChange={(e) => { this.setState({groupAdmin: e.target.value})}} placeholder="Date"/></span> */}
-                
 
-                {/* <div className="group-friends-option" onClick={() => this.toggleSelect()}>
-                  <select className={this.state.selectClass} multiple={true}>
-
-                    {displayFriendsOptions}
-                  </select>
-                </div> */}
 
                 <div className="friendsDiv">
                   {this.displayFriends()}
