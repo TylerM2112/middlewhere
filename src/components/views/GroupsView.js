@@ -5,6 +5,7 @@ import GroupEvent from '../GroupEvent/GroupEvent'
 import Groups from '../Groups/Groups';
 import {connect} from 'react-redux'
 import './groupsview.css'
+import {Route,Switch} from 'react-router-dom'
 
 class GroupsView extends Component {
     constructor(props){
@@ -27,8 +28,9 @@ class GroupsView extends Component {
         return (
             <div>
                 {/* <Header TitleOfPage={"Groups"}/> */}
-               
-                <Groups/>
+               <Route exact path='/groups' component={Groups}/>
+               <Route exact path='/groups/new/' component={NewGroup}/>
+                {/* <Groups/> */}
                 {/* <NewGroup/> */}
                 {/* <GroupEvent/> */}
             </div>

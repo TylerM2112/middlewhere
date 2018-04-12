@@ -8,7 +8,7 @@ export default class Map extends Component {
   constructor() {
     super();
     this.state = {
-      locations: [{ long: -149.894107, lat: 61.203115 }, { long: -149.898655, lat: 61.203221 }, { long: -149.889133, lat: 61.1528869 }, { long: -149.737337, lat: 61.215882 }],
+      locations: [],
       middlepoint: null,
       yelp: null,
       infoBox:false,
@@ -21,24 +21,25 @@ export default class Map extends Component {
     this.displayInfoBox = this.displayInfoBox.bind(this)
     this.setInfoBox = this.setInfoBox.bind(this)
   }
-  componentDidMount() {
-    let mp = middlepoint(this.state.locations);
 
+  componentWillReceiveProps(props){
+    console.log("cwrp",props)
+    if(this.state.locations.length < 1){
+    this.setState({locations:props.locations});
+    let mp = middlepoint(props.locations);
+      this.props.addMiddlepoint(mp);
     this.setState({
       middlepoint: mp
     }, () => {
       //Makes a call to server-side to initiate Yelp API call.
       axios.post('/api/yelp/search', this.state).then(res => {
-        this.props.getYelp(res.data)
+        props.getYelp(res.data)
         this.setState({
           yelp: res.data
         })
       }).catch(error => { console.log("Yelp API Error", error) })
     })
   }
-
-  componentWillReceiveProps(nextProps) {
-    console.log("nextProps",this.props)
   }
 
   setInfoBox(e){
