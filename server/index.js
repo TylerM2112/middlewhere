@@ -18,6 +18,7 @@ require('dotenv').config();
 
 massive(process.env.CONNECTION_STRING).then(db => app.set('db', db)).catch(e => console.log("massive error", e));
 const app = express();
+app.use( express.static( `${__dirname}/../build` ) );
 
 app.use(bodyParser.json());
 app.use(session({
@@ -34,9 +35,9 @@ app.use(session({
 app.get('/api/getUserInfo/:user_id', userController.getUserInfo)
 //FIND USER
 app.get('/api/users:users', userController.search_user)
+
 //get all users the db
 app.get('/api/users', userController.get_users)
-
 
 //NOTIFICATION ENDPOINTS
 app.get(`/api/notifications/:user_id`, userController.getNotifications)
@@ -70,15 +71,21 @@ app.get('/api/getGroupMembers/:group_id',groupController.getGroupMembers)
 app.delete('/api/deleteUserFromGroup/:group_id/:user_id',groupController.deleteUserFromGroup)
 
 //EVENTS CONTROLLER
+
 // app.post('/api/new/event', eventController.post_event)
 // app.post('/api/events', eventController.approve_event)
 //gets all the users of the selected groups for an event
 app.post('/api/createEvent',eventController.createEvent);
 //creates the event,notifications and the group admin suggested places
 app.post('/api/createEventFinal',eventController.createEventFinal);
+
 //POST GROUP
 app.post('/api/new/group', checkBody, groupController.post_group)
 app.post('/api/groups', groupController.approve_group)
+//GET GROUPS FOR USER
+app.get('/api/getGroups/:user_id',groupController.getGroups);
+app.get('/api/getGroupMembers/:group_id',groupController.getGroupMembers)
+app.delete('/api/deleteUserFromGroup/:group_id/:user_id',groupController.deleteUserFromGroup)
 
 //User address 
 app.post('/api/addUserAddress/:user_id', userController.addUserAddress);

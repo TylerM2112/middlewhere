@@ -18,7 +18,6 @@ import GroupEvent from './components/GroupEvent/GroupEvent';
 
 import './App.css';
 
-import { excon } from 'excon'
 import Map from './components/Map/Map';
 
 
