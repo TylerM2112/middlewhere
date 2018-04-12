@@ -42,6 +42,7 @@ class Profile extends Component {
 	componentDidMount() {
 		axios.get(`/api/getUserInfo/${this.props.state.user_id}`)
 			.then(res => {
+
 				console.log(res.data)
 				if (res.data.address_count) { this.props.updateUser(res.data) }
 				else {
@@ -240,18 +241,10 @@ class Profile extends Component {
 	}
 
 	submitAddress() {
-		if (this.state.newAddress1 !== null) {
-			if (this.state.newCity !== null) {
-				if (this.state.newState !== null) {
-					if (this.state.newPostalcode !== null) {
-						if (this.state.newPlaceName !== null) {
+		
 								this.addAddress();
 								return;
-						}
-					}
-				}
-			}
-		}
+
 		alert('Please make sure all the fields are filled in.')
 	}
 
@@ -324,10 +317,11 @@ class Profile extends Component {
 											<img src={e.picture} alt="profilepic" />
 										</div>
 										<div className="requestInfoContainer">
-											<p>{e.notification_name}</p>
+											{/* <p>{e.notification_name}</p>
+											{console.log("EEEEEEEEEEEEEEEEEEEEE",e)}
 											<p>On {e.event_date} at {e.event_time.substr(0, 2) < 12 ? `${e.event_time} AM` : e.event_time.substr(0, 2) - 12 + e.event_time.substr(2, 3) + "PM"}</p>
 											<button className="approveButton" onClick={() => this.approved(e)}>Approve</button>
-											<button className="declineButton" onClick={() => this.removeNotification(e)}>Decline</button>
+											<button className="declineButton" onClick={() => this.removeNotification(e)}>Decline</button> */}
 										</div>
 									</div>
 								)
@@ -376,6 +370,7 @@ class Profile extends Component {
 					</div>
 					<button onClick={() => this.toggle("ADDRESS_ADD")}>Add Address</button>
 				</div>
+
 				<div className={this.state.toggleLocations ? "addressesContainer" : "eventsOff"}>
 					<div className={this.state.toggleAddAddress ? "editAddress" : "addAddressOff"}>
 						<label>Location Label</label>
@@ -393,6 +388,8 @@ class Profile extends Component {
 							<button onClick={() => this.toggle("ADDRESS_CANCEL")}>Cancel</button>
 						</div>
 					</div>
+
+
 					{this.displayAddresses()}
 				</div>
 			</div>
