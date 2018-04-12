@@ -20,7 +20,6 @@ export default class Friends extends Component {
             this.setState({
                 friends: resp.data
             })
-            console.log("YOU SUCK RYAN");
         })
         .catch((err) => {
             console.log('err', err)
