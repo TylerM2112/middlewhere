@@ -13,11 +13,11 @@ module.exports = {
             latitude: `${+req.body.middlepoint[0]}`,
             longitude: `${+req.body.middlepoint[1]}`,
             
-        }).then(response => {
-            // console.log(response.jsonBody)
-            res.status(200).json(response.jsonBody);
-        }).catch(error => {
-            console.log("Yelp API Error", error);
+        })
+        .then(response => { res.status(200).json(response.jsonBody) })
+        .catch(error => {
+            console.log("yelpController.search",err);
+            res.status(500).send(err);
           });
      }
 }

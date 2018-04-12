@@ -1,6 +1,6 @@
 const iState = {
     name: '',
-    user_id: 400,
+    user_id: 111,
     picture: null,
     email: null,
     address_count: 0,
@@ -77,13 +77,13 @@ export default function (state = iState, action) {
             return newState;
             break;
         case UPDATE_USER:
-            console.log('action.payload',action.payload)
+
             newState.name = action.payload.name;
             newState.user_id = action.payload.auto_id;
             newState.picture = action.payload.picture;
             newState.address_count = action.payload.address_count;
             newState.email = action.payload.email;
-            console.log("hi")
+
             if(action.payload.address_count == 0){console.log("hi");return newState}
             if(typeof action.payload.addresses === 'undefined'){ return newState}
 

@@ -6,6 +6,7 @@ import logo from './../../assets/images/mw.png'
 import ReactSwipe from 'react-swipe';
 import Header from '../Header/Header';
 import {Link} from 'react-router-dom'
+import Btn from './../Assets/Button/Btn';
 
 class Groups extends Component {
   constructor() {
@@ -68,7 +69,7 @@ class Groups extends Component {
           )
         }
       })
-      if(html.length > 0){html.unshift(<div className="groupHeader">Groups You Made</div>)}
+      if(html.length > 0){html.unshift(<div className="groupHeader">Groups You Made <Btn link='/groups/new' label='ADD GROUP'/></div>)}
       html.push(<div className="groupHeader">Groups You're Apart Of</div>)
       this.state.groups.map((e, i) => {
         timer = (timer+1);
@@ -98,7 +99,7 @@ class Groups extends Component {
       })
     }
     else {
-      return (<div>No Groups</div>)
+      return (<div>No Groups<br/><Btn link='/groups/new' label='ADD GROUP'/></div>)
     }
 
     return html;

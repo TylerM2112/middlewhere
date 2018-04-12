@@ -20,15 +20,15 @@ function findMiddlepoint(x, y, z) {
 
   lat = lat * (180 / Math.PI);
   long = long * (180 / Math.PI);
-
+  console.log(lat,long)
   return [lat, long]
 }
 
 //Convert the midpoint latitude and longitude from radians to degrees.
 export function middlepoint(array) {
   let arr = [];
-  array.map(item => arr.push(convertToCoordinates(item.lat, item.long)));
-  console.log(arr);
+  array.map(item => {arr.push(convertToCoordinates(item.lat, item.long))});
+  
   let x = 0;
   let y = 0;
   let z = 0;
