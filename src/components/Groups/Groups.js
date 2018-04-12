@@ -48,6 +48,8 @@ class Groups extends Component {
         style = { animationDelay: `${timer/20}s` }
         if (e.group_admin == this.props.state.user_id) {
 
+
+          //gets groups that user is admin of
           html.push(
             <ReactSwipe className="carousel" swipeOptions={{ continuous: false }} key={e.group_id + i} id={"id" + e.group_id}>
               <div style={style} className="groupContainer">
@@ -68,7 +70,11 @@ class Groups extends Component {
           )
         }
       })
+
+      //gets all gourps not admin but apart of 
       if(html.length > 0){html.unshift(<div className="groupHeader">Groups You Made</div>)}
+
+      //this conditionally sets header
       html.push(<div className="groupHeader">Groups You're Apart Of</div>)
       this.state.groups.map((e, i) => {
         timer = (timer+1);
@@ -116,14 +122,15 @@ class Groups extends Component {
   }
 
   deleteGroup(group_id){
+    //style.animation give Id concat id with string andd do job
     document.getElementById("id"+ group_id).style.animation = "removeGroupAni .7s linear"
     document.getElementById("id"+ group_id).style.animationFillMode = "forwards"
   }
   render() {
+    // if exists force element to be width of screen 
     {document.getElementsByClassName("react-swipe-container") ? document.getElementsByClassName("react-swipe-container").offsetWidth = window.innerWidth : ''}
     return (
       <div className="mainGroupContainer">
-        {this.state.loading ?
           this.displayGroups()
           :
           <div><img src={logo} /><center>LOADING</center></div>

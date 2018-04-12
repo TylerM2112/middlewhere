@@ -30,6 +30,57 @@ app.use(session({
   },
 }));
 
+
+//////////////////////////////////\/\/auth0 code\/\/////////////////////////////////////////////////////
+app.get('/auth/callback', (req, res) => { //from here Get request to 
+  ///////////////////////////////////////////////////////////////////////////////////
+    axios.post(`https://${process.env.REACT_APP_AUTH0_DOMAIN}/oauth/token`, {
+      // object being sent in post to get an access token
+      client_id: process.env.REACT_APP_AUTH0_CLIENT_ID,
+      client_secret: process.env.REACT_APP_AUTH0_CLIENT_SECRET,
+      code: req.query.code,
+      grant_type: 'authorization_code',
+      redirect_uri: `http://${req.headers.host}/auth/callback`,
+    }).then(accessTokenResponse => {
+      console.log('req.headers', req.headers)
+      const accessToken = accessTokenResponse.data.access_token;
+    // *** Q: what does  this \/ do???? 
+      return axios.get(`https://${process.env.REACT_APP_AUTH0_DOMAIN}/userinfo/?access_token=${accessToken}`).then(userInfoResponse => {
+        const userData = userInfoResponse.data;
+
+    console.log('userData', userData);
+    console.log('req.header.host', req.headers.host)
+    
+        return req.app.get('db').find_user_by_auth0_id(userData.sub).then(users => {
+          if (users.length) {
+
+            const user = users[0];
+
+            req.session.user = {auto_id: user.auto_id, email: user.email, name: user.name, phone: user.phone, picture: user.picture };
+            res.redirect('/profile');
+
+          } else {
+            const createData = [userData.sub, userData.name, userData.email, userData.phone, userData.picture];
+            return req.app.get('db').create_user(createData).then(newUsers => {
+              const user = newUsers[0];
+              req.session.user = {auto_id: user.auto_id, name: user.name, email: user.email, phone: user.phone, picture: user.picture };
+              res.redirect('/profile');
+            })
+          }
+        });
+      });
+    }).catch(error => {
+      console.log('error in /auth/callback', error);
+      res.status(500).json({ message: 'An unexpected error occurred on the server.'})
+    });
+  /////////////////////////////////////////////////////////////////////////////////////////////
+  }); // to here
+  /////////////////////////////////////////////////////////////////////////////////////////////
+  
+  
+//////////////////////////////////^^^auth0 code^^^////////////////////////////////////////////////////
+
+
 //USER CONTROLLER
 app.get('/api/getUserInfo/:user_id', userController.getUserInfo)
 

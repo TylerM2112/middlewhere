@@ -66,6 +66,7 @@ class GroupDetails extends Component {
                         <img src={e.picture}/>
                     </div>
                     {this.state.isGroupAdmin ? 
+                    //some use for possible conditional admin rendering 
                             <div className="groupMemberContainerRight"><button className="groupContainerButton" onClick={()=>this.removeUser(e.auto_id)}>Remove User</button></div>
                         :
                             ''

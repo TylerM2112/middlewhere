@@ -42,6 +42,7 @@ export default class GroupEvent extends Component {
     let newYelp = this.state.yelp.slice();
     let index = newYelp.findIndex(i=>i.id === e);
     
+    //makes new field in yelp object 
     newYelp[index].checked = !newYelp[index].checked
 
     if(newYelp[index].checked){
@@ -65,10 +66,13 @@ export default class GroupEvent extends Component {
 
 
       <div className="blackout"></div>
+
+      {/* //checked field determines true or false for condiitonal rendering */}
       {e.checked ? <div className="border"></div> : ''}
       <div className="detailsContainer">
         <div className="yelpName">{e.name}</div>
         <div className="flexContainer">
+        {/* //gets rating from yelp and displays stars */}
         <div className="rating"><img src={this.getRating(e.rating)}/><br/>
         Based on {e.review_count} {e.review_count === 1 ? "Review" : "Reviews"}
         </div>
@@ -83,7 +87,7 @@ export default class GroupEvent extends Component {
     return <div>HI</div>
   }
   }
-
+//uses rating from yelp and displays yelp stars
   getRating(r){
     switch(r){
       case 0:
@@ -109,22 +113,14 @@ export default class GroupEvent extends Component {
     }
   }
 
-  scrollPosition(){
-    
-    // if(document.getElementById("mainYelpList")){
-    //   let main = document.getElementById("mainYelpList").scrollTop;
-    //   if(main !== this.state.scrollPosition){
-    //     this.setState({scrollPosition:main,showMap:false})
-    //   }
-    // }
-  }
-
   getSelectedInfoBox(e){
     let id = document.getElementById(encodeURI(e)).offsetTop
-    let start = document.getElementById("mainYelpList").scrollTop
-
+//getting scrolling position
     document.getElementById("mainYelpList").scrollTo(0,id-240)
+    /////////////////////////////////////////////////x, y id-240 meant to offset scroll position from top
   }
+
+
   render() {
     return (
       <div className="mainGroupEventContainer">
