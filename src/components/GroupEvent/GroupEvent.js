@@ -37,7 +37,6 @@ class GroupEvent extends Component {
     }
 
     this.getYelp = this.getYelp.bind(this)
-    this.scrollPosition = this.scrollPosition.bind(this);
     this.addSelectedPlacesToEvent = this.addSelectedPlacesToEvent.bind(this)
     this.addMiddlepoint = this.addMiddlepoint.bind(this);
   }
@@ -211,8 +210,8 @@ class GroupEvent extends Component {
         <Map  addMiddlepoint={this.addMiddlepoint} locations={this.state.users} getYelp={this.getYelp} getMarkers={this.state.markers} getSelectedInfoBox={this.getSelectedInfoBox}/>
         </div>
         </div>}
-        <div className="mainYelpList" id="mainYelpList" onscroll={this.scrollPosition()}>
-        <div className="yelpList" id="yelpList"  onscroll={()=>this.scrollPosition()}>
+        <div className="mainYelpList" id="mainYelpList">
+        <div className="yelpList" id="yelpList">
           {this.displayYelp()}
 
         </div>

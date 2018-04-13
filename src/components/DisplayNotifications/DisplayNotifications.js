@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { updateNotifications } from './../../ducks/reducer';
+import { Link } from 'react-router-dom';
 
 class DisplayNotifications extends Component {
   constructor() { 
@@ -44,6 +45,7 @@ class DisplayNotifications extends Component {
 				this.removeNotification(e);
 				break;
 			case "event":
+			console.log("RUNNING")	
 				axios.post('/api/events', e).then(res => {
 				}).catch(err => {
 					console.log("Issue with event approving", err)
@@ -175,12 +177,18 @@ class DisplayNotifications extends Component {
 											<img src={e.picture} alt="profilepic" />
 										</div>
 										<div className="requestInfoContainer">
-
-											{/* <p>{e.notification_name}</p>
+											
+											<p>{e.notification_name}</p>
 											{console.log("EEEEEEEEEEEEEEEEEEEEE",e)}
 											<p>On {e.event_date} at {e.event_time.substr(0, 2) < 12 ? `${e.event_time} AM` : e.event_time.substr(0, 2) - 12 + e.event_time.substr(2, 3) + "PM"}</p>
-											<button className="approveButton" onClick={() => this.approved(e)}>Approve</button>
-											<button className="declineButton" onClick={() => this.removeNotification(e)}>Decline</button> */}
+											<Link to={{
+												pathname: "/events/select",
+												state:
+													e.group_id,
+													isCreating: false
+											
+											}}><button className="approveButton" onClick={() => this.approved(e)}>Approve</button></Link>
+											<button className="declineButton" onClick={() => this.removeNotification(e)}>Decline</button>
 										</div>
 									</div>
 								)

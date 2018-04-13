@@ -49,6 +49,7 @@ class DisplayAddresses extends Component {
 					newLong: long,
 					newPlaceName: this.state.newPlaceName,
 					auto_id: this.state.auto_id,
+					defaultaddress: this.props.state.address_count === 0 ? true : this.state.defaultaddress,
 				}
 				if (this.state.auto_id) {
 					this.editAddress(addressObj)

@@ -31,7 +31,7 @@ module.exports = {
             .catch(err =>{ console.log("userController.getUserInfo get_user_addresses",err);})
         }
         else {
-          res.status(200).send(user);
+          res.status(200).send(user[0]);
         }
       })
       .catch(err => {
@@ -74,11 +74,12 @@ module.exports = {
     // }
   },
   addUserAddress: (req, res) => {
-    const { newAddress1, newCity, newState, newPostalcode, newPlaceName, newLat, newLong } = req.body;
+
+    const { newAddress1, newCity, newState, newPostalcode, newPlaceName, newLat, newLong, defaultaddress } = req.body;
     const { user_id } = req.params;
     const db = req.app.get('db');
 
-    db.add_user_address([ newAddress1, newCity, newState, newPostalcode, newPlaceName, newLat, newLong, user_id ])
+    db.add_user_address([ newAddress1, newCity, newState, newPostalcode, newPlaceName, newLat, newLong, user_id, defaultaddress ])
       .then(response => res.status(200).send(response))
       .catch(err => {
         console.log("userController.addUserAddress",err);
