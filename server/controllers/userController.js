@@ -6,7 +6,7 @@ module.exports = {
 
     var addresses = '';
     let userInfo = '';
-
+    console.log(req.session.user)
     db.get_user_info([req.session.user.user_id])
       .then(user => {
 
@@ -16,7 +16,7 @@ module.exports = {
 
         console.log('req.session.user', req.session.user)
 
-        if (userInfo.address_count !== 0 || typeof userInfo.address_count === 'undefined') {
+        if (userInfo.address_count !== 0 || typeof userInfo.address_count !== 'undefined') {
           db.get_user_addresses([req.session.user.user_id])
             .then(address => {
               let userObj = Object.assign({}, userInfo);

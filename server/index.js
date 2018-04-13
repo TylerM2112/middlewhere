@@ -64,7 +64,7 @@ app.get('/auth/callback', (req, res) => { //from here Get request to
             const createData = [userData.sub, userData.name, userData.email, userData.phone, userData.picture];
             return req.app.get('db').create_user(createData).then(newUsers => {
               const user = newUsers[0];
-              req.session.user = {auto_id: user.auto_id, name: user.name, email: user.email, phone: user.phone, picture: user.picture };
+              req.session.user = {user_id: user.auto_id, name: user.name, email: user.email, phone: user.phone, picture: user.picture };
               res.redirect('/profile');
             })
           }
