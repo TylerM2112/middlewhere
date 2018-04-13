@@ -49,8 +49,8 @@ app.get('/auth/callback', (req, res) => { //from here Get request to
       return axios.get(`https://${process.env.REACT_APP_AUTH0_DOMAIN}/userinfo/?access_token=${accessToken}`).then(userInfoResponse => {
         const userData = userInfoResponse.data;
 
-    console.log('userData', userData);
-    console.log('req.header.host', req.headers.host)
+    // console.log('userData', userData);
+    // console.log('req.header.host', req.headers.host)
     
         return req.app.get('db').find_user_by_auth0_id(userData.sub).then(users => {
           if (users.length) {
@@ -64,7 +64,7 @@ app.get('/auth/callback', (req, res) => { //from here Get request to
             const createData = [userData.sub, userData.name, userData.email, userData.phone, userData.picture];
             return req.app.get('db').create_user(createData).then(newUsers => {
               const user = newUsers[0];
-              req.session.user = {auto_id: user.auto_id, name: user.name, email: user.email, phone: user.phone, picture: user.picture };
+              req.session.user = {user_id: user.auto_id, name: user.name, email: user.email, phone: user.phone, picture: user.picture };
               res.redirect('/profile');
             })
           }
@@ -93,6 +93,7 @@ app.get('/api/users', userController.get_users)
 //NOTIFICATION ENDPOINTS
 app.get(`/api/notifications/:user_id`, userController.getNotifications)
 app.delete('/api/notifications/:notification_id', userController.remove_notification)
+app.post('/api/events',eventController.approve_event);
 
 //ADDRESS ENDPOINTS
 app.post('/api/addUserAddress/:user_id', userController.addUserAddress);
@@ -129,6 +130,7 @@ app.delete('/api/deleteUserFromGroup/:group_id/:user_id',groupController.deleteU
 app.post('/api/createEvent',eventController.createEvent);
 //creates the event,notifications and the group admin suggested places
 app.post('/api/createEventFinal',eventController.createEventFinal);
+app.get('/api/getEventDetails/:group_id',eventController.getEventDetails);
 
 //POST GROUP
 app.post('/api/new/group', checkBody, groupController.post_group)

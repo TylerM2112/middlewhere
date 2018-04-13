@@ -20,7 +20,8 @@ module.exports = {
     const { receiver, type_id } = req.body
 
     db.confirm_event([+receiver, +type_id])
-      .then(res => {
+      .then(resp => {
+        res.status(200).end();
       })
       .catch(err => {
         console.log("eventController.approve_event",err)
@@ -43,6 +44,7 @@ module.exports = {
     get = get.substr(0, get.length - 2)
     get += ") AND mw_address.defaultaddress = true"
 
+    // console.log("get in CREATE EVENT",get);
     db.run(get)
       .then(users => {res.status(200).send(users) })
       .catch(err => { 
@@ -56,22 +58,21 @@ module.exports = {
     const db = req.app.get('db');
     const { markers, middlepoint, groupAdmin, eventDate, eventTime, eventDeadline, users, userId, eventName } = req.body;
     let event_id = null;
-
     db.create_event([middlepoint[0], middlepoint[1], eventName, eventDate, eventTime, userId, eventDeadline])
       .then(resp => {
         event_id = resp[0].auto_id;
 
         //DYNAMICALLY CREATES THE INSERT FOR THE NOTIFCATIONS
         insert = ["INSERT INTO notification (sender,receiver,type,type_id) VALUES "];
-
+        // console.log("users",users)
         users.map(e => {
           if (e.user_id != userId) {
-            insert.push(`(${userId},${e.user_id},'group',${event_id})`)
+            insert.push(`(${userId},${e.user_id},'event',${event_id})`)
           }
         });
 
         insert = insert.join(",").replace("VALUES ,", "VALUES ");
-
+        // console.log(insert);
         db.run(insert).then().catch(err => console.log("eventController.createEventFinal insert into notification",err));
 
         //CREATES A EVENT MEMBER FOR THE USER THAT IS CREATING THE EVENT
@@ -91,5 +92,22 @@ module.exports = {
         console.log("eventController.createEventFinal",err);
         res.status(500).send(err);
       });
+  },
+  getEventDetails:(req,res)=>{
+    const db = req.app.get('db');
+    const {group_id} = req.params
+
+    let obj = {};
+    db.get_event_member_locations([group_id])
+      .then(users=>{
+        obj.users = users;
+        db.get_suggested_places
+        
+        console.log("GETEVENTDETAILS",users)
+      })
+      .catch(err=>{
+        console.log("eventController.getEventDetails",err);
+        res.status(500).send(err);
+      })
   }
 }
