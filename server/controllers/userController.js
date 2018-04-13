@@ -6,16 +6,13 @@ module.exports = {
 
     var addresses = '';
     let userInfo = '';
-    console.log(req.session.user)
+    
     db.get_user_info([req.session.user.user_id])
       .then(user => {
 
         //if the user has addresses gets them from the database
         user[0].address_count = +user[0].address_count
         userInfo = user[0];
-
-        console.log('req.session.user', req.session.user)
-
         if (userInfo.address_count !== 0 || typeof userInfo.address_count !== 'undefined') {
           db.get_user_addresses([req.session.user.user_id])
             .then(address => {
@@ -31,7 +28,7 @@ module.exports = {
             .catch(err =>{ console.log("userController.getUserInfo get_user_addresses",err);})
         }
         else {
-          res.status(200).send(user);
+          res.status(200).send(user[0]);
         }
       })
       .catch(err => {

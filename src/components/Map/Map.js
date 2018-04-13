@@ -23,23 +23,26 @@ export default class Map extends Component {
   }
 
   componentWillReceiveProps(props){
-    console.log("cwrp",props)
-    if(this.state.locations.length < 1){
-    this.setState({locations:props.locations});
+    console.log("CWRP",this.state)
+    if(typeof this.state.locations === 'undefined' || this.state.locations.length !== 0 ){return }
+
     let mp = middlepoint(props.locations);
-      this.props.addMiddlepoint(mp);
+    console.log("middlepoint",mp)
+    this.props.addMiddlepoint(mp);
+
     this.setState({
-      middlepoint: mp
+      middlepoint: mp,locations:props.location
     }, () => {
       //Makes a call to server-side to initiate Yelp API call.
-      axios.post('/api/yelp/search', this.state).then(res => {
+      axios.post('/api/yelp/search', this.state)
+      .then(res => {
+        console.log("YELP",res.data)
         props.getYelp(res.data)
         this.setState({
           yelp: res.data
         })
       }).catch(error => { console.log("Yelp API Error", error) })
     })
-  }
   }
 
   setInfoBox(e){

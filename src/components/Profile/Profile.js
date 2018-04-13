@@ -24,8 +24,8 @@ class Profile extends Component {
 		axios.get(`/api/getUserInfo/`)
 		//gets userId from reducer state
 			.then(res => {
-				if (res.data.address_count) {
-					//if there is and address_count
+				console.log(res.data)
+				//if there is and address_count
 					this.props.updateUser(res.data)
 					axios.get(`/api/notifications/${this.props.state.user_id}`).then(res => {
 			console.log(this.props.state.user_id);
@@ -36,9 +36,7 @@ class Profile extends Component {
 		}).catch(error => {
 			console.log("notifications fetch error", error)
 		})
-				} else {
-				this.props.updateUser(res.data[0]);
-				}
+
 			})
 			.catch(err => console.log(err));
 		console.log(`/api/notifications/${this.props.state.user_id}`)
