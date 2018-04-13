@@ -140,8 +140,9 @@ class GroupEvent extends Component {
         )
       });
     }
-  }
 
+  }
+//uses rating from yelp and displays yelp stars
   getRating(r){
     switch(r){
       case 0:
@@ -167,22 +168,15 @@ class GroupEvent extends Component {
     }
   }
 
-  scrollPosition(){
-    
-    // if(document.getElementById("mainYelpList")){
-    //   let main = document.getElementById("mainYelpList").scrollTop;
-    //   if(main !== this.state.scrollPosition){
-    //     this.setState({scrollPosition:main,showMap:false})
-    //   }
-    // }
-  }
-
   getSelectedInfoBox(e){
     let id = document.getElementById(encodeURI(e)).offsetTop
-    let start = document.getElementById("mainYelpList").scrollTop
-
+//getting scrolling position
     document.getElementById("mainYelpList").scrollTo(0,id-240)
+    /////////////////////////////////////////////////x, y id-240 meant to offset scroll position from top
   }
+
+
+
 
   addSelectedPlacesToEvent(){
     console.log(this.state.markers);
@@ -196,6 +190,7 @@ class GroupEvent extends Component {
   addMiddlepoint(mp){
    this.setState({middlepoint:mp})
   }
+
   render() {
     return (
       <div className="mainGroupEventContainer">

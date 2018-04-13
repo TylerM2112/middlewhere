@@ -14,8 +14,10 @@ module.exports = {
         user[0].address_count = +user[0].address_count
         userInfo = user[0];
 
+        console.log('req.session.user', req.session.user)
+
         if (userInfo.address_count !== 0 || typeof userInfo.address_count === 'undefined') {
-          db.get_user_addresses([user_id])
+          db.get_user_addresses([req.session.user.auto_id])
             .then(address => {
               let userObj = Object.assign({}, userInfo);
               userObj.addresses = [];

@@ -38,15 +38,16 @@ class Profile extends Component {
 		this.setAsDefault = this.setAsDefault.bind(this);
 
 	}
-
+////////////////1//////////////////////////////////
 	componentDidMount() {
 		axios.get(`/api/getUserInfo/${this.props.state.user_id}`)
+		//gets userId from reducer state
 			.then(res => {
-
-				console.log(res.data)
-				if (res.data.address_count) { this.props.updateUser(res.data) }
-				else {
-					this.props.updateUser(res.data[0]);
+				if (res.data.address_count) {
+					//if there is and address_count
+					this.props.updateUser(res.data)
+				} else {
+				this.props.updateUser(res.data[0]);
 				}
 			})
 			.catch(err => console.log(err));
@@ -317,6 +318,7 @@ class Profile extends Component {
 											<img src={e.picture} alt="profilepic" />
 										</div>
 										<div className="requestInfoContainer">
+
 											{/* <p>{e.notification_name}</p>
 											{console.log("EEEEEEEEEEEEEEEEEEEEE",e)}
 											<p>On {e.event_date} at {e.event_time.substr(0, 2) < 12 ? `${e.event_time} AM` : e.event_time.substr(0, 2) - 12 + e.event_time.substr(2, 3) + "PM"}</p>
@@ -389,8 +391,10 @@ class Profile extends Component {
 						</div>
 					</div>
 
+					{this.props.state.address_count === 0 ? <div><h1>Please add an address</h1></div> : this.displayAddresses()}
 
-					{this.displayAddresses()}
+
+
 				</div>
 			</div>
 		)

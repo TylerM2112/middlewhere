@@ -11,3 +11,6 @@ END as friend_picture
 
 FROM friends
 WHERE user_id = $1 OR friend_id = $1;
+
+
+--create user sql

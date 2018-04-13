@@ -1,27 +1,32 @@
 import React, { Component } from 'react';
+import Auth0Lock from 'auth0-lock';
+import "dotenv";
 
 export default class Auth0Form extends Component {
+  constructor(props){
+    super(props)
+
+    this.state = {
+
+    }
+  }
+  
+  
+  
     render() {
+      const redirectUri = encodeURIComponent(`${window.location.origin}/auth/callback`);
+      window.location = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/login?client=${process.env.REACT_APP_AUTH0_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${redirectUri}`
+
+      
         return (
-            <form id="signup">
-                 <fieldset>
-                 <legend>Sign up</legend>
-                    <p>
-                      <input type="email" id="signup-email" placeholder="Email" required/>
-                    </p>
-                    <p>
-                      <input type="password" id="signup-password" placeholder="Password"
-                             required/>
-                    </p>
-                    <p>
-                      <input type="text" id="name" placeholder="Full name" required/>
-                    </p>
-                     <p>
-                      <input type="text" id="color" placeholder="Favorite color"/>
-                    </p>
-                    <input type="submit" value="Sign up"/>
-                 </fieldset>
-            </form>
+          
+          <div>
+            
+           </div>
+
+
         );
+        
+  
     }
 }
