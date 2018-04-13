@@ -98,6 +98,9 @@ button:focus{
     animation-fill-mode: forwards;
     opacity: 0;
     padding:5px 0;
+    width:100vw !important;
+    left:-100vw !important;
+    /* transform:translate(375px, 0px) translateZ(0px) !important; */
 }
 
 @keyframes groupDetailsAni{
