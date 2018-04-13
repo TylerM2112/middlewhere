@@ -57,7 +57,7 @@ app.get('/auth/callback', (req, res) => { //from here Get request to
 
             const user = users[0];
 
-            req.session.user = {auto_id: user.auto_id, email: user.email, name: user.name, phone: user.phone, picture: user.picture };
+            req.session.user = {user_id: user.auto_id, email: user.email, name: user.name, phone: user.phone, picture: user.picture };
             res.redirect('/profile');
 
           } else {
@@ -83,7 +83,7 @@ app.get('/auth/callback', (req, res) => { //from here Get request to
 
 
 //USER CONTROLLER
-app.get('/api/getUserInfo/:user_id', userController.getUserInfo)
+app.get('/api/getUserInfo/', userController.getUserInfo)
 //FIND USER
 app.get('/api/users:users', userController.search_user)
 

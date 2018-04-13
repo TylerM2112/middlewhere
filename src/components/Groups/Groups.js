@@ -127,9 +127,10 @@ class Groups extends Component {
   }
   render() {
     // if exists force element to be width of screen 
-    {document.getElementsByClassName("react-swipe-container") ? document.getElementsByClassName("react-swipe-container").offsetWidth = window.innerWidth : ''}
+    {document.getElementsByClassName("groupDetails") ? document.getElementsByClassName("groupDetails").offsetWidth = window.innerWidth : ''}
     return (
       <div className="mainGroupContainer">
+        {this.state.loading ?
           this.displayGroups()
           :
           <div><img src={logo} /><center>LOADING</center></div>

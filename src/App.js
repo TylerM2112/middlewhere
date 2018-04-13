@@ -19,6 +19,7 @@ import GroupEvent from './components/GroupEvent/GroupEvent';
 import './App.css';
 
 import Map from './components/Map/Map';
+import Auth0Form from './components/Auth0Form/Auth0Form';
 
 
 class App extends Component {
@@ -28,14 +29,18 @@ class App extends Component {
 
 
       <Switch>
-         <Route exact path="/" component={LoginView}/>
+         <Route exact path="/" component={Auth0Form}/>
          <Route path="/events" component={EventsView}/>
          <Route path="/groups" component={GroupsView}/>
          <Route path="/friends" component={FriendsView}/>
          <Route path="/profile" component={Profile}/>
          <Route path="/groupDetails" component={GroupDetails}/>
         </Switch>
-      <NavBar />  
+        {/* {console.log(window.location)} */}
+        {window.location.pathname === '/' ?
+            ''
+          :
+            <NavBar />  }
      </div>
     );
   }

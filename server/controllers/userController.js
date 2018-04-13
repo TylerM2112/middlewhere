@@ -7,7 +7,7 @@ module.exports = {
     var addresses = '';
     let userInfo = '';
 
-    db.get_user_info([user_id])
+    db.get_user_info([req.session.user.user_id])
       .then(user => {
 
         //if the user has addresses gets them from the database
@@ -17,7 +17,7 @@ module.exports = {
         console.log('req.session.user', req.session.user)
 
         if (userInfo.address_count !== 0 || typeof userInfo.address_count === 'undefined') {
-          db.get_user_addresses([req.session.user.auto_id])
+          db.get_user_addresses([req.session.user.user_id])
             .then(address => {
               let userObj = Object.assign({}, userInfo);
               userObj.addresses = [];
@@ -113,9 +113,10 @@ module.exports = {
   getNotifications: (req, res) => {
     const { user_id } = req.params;
     const db = req.app.get('db');
-
+    console.log(req.params)
     db.get_notifications([+user_id])
       .then(arr => {
+        console.log("HAHAHAHAHAHAHAHAHAHA", arr);
         let friendArr = arr.filter(e => e.type === "friend")
         let groupArr = arr.filter(e => e.type === "group")
         let eventArr = arr.filter(e => e.type === "event")
