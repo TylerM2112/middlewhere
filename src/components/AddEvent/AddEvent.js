@@ -10,10 +10,10 @@ class AddEvent extends Component {
         super();
 
         this.state={
-            eventName:null,
-            eventDate:null,
-            eventTime:null,
-            eventDeadline:null,
+            eventName:"hi tyler",
+            eventDate:"2018-04-20",
+            eventTime:"13:00",
+            eventDeadline:"2018-04-19",
             groups:[],
             selectedGroups:[],
             eventAdmin:null,
@@ -91,6 +91,7 @@ class AddEvent extends Component {
                 <input placeholder="time" type="time" onChange={(e)=>this.setState({eventTime:e.target.value})}/>
                 <br />
 
+                {console.log("STATE FOR ADDEVENT",this.state)}
                 <input type="date" onChange={e=>this.setState({eventDeadline:e.target.value})}/>
                 <Link to={{pathname:'/events/select', state:this.state}} ><button>Select places</button></Link>
 

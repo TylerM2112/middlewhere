@@ -37,19 +37,30 @@ class GroupEvent extends Component {
     }
 
     this.getYelp = this.getYelp.bind(this)
+    
     this.addSelectedPlacesToEvent = this.addSelectedPlacesToEvent.bind(this)
     this.addMiddlepoint = this.addMiddlepoint.bind(this);
   }
 
   componentDidMount() {
-    const {groupAdmin,eventDate,eventTime,eventDeadline,selectedGroups,isCreating,eventName} = this.props.location.state
-
-    console.log("CDMCDMCDMCDMCDM",this.props.location.state)
-    
-    if(selectedGroups){
+    const {isCreating} = this.props.location.state
+    if(isCreating === true){
+      const {groupAdmin,eventDate,eventTime,eventDeadline,selectedGroups,isCreating,eventName} = this.props.location.state
       axios.post('/api/createEvent',this.props.location.state)
-        .then(res=>{this.setState({users:res.data,groupAdmin:groupAdmin,eventDate:eventDate,eventTime:eventTime,eventDeadline:eventDeadline,isCreating:isCreating,userId:this.props.state.user_id,eventName:eventName})})
+        .then(res=>{
+          console.log(res.data)
+          this.setState({users:res.data,
+            groupAdmin:groupAdmin,
+            eventDate:eventDate,
+            eventTime:eventTime,
+            eventDeadline:eventDeadline,
+            isCreating:isCreating,
+            userId:this.props.state.user_id,
+            eventName:eventName})})
         .catch(err=>console.log("CDMCDM",err));
+    }
+    else{
+      axios.get(`/api/getEventDetails/${this.props.location.state.group_id}`)
     }
   }
 
@@ -210,8 +221,8 @@ class GroupEvent extends Component {
         <Map  addMiddlepoint={this.addMiddlepoint} locations={this.state.users} getYelp={this.getYelp} getMarkers={this.state.markers} getSelectedInfoBox={this.getSelectedInfoBox}/>
         </div>
         </div>}
-        <div className="mainYelpList" id="mainYelpList">
-        <div className="yelpList" id="yelpList">
+        <div className="mainYelpList" id="mainYelpList" >
+        <div className="yelpList" id="yelpList" >
           {this.displayYelp()}
 
         </div>
