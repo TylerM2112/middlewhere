@@ -93,11 +93,7 @@ app.get('/api/users', userController.get_users)
 //NOTIFICATION ENDPOINTS
 app.get(`/api/notifications/:user_id`, userController.getNotifications)
 app.delete('/api/notifications/:notification_id', userController.remove_notification)
-<<<<<<< HEAD
-app.post('/api/events', eventController.approve_event);
-=======
 app.post('/api/events',eventController.approve_event);
->>>>>>> dev
 
 //ADDRESS ENDPOINTS
 app.post('/api/addUserAddress/:user_id', userController.addUserAddress);
