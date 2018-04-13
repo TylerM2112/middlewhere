@@ -15,7 +15,7 @@ module.exports = {
             
         })
         .then(response => { res.status(200).json(response.jsonBody) })
-        .catch(error => {
+        .catch(err => {
             console.log("yelpController.search",err);
             res.status(500).send(err);
           });

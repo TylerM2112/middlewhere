@@ -20,11 +20,6 @@ class GroupsView extends Component {
     
 
     render() {
-        const displayFriendsOptions = this.state.friends.map((elem,i) => {
-            return(
-              <input type="checkbox" value={elem}/>
-            )
-          })
         return (
             <div>
                 {/* <Header TitleOfPage={"Groups"}/> */}
