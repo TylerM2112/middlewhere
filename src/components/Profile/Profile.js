@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { excon } from 'excon'
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { updateUser, addAddress, removeAddress, updateAddress, updateAllAddresses } from './../../ducks/reducer';
@@ -43,9 +42,11 @@ class Profile extends Component {
 	componentDidMount() {
 		axios.get(`/api/getUserInfo/${this.props.state.user_id}`)
 			.then(res => {
-				if(res.data.address_count){ this.props.updateUser(res.data)}
-				else{
-				this.props.updateUser(res.data[0]);
+
+				console.log(res.data)
+				if (res.data.address_count) { this.props.updateUser(res.data) }
+				else {
+					this.props.updateUser(res.data[0]);
 				}
 			})
 			.catch(err => console.log(err));

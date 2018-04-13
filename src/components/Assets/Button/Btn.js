@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
-// import {excon} from 'excon'
 export default class Btn extends Component {
     constructor(props){
         super(props);
