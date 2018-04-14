@@ -43,7 +43,7 @@ app.get('/auth/callback', (req, res) => { //from here Get request to
       grant_type: 'authorization_code',
       redirect_uri: `http://${req.headers.host}/auth/callback`,
     }).then(accessTokenResponse => {
-      console.log('req.headers', req.headers)
+      // console.log('req.headers', req.headers)
       const accessToken = accessTokenResponse.data.access_token;
     // *** Q: what does  this \/ do???? 
       return axios.get(`https://${process.env.REACT_APP_AUTH0_DOMAIN}/userinfo/?access_token=${accessToken}`).then(userInfoResponse => {
@@ -131,6 +131,7 @@ app.post('/api/createEvent',eventController.createEvent);
 //creates the event,notifications and the group admin suggested places
 app.post('/api/createEventFinal',eventController.createEventFinal);
 app.get('/api/getEventDetails/:group_id',eventController.getEventDetails);
+app.post('/api/updateEvent',eventController.updateEvent);
 
 //POST GROUP
 app.post('/api/new/group', checkBody, groupController.post_group)

@@ -1,0 +1,1 @@
+SELECT place_id FROM suggested_event_places WHERE event_id = $1 AND user_id = $2;

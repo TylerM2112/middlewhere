@@ -98,16 +98,63 @@ module.exports = {
     const {group_id} = req.params
 
     let obj = {};
+    let places = [];
     db.get_event_member_locations([group_id])
       .then(users=>{
         obj.users = users;
-        db.get_suggested_places
-        
-        console.log("GETEVENTDETAILS",users)
+        db.get_suggested_places([group_id])
+          .then(place=>{
+            places = place;
+            db.get_user_suggested_places([group_id,+req.session.user.user_id])
+              .then(userPlaces=>{
+                places.map(e=>{
+                  let index = userPlaces.findIndex(i=>i.place_id === e.place_id)
+                  if(index === -1){
+                    e.user_suggestion = false;
+                  }
+                  else{
+                    e.user_suggestion = true;
+                  }
+                })
+
+                obj.places = places;
+                res.status(200).send(obj)
+              })
+          })
+          .catch(err=>{
+            console.log(err);
+          });
       })
       .catch(err=>{
         console.log("eventController.getEventDetails",err);
         res.status(500).send(err);
       })
+  },
+  updateEvent:(req,res)=>{
+    const {middlepoint,markers,users} = req.body
+    const db = req.app.get('db');
+
+    let lat = middlepoint[0]
+    let long = middlepoint[0]
+    let event_id = +users[0].event_id
+    console.log(event_id,lat,long)
+
+    db.run(`UPDATE events SET event_lat = ${lat}, event_long = ${long} WHERE auto_id = ${event_id}`)
+      .then()
+      .catch(err=>{
+        console.log("Eventcontroller.updateEvent",err)
+        res.status(500).send(err);
+      })
+
+        insert = ["INSERT INTO suggested_event_places (user_id,event_id,place_id) VALUES "];
+
+        markers.map(e => { insert.push(`(${req.session.user.user_id},${event_id},'${e.placeId}')`)});
+
+        insert = insert.join(",").replace("VALUES ,", "VALUES ");
+
+        db.run(insert)
+          .then()
+          .catch(err => console.log("eventController.createEventFinal insert into suggested_event_places",err));
   }
+
 }

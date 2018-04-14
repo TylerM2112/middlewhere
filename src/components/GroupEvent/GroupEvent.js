@@ -33,6 +33,7 @@ class GroupEvent extends Component {
       eventTime:null,
       eventDeadline:null,
       isCreating:false,
+      suggestedPlaces:[],
 
     }
 
@@ -61,11 +62,25 @@ class GroupEvent extends Component {
     }
     else{
       axios.get(`/api/getEventDetails/${this.props.location.state.group_id}`)
+        .then(res=>{console.log("SP DATA",res.data);this.setState({users:res.data.users,suggestedPlaces:res.data.places})})
+        .catch(err=>console.log(err))
     }
   }
 
   getYelp(arr){
     this.setState({yelp:arr.businesses},()=>this.displayYelp());
+      console.log("GET_YELP",arr)
+      console.log("suggestsed",this.state.suggestedPlaces);
+      arr.businesses.map(e=>{
+        let index = this.state.suggestedPlaces.findIndex(i => i.place_id === e.id && i.user_suggestion === true);
+        console.log(index)
+        if(index === -1){}
+        else{
+          console.log("PLACE_ID")
+          this.addToSelectedPlaces(e);
+        }
+      })
+    
   }
 
   // displayBorder(e){
@@ -117,21 +132,31 @@ class GroupEvent extends Component {
     let newMarkers = this.state.markers.slice();
     let newSelectedPlaces = this.state.selectedPlaces
     let index = newMarkers.findIndex(e=>e.placeId === id.id);
-    console.log("ID",id)
+    let suggestedPlace = this.state.suggestedPlaces.slice();
 
     if(index === -1){
       document.getElementById(id.id).style.backgroundColor = "#300032";
       newMarkers.push({lat:id.coordinates.latitude,lng:id.coordinates.longitude,name:id.name,placeId:id.id})
 
+      let index2 = suggestedPlace.findIndex(e=>e.place_id === id.id);
+      if(index2 === -1){
+      suggestedPlace.push({count:1,place_id:id.id,user_suggestion:true})
+      }
+      else{
+        suggestedPlace[index2].count -= 1;
+      }
       newSelectedPlaces += 1;
     }
     else{
       newMarkers.splice(index,1);
       document.getElementById(id.id).style.backgroundColor = "#c43235";
       newSelectedPlaces -= 1;
+
+      let index2 = suggestedPlace.findIndex(e=>e.place_id === id.id);
+      suggestedPlace[index2].count -=1;
     }
 
-    this.setState({markers:newMarkers,selectedPlaces:newSelectedPlaces})
+    this.setState({markers:newMarkers,selectedPlaces:newSelectedPlaces,suggestedPlaces:suggestedPlace})
   }
 
   displayYelp(){
@@ -141,10 +166,13 @@ class GroupEvent extends Component {
       return this.state.yelp.map((e,i)=>{
         timer = i;
             style = { animationDelay: `${timer/20}s` }
+
+            let index = this.state.suggestedPlaces.findIndex(i => i.place_id === e.id)
         return (
         <ReactSwipe className="carousel" swipeOptions={{ continuous: false }} key={e.ids} id={"id" + e.group_id}> 
           <div style={style} className="groupContainer" id ={e.id} onClick={()=>this.addToSelectedPlaces(e)}>
             <div className="yelpName">{e.name}</div>
+            <div> {!this.state.isCreating ? index !== -1 ? this.state.suggestedPlaces[index].count : "0" : ""}</div>
           </div>
           </ReactSwipe>
         )
@@ -189,11 +217,15 @@ class GroupEvent extends Component {
 
 
   addSelectedPlacesToEvent(){
-    console.log(this.state.markers);
     if(this.state.isCreating){
     axios.post(`/api/createEventFinal/`,this.state)
       .then()
       .catch(err=>console.log(err));
+    }
+    else{
+      axios.post(`/api/updateEvent`,this.state)
+        .then()
+        .catch(err=>console.log(err));
     }
   }
 
@@ -210,7 +242,7 @@ class GroupEvent extends Component {
         {this.state.selectedPlaces} {this.state.selectedPlaces === 1 ? "place" : "places"} selected
         <button onClick={()=>this.addSelectedPlacesToEvent()}>Add Selected Places</button>
         <div className="mapContainer mapMoveDown">
-        <Map addMiddlepoint={this.addMiddlepoint} locations={this.state.users} getYelp={this.getYelp} getMarkers={this.state.markers} getSelectedInfoBox={this.getSelectedInfoBox}/>
+        <Map addMiddlepoint={this.addMiddlepoint} locations={this.state.users} getYelp={this.getYelp} getMarkers={this.state.markers} getSelectedInfoBox={this.getSelectedInfoBox} suggestedPlaces={this.state.suggestedPlaces}/>
         </div>
         </div> : 
         <div  className="containerForBtn">
@@ -218,7 +250,7 @@ class GroupEvent extends Component {
         {this.state.selectedPlaces} {this.state.selectedPlaces === 1 ? "place" : "places"} selected
         <button onClick={()=>this.addSelectedPlacesToEvent()}>Add Selected Places</button>
         <div className="mapContainer mapMoveUp">
-        <Map  addMiddlepoint={this.addMiddlepoint} locations={this.state.users} getYelp={this.getYelp} getMarkers={this.state.markers} getSelectedInfoBox={this.getSelectedInfoBox}/>
+        <Map  addMiddlepoint={this.addMiddlepoint} locations={this.state.users} getYelp={this.getYelp} getMarkers={this.state.markers} getSelectedInfoBox={this.getSelectedInfoBox} suggestedPlaces={this.state.suggestedPlaces}/>
         </div>
         </div>}
         <div className="mainYelpList" id="mainYelpList" >
