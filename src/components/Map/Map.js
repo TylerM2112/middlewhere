@@ -34,6 +34,10 @@ export default class Map extends Component {
       middlepoint: mp,locations:props.location
     }, () => {
       //Makes a call to server-side to initiate Yelp API call.
+      if (isNaN(this.state.middlepoint[0]) || isNaN(this.state.middlepoint[1])) {
+        this.setState({
+          yelp: false,
+        }); return}
       axios.post('/api/yelp/search', this.state)
       .then(res => {
         console.log("YELP",res.data)
@@ -91,6 +95,11 @@ export default class Map extends Component {
 
   displayYelp() {
     // console.log(this.state.yelp);
+    if (this.state.yelp === false) { 
+      return (
+        <div>No results were found!</div>
+      )
+    }
     if (this.state.yelp !== null) {
       return(
       this.state.yelp.businesses.map(e => {

@@ -177,19 +177,6 @@ class DisplayNotifications extends Component {
 											<img src={e.picture} alt="profilepic" />
 										</div>
 										<div className="requestInfoContainer">
-<<<<<<< HEAD
-											
-											<p>{e.notification_name}</p>
-											{console.log("EEEEEEEEEEEEEEEEEEEEE",e)}
-											<p>On {e.event_date} at {e.event_time.substr(0, 2) < 12 ? `${e.event_time} AM` : e.event_time.substr(0, 2) - 12 + e.event_time.substr(2, 3) + "PM"}</p>
-											<Link to={{
-												pathname: "/events/select",
-												state:
-													e.group_id,
-													isCreating: false
-											
-											}}><button className="approveButton" onClick={() => this.approved(e)}>Approve</button></Link>
-=======
 
 											<p>{e.notification_name}</p>
 											
@@ -201,7 +188,6 @@ class DisplayNotifications extends Component {
                                                     isCreating: false}
                                             
                                             }}><button className="approveButton" onClick={() => this.approved(e)}>Approve</button></Link>
->>>>>>> dev
 											<button className="declineButton" onClick={() => this.removeNotification(e)}>Decline</button>
 										</div>
 									</div>
