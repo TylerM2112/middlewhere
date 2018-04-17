@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { updateNotifications } from './../../ducks/reducer';
 import {Link} from 'react-router-dom';
 
+import './DisplayNotifications.css';
 class DisplayNotifications extends Component {
   constructor() { 
     super();
