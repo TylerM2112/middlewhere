@@ -18,11 +18,12 @@ class DisplayAddresses extends Component {
 			toggleLocations: false,
 			toggleAddAddress: false,
 			toggleAddress: false,
+			validated: false,
     }
     this.addAddress = this.addAddress.bind(this);
 		this.toggle = this.toggle.bind(this);
 		this.removeAddress = this.removeAddress.bind(this);
-		this.submitAddress = this.submitAddress.bind(this);
+		this.isValidated = this.isValidated.bind(this);
     this.displayLocations = this.displayLocations.bind(this);
 		this.setAsDefault = this.setAsDefault.bind(this);
 
@@ -49,6 +50,7 @@ class DisplayAddresses extends Component {
 					newLong: long,
 					newPlaceName: this.state.newPlaceName,
 					auto_id: this.state.auto_id,
+					defaultaddress: this.props.state.address_count === 0 ? true : this.state.defaultaddress,
 				}
 				if (this.state.auto_id) {
 					this.editAddress(addressObj)
@@ -63,7 +65,7 @@ class DisplayAddresses extends Component {
 				}
 			})
 			.catch(err => {
-				alert("Please review and re-enter your address.")
+				alert("Google could not validate your address, please re-enter and try again.")
 				console.log("Google Geocode Error", err)
 			})
 
@@ -102,14 +104,24 @@ class DisplayAddresses extends Component {
 				console.log("Edit Address Put Error", err)
 			})
   }
-  
-  submitAddress() {
-		
-    this.addAddress();
-    return;
-
-alert('Please make sure all the fields are filled in.')
-}
+	
+	isValidated() {
+		let count = 0;
+		if (this.state.newAddress1 === '') { count += 1 };
+		if (this.state.newCity === '') { count += 1 };
+		if (this.state.newState === '') { count += 1 };
+		if (this.state.newPostalcode === '') { count += 1 };
+		if (this.state.newPlaceName === '') { count += 1 };
+		if (count === 0) {
+			this.setState({
+				validated: true,
+			})
+		} else {
+			this.setState({
+				validated: false,
+			})
+		}
+	}
 
   //REMOVES ADDRESS
   removeAddress(id) {
@@ -145,6 +157,7 @@ alert('Please make sure all the fields are filled in.')
 					newPostalcode: '',
 					newPlaceName: '',
 					auto_id: null,
+					validated: false,
 				})
 				if (this.state.toggleLocations & !this.state.toggleAddAddress) {
 					this.setState({
@@ -164,6 +177,7 @@ alert('Please make sure all the fields are filled in.')
 					newState: '',
 					newPostalcode: '',
 					newPlaceName: '',
+					validated: false,
 					toggleAddAddress: !this.state.toggleLocations,
 				})
 				break;
@@ -191,6 +205,7 @@ alert('Please make sure all the fields are filled in.')
 					newPostalcode: e.postalcode,
 					toggleAddAddress: true,
 					auto_id: e.auto_id,
+					validated: true,
 				})
 				break;
 			default:
@@ -212,17 +227,21 @@ alert('Please make sure all the fields are filled in.')
 				<div className={this.state.toggleLocations ? "addressesContainer" : "eventsOff"}>
 					<div className={this.state.toggleAddAddress ? "editAddress" : "addAddressOff"}>
 						<label>Location Label</label>
-						<input type="text" onChange={e => this.setState({ newPlaceName: e.target.value })} value={this.state.newPlaceName} />
+						<input type="text" onChange={e => this.setState({ newPlaceName: e.target.value }, () => { this.isValidated() })} value={this.state.newPlaceName} />
 						<label>Address</label>
-						<input type="text" onChange={e => this.setState({ newAddress1: e.target.value })} value={this.state.newAddress1} />
+						<input type="text" onChange={e => this.setState({ newAddress1: e.target.value }, () => { this.isValidated() })} value={this.state.newAddress1} />
 						<label>City</label>
-						<input type="text" onChange={e => this.setState({ newCity: e.target.value })} value={this.state.newCity} />
+						<input type="text" onChange={e => this.setState({ newCity: e.target.value }, () => { this.isValidated() })} value={this.state.newCity} />
 						<label>State</label>
-						<input type="text" onChange={e => this.setState({ newState: e.target.value })} value={this.state.newState} />
+						<input type="text" onChange={e => this.setState({ newState: e.target.value }, () => { this.isValidated() })} value={this.state.newState} />
 						<label>Zip Code</label>
-						<input type="text" onChange={e => this.setState({ newPostalcode: e.target.value })} value={this.state.newPostalcode} />
+						<input type="numeric" onChange={e => this.setState({ newPostalcode: e.target.value }, () => { this.isValidated() })} value={this.state.newPostalcode} />
 						<div className="editAddressButtonContainer">
-							<button onClick={this.submitAddress}>Submit</button>
+							{this.state.validated ?
+								<button onClick={(e) => this.addAddress()}>Submit</button>
+								:
+								<div></div>
+							}	
 							<button onClick={() => this.toggle("ADDRESS_CANCEL")}>Cancel</button>
 						</div>
           </div>

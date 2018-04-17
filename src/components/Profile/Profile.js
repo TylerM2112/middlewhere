@@ -20,25 +20,25 @@ class Profile extends Component {
 	}
 
 	componentDidMount() {
-		// axios.get(`/api/getUserInfo/`)
-		// //gets userId from reducer state
-		// 	.then(res => {
-		// 		console.log(res.data)
-		// 		//if there is and address_count
-		// 			this.props.updateUser(res.data)
-		// 			axios.get(`/api/notifications/${this.props.state.user_id}`).then(res => {
-		// 	console.log(this.props.state.user_id);
-		// 	this.setState({
-		// 		notifications: res.data
-		// 	})
-		// 	// this.props.updateNotifications(res.data);
-		// }).catch(error => {
-		// 	console.log("notifications fetch error", error)
-		// })
-
-		// 	})
-		// 	.catch(err => console.log(err));
-		// console.log(`/api/notifications/${this.props.state.user_id}`)
+		console.log(this.props.state)
+		axios.get(`/api/getUserInfo/`)
+		//gets userId from reducer state
+			.then(res => {
+				console.log(res.data)
+				//if there is and address_count
+					this.props.updateUser(res.data)
+					axios.get(`/api/notifications/${this.props.state.user_id}`).then(res => {
+			console.log(this.props.state.user_id);
+			this.setState({
+				notifications: res.data
+			})
+			// this.props.updateNotifications(res.data);
+		}).catch(error => {
+			console.log("notifications fetch error", error)
+		})
+			})
+			.catch(err => console.log(err));
+		console.log(`/api/notifications/${this.props.state.user_id}`)
 	}
 
 	displayProfile() {

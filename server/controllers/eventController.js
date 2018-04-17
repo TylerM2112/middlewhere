@@ -16,6 +16,7 @@ module.exports = {
       })
   },
   approve_event: (req, res) => {
+    console.log("LOOK AT ME", req.body);
     const db = req.app.get('db')
     const { receiver, type_id } = req.body
 

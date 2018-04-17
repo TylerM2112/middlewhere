@@ -4,6 +4,7 @@ const massive = require('massive');
 const session = require('express-session');
 const axios = require('axios');
 
+
 //CONTROLLERS
 const userController = require('./controllers/userController');
 const eventController = require('./controllers/eventController')
@@ -41,7 +42,7 @@ app.get('/auth/callback', (req, res) => { //from here Get request to
       client_secret: process.env.REACT_APP_AUTH0_CLIENT_SECRET,
       code: req.query.code,
       grant_type: 'authorization_code',
-      redirect_uri: `http://${req.headers.host}/auth/callback`,
+      redirect_uri: `https://${req.headers.host}/auth/callback`,
     }).then(accessTokenResponse => {
       // console.log('req.headers', req.headers)
       const accessToken = accessTokenResponse.data.access_token;
@@ -150,6 +151,11 @@ app.delete('/api/removeAddress/:auto_id', userController.removeAddress);
 //Yelp Controller
 app.post('/api/yelp/search', yc.search)
 
+
+const path = require('path')
+app.get('*', (req, res)=>{
+res.sendFile(path.join(__dirname, '../build/index.html'));
+}) 
 
 const PORT = process.env.SERVER_PORT || 4000;
 app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));

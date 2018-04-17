@@ -44,6 +44,7 @@ class GroupEvent extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props)
     const {isCreating} = this.props.location.state
     console.log(this.props.location.state)
     if(isCreating === true){
@@ -197,6 +198,11 @@ class GroupEvent extends Component {
           </ReactSwipe>
         )
       });
+    }
+    if (this.state.yelp.length === 0) { 
+      return (
+        <div>No results found!</div>
+      )
     }
 
   }

@@ -20,10 +20,11 @@ class NewGroup extends Component {
             groupMembers:[],
             friends: [],
             selectClass:'initial',
-            newGroupFriends:[]
+            newGroupFriends: [],
+            validated: false,
         }
-        this.postGroup = this.postGroup.bind(this)
-        // this.inputValidation =  this.inputValidation.bind(this)
+      this.postGroup = this.postGroup.bind(this);
+      this.isValidated = this.isValidated.bind(this);
     }
 
     componentDidMount() {
@@ -36,11 +37,6 @@ class NewGroup extends Component {
     addToInvites(i){
         console.log('i', i)
     }
-
-    // inputValidation() {
-    //   const {groupName, groupPurpose, groupMembers} = this.state
-    //   return (groupName === '' ? alert('please, fill out a groupname.') : (groupPurpose === '' ? alert('please fillout a group Purpose') : (groupMembers.length === 0  ? alert('please select group members.') : alert('form submission sucessful'))))}
-
 
     postGroup(){
       const {groupName, groupPurpose, groupMembers,newGroupFriends,groupAdmin} = this.state
@@ -59,7 +55,6 @@ class NewGroup extends Component {
           groupName: '',
           groupPurpose: '',
           groupAdmin: '',
-              //having trouble with ressetting state after post to db
           })
         
     }
@@ -81,7 +76,7 @@ class NewGroup extends Component {
           newGroup.splice(index,1);
         }
 
-        this.setState({newGroupFriends:newGroup});
+       this.setState({ newGroupFriends: newGroup }, () => { this.isValidated()});
      }
 
      displayFriends(){
@@ -116,6 +111,22 @@ class NewGroup extends Component {
         })
       }
      }
+  
+  isValidated() { 
+    let count = 0;
+    if (this.state.groupName === '') { count += 1 }
+    if (this.state.groupPurpose === '') { count += 1 }
+    if (this.state.newGroupFriends.length === 0) { count += 1 }
+    if (count === 0) {
+      this.setState({
+        validated: true,
+      })
+    } else { 
+      this.setState({
+        validated: false,
+      })
+    }
+  }
 
     
      render() {
@@ -128,10 +139,14 @@ class NewGroup extends Component {
             <div className="parent-newEvents-div">
               <div className="newGroupInput">
               <h2 className="new-event-h2">Make a new event</h2>
-              <span><input className="newEvent-input" value={this.state.groupName} type="text" onChange={(e) => { this.setState({groupName: e.target.value})}} placeholder="Group Name"/> </span>
-              <span><input className="newEvent-input" value={this.state.groupPurpose} type="text" onChange={(e) => { this.setState({groupPurpose: e.target.value})}} placeholder="Group Purpose"/> </span>
+              <span><input className="newEvent-input" value={this.state.groupName} type="text" onChange={(e) => { this.setState({ groupName: e.target.value }, () => { this.isValidated() })}} placeholder="Group Name"/> </span>
+              <span><input className="newEvent-input" value={this.state.groupPurpose} type="text" onChange={(e) => { this.setState({groupPurpose: e.target.value}, () => { this.isValidated() })}} placeholder="Group Purpose"/> </span>
               {/* PostButton - prop-name: postButton is Universal prop */}
-               <PostBttn label="SAVE GROUP"  postButtonFunctionProp={this.postGroup} class={"post-event-button"}/>
+              {this.state.validated ?
+                <PostBttn label="SAVE GROUP" postButtonFunctionProp={this.postGroup} class={"post-event-button"}/>
+                :
+                <div></div>
+              } 
               </div>
 
 
