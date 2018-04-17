@@ -45,6 +45,7 @@ class GroupEvent extends Component {
 
   componentDidMount() {
     const {isCreating} = this.props.location.state
+    console.log(this.props.location.state)
     if(isCreating === true){
       const {groupAdmin,eventDate,eventTime,eventDeadline,selectedGroups,isCreating,eventName} = this.props.location.state
       axios.post('/api/createEvent',this.props.location.state)
@@ -77,7 +78,7 @@ class GroupEvent extends Component {
         if(index === -1){}
         else{
           console.log("PLACE_ID")
-          this.addToSelectedPlaces(e);
+          this.addToSelectedPlacesInital(e);
         }
       })
     
@@ -128,6 +129,25 @@ class GroupEvent extends Component {
   // }
   // }
 
+  addToSelectedPlacesInital(id){
+    let newMarkers = this.state.markers.slice();
+    let newSelectedPlaces = this.state.selectedPlaces
+    let index = newMarkers.findIndex(e=>e.placeId === id.id);
+
+    if(index === -1){
+      document.getElementById(id.id).style.backgroundColor = "#300032";
+      newMarkers.push({lat:id.coordinates.latitude,lng:id.coordinates.longitude,name:id.name,placeId:id.id})
+      newSelectedPlaces += 1;
+    }
+    else{
+      newMarkers.splice(index,1);
+      document.getElementById(id.id).style.backgroundColor = "#c43235";
+      newSelectedPlaces -= 1;
+    }
+
+    this.setState({markers:newMarkers,selectedPlaces:newSelectedPlaces})
+  }
+
   addToSelectedPlaces(id){
     let newMarkers = this.state.markers.slice();
     let newSelectedPlaces = this.state.selectedPlaces
@@ -143,7 +163,7 @@ class GroupEvent extends Component {
       suggestedPlace.push({count:1,place_id:id.id,user_suggestion:true})
       }
       else{
-        suggestedPlace[index2].count -= 1;
+        suggestedPlace[index2].count = +suggestedPlace[index2].count +1;
       }
       newSelectedPlaces += 1;
     }

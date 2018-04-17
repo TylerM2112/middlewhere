@@ -105,7 +105,7 @@ module.exports = {
         db.get_suggested_places([group_id])
           .then(place=>{
             places = place;
-            db.get_user_suggested_places([group_id,+req.session.user.user_id])
+            db.get_user_suggested_places([group_id,338])
               .then(userPlaces=>{
                 places.map(e=>{
                   let index = userPlaces.findIndex(i=>i.place_id === e.place_id)
@@ -135,7 +135,7 @@ module.exports = {
     const db = req.app.get('db');
 
     let lat = middlepoint[0]
-    let long = middlepoint[0]
+    let long = middlepoint[1]
     let event_id = +users[0].event_id
     console.log(event_id,lat,long)
 
@@ -155,6 +155,17 @@ module.exports = {
         db.run(insert)
           .then()
           .catch(err => console.log("eventController.createEventFinal insert into suggested_event_places",err));
+  },
+  getUserEvents:(req,res)=>{
+    const db = req.app.get('db');
+    const {user_id} = req.params;
+
+    db.get_user_events([+user_id])
+      .then(events=>{res.status(200).send(events)})
+      .catch(err=>{
+        console.log("EventController.getUserEvents",err)
+        res.status(500).send(err);
+      })
   }
 
 }

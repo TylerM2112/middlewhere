@@ -132,6 +132,7 @@ app.post('/api/createEvent',eventController.createEvent);
 app.post('/api/createEventFinal',eventController.createEventFinal);
 app.get('/api/getEventDetails/:group_id',eventController.getEventDetails);
 app.post('/api/updateEvent',eventController.updateEvent);
+app.get('/api/getUserEvents/:user_id',eventController.getUserEvents);
 
 //POST GROUP
 app.post('/api/new/group', checkBody, groupController.post_group)
