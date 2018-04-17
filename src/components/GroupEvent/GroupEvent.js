@@ -43,6 +43,7 @@ class GroupEvent extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props)
     const {isCreating} = this.props.location.state
     if(isCreating === true){
       const {groupAdmin,eventDate,eventTime,eventDeadline,selectedGroups,isCreating,eventName} = this.props.location.state
@@ -149,6 +150,11 @@ class GroupEvent extends Component {
           </ReactSwipe>
         )
       });
+    }
+    if (this.state.yelp.length === 0) { 
+      return (
+        <div>No results found!</div>
+      )
     }
 
   }

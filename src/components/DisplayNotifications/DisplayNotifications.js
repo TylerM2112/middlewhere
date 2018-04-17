@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { updateNotifications } from './../../ducks/reducer';
 import {Link} from 'react-router-dom';
 
+import './DisplayNotifications.css';
 class DisplayNotifications extends Component {
   constructor() { 
     super();
@@ -45,6 +46,7 @@ class DisplayNotifications extends Component {
 				this.removeNotification(e);
 				break;
 			case "event":
+			console.log("RUNNING")	
 				axios.post('/api/events', e).then(res => {
 				}).catch(err => {
 					console.log("Issue with event approving", err)

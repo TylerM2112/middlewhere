@@ -36,7 +36,6 @@ class Profile extends Component {
 		}).catch(error => {
 			console.log("notifications fetch error", error)
 		})
-
 			})
 			.catch(err => console.log(err));
 		console.log(`/api/notifications/${this.props.state.user_id}`)
