@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { updateUser, updateNotifications } from './../../ducks/reducer';
+import { updateUser, updateNotifications, logoutUser } from './../../ducks/reducer';
 import friends from '../../assets/images/friends-512.png';
 import Btn from '../Assets/Button/Btn';
 import logo from "../../assets/images/mwLogoSmallpng.png";
@@ -17,6 +17,7 @@ class Profile extends Component {
 		this.state = {
 			notifications: [],
 		}
+		this.logout = this.logout.bind(this);
 	}
 
 	componentDidMount() {
@@ -53,7 +54,8 @@ class Profile extends Component {
 						<div className="basicInfoText">
 							<p>{this.props.state.name}</p>
 							<p>{this.props.state.email}</p>
-						</div>
+					</div>
+					<button onClick={this.logout}>Log out</button>
 					</div>
 					<div>
 						<Btn label="FRIENDS" link="/friends" img={friends} />
@@ -62,6 +64,15 @@ class Profile extends Component {
 		}
 		return html;
 	}
+
+	logout() {
+		axios.post('/api/logout')
+			.then(
+				this.props.logoutUser(),
+				window.location.replace('/')
+			)
+			.catch(err => console.log("Profile Logout Error", err));
+  }
 
 	render() {
 		return (
@@ -82,4 +93,4 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps, { updateUser, updateNotifications })(Profile);
+export default connect(mapStateToProps, { updateUser, updateNotifications, logoutUser })(Profile);

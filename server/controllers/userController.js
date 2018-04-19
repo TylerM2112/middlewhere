@@ -114,7 +114,6 @@ module.exports = {
     console.log(req.params)
     db.get_notifications([+user_id])
       .then(arr => {
-        console.log("HAHAHAHAHAHAHAHAHAHA", arr);
         let friendArr = arr.filter(e => e.type === "friend")
         let groupArr = arr.filter(e => e.type === "group")
         let eventArr = arr.filter(e => e.type === "event")
@@ -180,5 +179,9 @@ module.exports = {
         console.log("userController.updateDefaults",err);
         res.status(500).send(err);
       })
-  }
+  }, 
+
+  logoutUser: (req, res) => {
+    req.session.destroy();
+   }
 }
