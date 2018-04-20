@@ -316,6 +316,12 @@ class Groups extends Component {
             {this.userGroups()}
             {this.userGroups()}
             {this.userGroups()}
+            {this.userGroups()}
+            {this.userGroups()}
+            {this.userGroups()}
+            {this.userGroups()}
+            {this.userGroups()}
+            {this.userGroups()}
             <div id="otherGroups"className="header"><p>Groups You're A Part Of</p></div>
             <div id="clearGroupDiv"></div>
             {this.otherGroups()}

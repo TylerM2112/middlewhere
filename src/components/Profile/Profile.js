@@ -46,15 +46,15 @@ class Profile extends Component {
 				<div className="basicInfoContainer">
 					<div className="picInfoContainer">
 						<div >
-							<img className="basicInfoPic" src={this.props.state.picture} alt="user" />
+							<img className="groupPicture" src={this.props.state.picture} alt="user" />
 						</div>
 						<div className="basicInfoText">
 							<p>{this.props.state.name}</p>
 							<p>{this.props.state.email}</p>
 					</div>
-					<button onClick={this.logout}>Log out</button>
 					</div>
-					<div>
+					<div className="btnContainer">
+					<button onClick={this.logout}>Log out</button>
 						<button onClick={()=>this.props.switchView(1,1)}>Friends</button>
 					</div>
 				</div>
