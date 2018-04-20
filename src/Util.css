@@ -107,7 +107,7 @@ html,body{
     padding:1px;
     z-index:200 !important;
     width:100vw;
-    display:inline-block;
+    /* display:inline-block; */
     /* border-bottom:solid rgb(123, 33, 128) 4px; */
 }
 

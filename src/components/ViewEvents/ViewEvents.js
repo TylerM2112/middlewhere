@@ -31,7 +31,7 @@ class ViewEvents extends Component {
             .catch(err=>console.log(err));
             }
             else{
-            this.setState({runAnimation:true})
+            this.setState({runAnimation:false})
             }
         }
     
@@ -56,7 +56,7 @@ class ViewEvents extends Component {
                      let date = e.event_date.split("-")
                      date = `${date[1]}/${date[2]}/${date[0]}`;
                      html.push(
-                         <SwipeableViews axis="x" style={style} resistance key={e.group_id + i} id={"id" + e.group_id} class="groupContainer eventContainer ">
+                         <SwipeableViews axis="x" style={style} resistance key={i} id={"id" + e.group_id} class="groupContainer eventContainer ">
                             <div style={style} className="groupContainerFlex rightAni">
                             
                             <div className="leftContainer">
