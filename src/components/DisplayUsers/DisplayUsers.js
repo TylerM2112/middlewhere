@@ -41,7 +41,7 @@ class DisplayUsers extends Component {
            let timer = i;
           let   style = { animationDelay: `${timer/20}s` }
             return (
-                <ReactSwipe className="carousel" swipeOptions={{ continuous: false }} key={elem.auto_id + i} id={"id" + elem.auto_id}>
+                // <ReactSwipe className="carousel" swipeOptions={{ continuous: false }} key={elem.auto_id + i} id={"id" + elem.auto_id}>
                 <div style={style} className="individual_user_div">
                 <div className="">
                     <div className="user_name"> {elem.name}</div>
@@ -49,7 +49,7 @@ class DisplayUsers extends Component {
                     <PostButton  postButtonFunctionProp={() => {this.addToFriendsFunc(elem.auto_id, i)}} label={'ADD TO FRIENDS'} class={"addToFriendsButton"}/>
                 </div>
                 </div>
-                 </ReactSwipe>
+                //  </ReactSwipe>
             )   
         })
 
@@ -70,7 +70,9 @@ class DisplayUsers extends Component {
         return(
 
             <div className={this.props.displayUserDiv}>
-             <div>{displayUsers}</div>
+            <div className="scrollableContainer">    
+                    <div>{displayUsers}</div>
+             </div>       
 
             </div>
         )

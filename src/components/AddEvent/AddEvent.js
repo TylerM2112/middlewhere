@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import ReactSwipe from 'react-swipe'
-import './AddEvent.css';
+// import './AddEvent.css';
 import {Link} from 'react-router-dom'
 import SwipeableViews from 'react-swipeable-views';
 
@@ -32,13 +32,13 @@ class AddEvent extends Component {
 
             if(props.state.user_id){
                 axios.get(`/api/getGroups/${this.props.state.user_id}`)
-                .then(res => { console.log(res.data); this.setState({ groups: res.data, loading: true,groupAdmin:props.state.user_id,loaded:true }) })
+                .then(res => { console.log(res.data); this.setState({ groups: res.data, groupAdmin:props.state.user_id,loaded:true }) })
                 .catch(err => console.log(err));
             }
         }
         else{
             if(this.state.loaded){
-                this.setState({loaded:true})
+                this.setState({loaded:false})
             }
         }
     }
@@ -118,6 +118,8 @@ class AddEvent extends Component {
     render() {
         return (
             <div className="mainAddEventContainer">
+                {this.state.loaded ?    
+            <div>        
                 <input placeholder="Event Name" onChange={(e) => { this.setState({ eventName: e.target.value }, () => this.isValidated() )}}/>
                 <br/>
                 <input placeholder="date" type="date" onChange={(e) => { this.setState({ eventDate: e.target.value }, () => this.isValidated() )}} />
@@ -131,8 +133,12 @@ class AddEvent extends Component {
                     <button onClick={()=>this.props.switchView(2,1,{e:this.state})}>Select places</button>
                     :
                     <div></div>
-                }
-                {this.displayGroups()}
+                        }
+                <div className="scrollableContainer">        
+                            {this.displayGroups()}
+                </div>            
+                </div>
+                : ''}
             </div>
         );
     }

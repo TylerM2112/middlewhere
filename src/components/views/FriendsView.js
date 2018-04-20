@@ -36,19 +36,40 @@ class FriendsView extends Component {
 
 
    
-    componentDidMount(){
-        axios.get(`/api/friends/${this.props.state.user_id}`)
-        .then((resp) => {
-            console.log("GET FRIENDS CDM",resp.data)
-              this.setState({
-                   friends: resp.data
-             })
-         })
-        .catch((err) => {
-              console.log('err', err)
-        })
+    // componentDidMount(){
+    //     axios.get(`/api/friends/${this.props.state.user_id}`)
+    //     .then((resp) => {
+    //         console.log("GET FRIENDS CDM",resp.data)
+    //           this.setState({
+    //                friends: resp.data
+    //          })
+    //      })
+    //     .catch((err) => {
+    //           console.log('err', err)
+    //     })
+    // }
+    componentWillReceiveProps(props) {
+        if(props.view === 1 && props.subView === 1 && this.state.friends.length === 0){
+            if(this.props.state.user_id){
+                axios.get(`/api/friends/${this.props.state.user_id}`)
+                .then((resp) => {
+                    console.log('resp.data', resp.data);
+                    this.setState({
+                        friends: resp.data,
+                        loaded:true
+                    })
+                })
+                .catch((err) => {
+                    console.log('err', err)
+                })
+            }
+        }
+        else{
+            if(this.state.loaded){
+                this.setState({loaded:false})
+            }
+        }
     }
-    
     getUserFunction(){
         console.log('hit')
         
@@ -94,7 +115,7 @@ class FriendsView extends Component {
 
       getSearch(userList){
         console.log('hit from getSearch')
-        axios.get(`/api/users${userList}`)
+        axios.get(`/api/users/${userList}`)
         .then((resp) => {
             console.log('resp', resp)
             this.setState({
@@ -131,14 +152,20 @@ class FriendsView extends Component {
         })
 
         return (
-            <div>
+            <div className="mainFriendContainer">
+                {this.state.loaded ?
+                <div>    
+                <Header TitleOfPage={"Friends"} NewButtonIsShown={true} getUserFunction={this.getUserFunction} />
                 <NewButton propsFunction={this.getUserFunction} buttonTxt={this.state.addNewUser} class={'show_user'}/>
                 <div><h1>{this.state.confirmationMessage ? this.state.confirmationMessage : null}</h1></div>
                 
                 {/*putting input here to fix sticky search input */}
                 {this.state.userBool ? <div><input className="friend_Search" placeholder="SEARCH " value={this.state.input} onChange={(e) => {this.trackstate(e.target.value)}} type="text"/><NewButton buttonTxt={'SEARCH'} class={'search_button'} propsFunction={() => this.getSearch(this.state.input)}/></div> : null}
-                {this.state.userBool ? <DisplayUsers displayUserDiv={this.state.displayUserDiv} users={this.state.users}/> : <div>{displayFriends}</div>}
-                
+                        {this.state.userBool ? <DisplayUsers displayUserDiv={this.state.displayUserDiv} users={this.state.users} /> : <div>{displayFriends}</div>}
+                </div>        
+                :
+                ''
+                }
                 
 
             </div>

@@ -16,16 +16,17 @@ class ViewEvents extends Component {
         this.displayEvents = this.displayEvents.bind(this)
     }
 
-    componentDidMount() {
-        axios.get(`/api/getUserEvents/${this.props.state.user_id}`)
-            .then(res=>this.setState({events:res.data}))
-            .catch(err=>console.log(err));
-    }
+    // componentDidMount() {
+    //     axios.get(`/api/getUserEvents/${this.props.state.user_id}`)
+    //         .then(res=>this.setState({events:res.data}))
+    //         .catch(err=>console.log(err));
+    // }
 
     componentWillReceiveProps(props){
         if(props.view === 2 && props.subView === 0){
-            if(this.props.state.user_id){
-            axios.get(`/api/getUserEvents/${this.props.state.user_id}`)
+            if (props.state.user_id) {
+                
+            axios.get(`/api/getUserEvents/${props.state.user_id}`)
             .then(res=>this.setState({events:res.data,runAnimation:true}))
             .catch(err=>console.log(err));
             }

@@ -96,7 +96,7 @@ app.get('/auth/callback', (req, res) => { //from here Get request to
 app.get('/api/getUserInfo/', userController.getUserInfo)
 app.post('/api/logout', userController.logoutUser)
 //FIND USER
-app.get('/api/users:users', userController.search_user)
+app.get('/api/users/:users', userController.search_user)
 
 //get all users the db
 app.get('/api/users', userController.get_users)
