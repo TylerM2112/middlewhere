@@ -91,9 +91,8 @@ class GroupDetails extends Component {
         return (
             <div className="mainGroupDetailsContainer">
                 {this.displayDetails()}
-                <div className="groupScrollableContainer">
+                <div className="scrollableContainer">
                 {this.displayGroupMembers()}
-                hi
                 </div>
             </div>
         );

@@ -52,7 +52,7 @@ class Profile extends Component {
 						</div>
 					</div>
 					<div>
-						<Btn label="FRIENDS" link="/friends" img={friends} />
+						<button onClick={()=>this.props.switchView(1,1)}>Friends</button>
 					</div>
 				</div>
 		}

@@ -24,8 +24,16 @@ class ViewEvents extends Component {
 
     componentWillReceiveProps(props){
         if(props.view === 2 && props.subView === 0){
+            if(this.props.state.user_id){
+            axios.get(`/api/getUserEvents/${this.props.state.user_id}`)
+            .then(res=>this.setState({events:res.data,runAnimation:true}))
+            .catch(err=>console.log(err));
+            }
+            else{
             this.setState({runAnimation:true})
+            }
         }
+    
     }
 
     displayEvents(){
@@ -101,7 +109,7 @@ class ViewEvents extends Component {
             <div className="mainEventContainer">
                 {this.state.runAnimation ?
                 <div>
-                <div id="userGroups" className="header"><p>Events You've Created</p></div>
+                <div id="userGroups" className="header"><p>Events You've Created</p><button onClick={()=>this.props.switchView(2,2)}>Click</button></div>
                 <div className="scrollableContainer" id="groupScrollableContainer" >
                     {this.displayEvents()}
                 </div>

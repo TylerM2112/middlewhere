@@ -4,7 +4,7 @@ import './newgroup.css';
 import PostBttn from '../Assets/Button/PostButton';
 import {connect} from 'react-redux';
 import calendar from '../../assets/images/calendar.png';
-import ReactSwipe from 'react-swipe';
+import SwipeableViews from 'react-swipeable-views';
 
 
 class NewGroup extends Component {
@@ -29,14 +29,16 @@ class NewGroup extends Component {
 
     componentDidMount() {
 
-      axios.get(`/api/friends/${this.props.state.user_id}`)
+    }
+
+    componentWillReceiveProps(props) {
+      if(props.subView === 2 && props.view === 0 && this.props.state.user_id){
+        axios.get(`/api/friends/${this.props.state.user_id}`)
         .then(res=>this.setState({friends:res.data}))
         .catch(err=>console.log(err))
+      }
     }
-    
-    addToInvites(i){
-        console.log('i', i)
-    }
+  
 
     postGroup(){
       const {groupName, groupPurpose, groupMembers,newGroupFriends,groupAdmin} = this.state
@@ -71,9 +73,11 @@ class NewGroup extends Component {
       console.log()
         if(index === -1){
           newGroup.push(id);
+          document.getElementById(id).style.backgroundColor = "#E53E4F";
         }
         else{
           newGroup.splice(index,1);
+          document.getElementById(id).removeAttribute("style")
         }
 
        this.setState({ newGroupFriends: newGroup }, () => { this.isValidated()});
@@ -87,27 +91,21 @@ class NewGroup extends Component {
           timer = i;
           style = { animationDelay: `${timer/20}s` }
           let index = this.state.newGroupFriends.indexOf(+e.friend_id);
-            return(
 
-              <ReactSwipe className="carousel" swipeOptions={{ continuous: false }} key={e.group_id + i} id={"id" + e.group_id}>
-
-                <div style={style} className={index === -1 ? "groupContainer singleFriendDiv" :"groupContainer singleFriendDiv purple" }onClick={()=>this.addFriendToGroup(+e.friend_id)}>
-                  <div className="groupTitle">{e.friend_name}</div>
-                  <img className="groupPicture" src={e.friend_picture}/>
-                  {index !== -1 ?
-                  <div className="border"></div>
-                :
-                  ''}
+          return(
+            <SwipeableViews axis="x" style={style} resistance key={e.group_id + i} id={"id" + e.group_id} class="groupContainer">
+                <div id={+e.friend_id} style={style} className="groupContainerFlex" onClick={()=>this.addFriendToGroup(+e.friend_id)}>
+                  
+                  <div className="leftContainer">
+                    <div className="groupTitle">{e.friend_name}</div>
+                    </div>
+                  <div>
+                    <img className="groupPicture" src={e.friend_picture} />
+                  </div>
                 </div>
-              {/* <div className="singleFriendDiv" onClick={()=>this.addFriendToGroup(+e.friend_id)}>
-                {index !== -1 ?
-                  <div className="border"></div>
-                :
-                  ''}
-                <img src={e.friend_picture}/><div>{e.friend_name}</div> 
-              </div> */}
-              </ReactSwipe>
+              </SwipeableViews>
           )
+        
         })
       }
      }

@@ -17,6 +17,7 @@ import SwipeableViews from 'react-swipeable-views'
 
 import Groups from './components/Groups/Groups';
 import ViewEvents from './components/ViewEvents/ViewEvents';
+import AddEvent from './components/AddEvent/AddEvent';
 
 
 import GroupEvent from './components/GroupEvent/GroupEvent';
@@ -109,7 +110,9 @@ class App extends Component {
         <Groups subView={this.state.subView} view={this.state.goToView} switchView={this.switchView} passState={this.passState} />
 
         <GroupDetails subView={this.state.subView} view={this.state.goToView} switchView={this.switchView} passedState={this.state.passedState}/>
-        <div></div>
+        
+        <NewGroup subView={this.state.subView} view={this.state.goToView} switchView={this.switchView} passedState={this.state.passedState}/>
+
       </SwipeableViews>
     )
   }
@@ -119,9 +122,11 @@ class App extends Component {
    return(
       <SwipeableViews resistance index={this.state.subView} onChangeIdex ={this.changeSubView} disabled={true}>
 
-        <div>
-        <Profile subView={this.state.subView} view={this.state.goToView} />
-        </div>
+
+        <Profile subView={this.state.subView} view={this.state.goToView} switchView={this.switchView} passedState={this.state.passedState} />
+
+        <Friends subView={this.state.subView} view={this.state.goToView} switchView={this.switchView} passedState={this.state.passedState} />
+
         
       </SwipeableViews>
     )
@@ -130,12 +135,13 @@ class App extends Component {
   displayEventView = () =>{
     return (
       <SwipeableViews resistance index={this.state.subView} disabled={true}>
+
       <ViewEvents subView={this.state.subView} view={this.state.goToView} switchView={this.switchView} passedState={this.state.passedState} />
 
 
       <GroupEvent subView={this.state.subView} view={this.state.goToView} switchView={this.switchView} passedState={this.state.passedState} />
 
-      <NewEvent subView={this.state.subView} view={this.state.goToView} switchView={this.switchView} passedState={this.state.passedState} />
+      <AddEvent subView={this.state.subView} view={this.state.goToView} switchView={this.switchView} passedState={this.state.passedState} />
 
       
       </SwipeableViews>

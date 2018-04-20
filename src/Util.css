@@ -96,6 +96,7 @@ html,body{
 .scrollableContainer{
     overflow:scroll;
     height:85vh;
+    margin-right:-17px;
 }
 #groupScrollableContainer{
     padding-top:54px;
