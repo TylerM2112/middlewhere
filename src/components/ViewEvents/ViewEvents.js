@@ -36,7 +36,6 @@ class ViewEvents extends Component {
                 }
             }
         }
-    
     }
 
     displayEvents(){
@@ -116,8 +115,6 @@ class ViewEvents extends Component {
                 <div className="scrollableContainer" id="groupScrollableContainer" >
                     {this.displayEvents()}
                 </div>
-                <div id="otherGroups"className="header"><p>Groups You're A Part Of</p></div>
-            <div id="clearGroupDiv"></div>
                 </div>
                 :
                 ''}

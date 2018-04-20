@@ -5,6 +5,7 @@ import { updateUser, updateNotifications, logoutUser } from './../../ducks/reduc
 import friends from '../../assets/images/friends-512.png';
 import Btn from '../Assets/Button/Btn';
 import logo from "../../assets/images/mwLogoSmallpng.png";
+import SwipeableViews from 'react-swipeable-views'
 
 import DisplayAddresses from '../DisplayAddresses/DisplayAddresses';
 import DisplayNotifications from '../DisplayNotifications/DisplayNotifications';
@@ -20,6 +21,7 @@ class Profile extends Component {
       		setTimestamp:null
 		}
 		this.logout = this.logout.bind(this);
+
 	}
 
 	componentDidMount() {
@@ -36,8 +38,11 @@ class Profile extends Component {
       .catch(error => {
         console.log("notifications fetch error", error)
       })})
-    .catch(err=>console.log(err));
+			.catch(err => console.log(err));
+			
+		
 	}
+
 
 	displayProfile() {
 		let html = ''

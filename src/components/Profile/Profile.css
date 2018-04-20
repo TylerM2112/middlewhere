@@ -149,6 +149,12 @@
   margin-left: -12px;
 }
 
+.scrollableAddressContainer{
+  overflow:scroll;
+  height:40vh;
+  /* margin-right:-17px; */
+}
+
 .notificationLabel{
   /* width: 60%; */
   margin: auto;

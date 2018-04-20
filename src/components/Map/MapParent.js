@@ -3,7 +3,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 import logo from './../../assets/images/mwLogoSmallpng.png'
 const MapWithAMarker = withScriptjs(withGoogleMap(props =>
     <GoogleMap
-      defaultZoom={8}
+      defaultZoom={12}
       defaultCenter={{ lat: props.middlepoint[0], lng: props.middlepoint[1] }}
   >
     {props.markers ?
