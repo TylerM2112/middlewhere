@@ -6,6 +6,16 @@
     z-index: 200;
 }
 
+.mainFriendContainer{
+    height:100vh;
+    overflow:hidden;
+}
+
+.mainFriendContainer > div{
+    /* height:100vh; */
+    overflow:hidden;
+}
+
 @keyframes friendsAnim{
     from{opacity: 0;margin-left:250px;}
     to{opacity: 1;margin-left:0;}

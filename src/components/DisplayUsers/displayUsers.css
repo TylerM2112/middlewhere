@@ -11,10 +11,12 @@
 
 .secondary_users_parent_div {
     width: 100%;
-    height: 100vh;
+    height: 54vh;
+    padding-bottom:100px;
     border-radius: 7px;
-    overflow: scroll;
-    position: absolute;
+    /* overflow: scroll; */
+    overflow:hidden;
+    /* position: absolute; */
     background-color: #E6E6E8;
     color: white;
 }
@@ -24,6 +26,7 @@
     background-color:#c43235;
     height: 10rem;
     width: 100%;
+    overflow:hidden;
     animation: displayUserAni .3s;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
