@@ -158,10 +158,5 @@ app.get('*', (req, res)=>{
 res.sendFile(path.join(__dirname, '../build/index.html'));
 }) 
 
-const path = require('path')
-app.get('*', (req, res)=>{
-res.sendFile(path.join(__dirname, '../build/index.html'));
-}) 
-
 const PORT = process.env.SERVER_PORT || 4000;
 app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
