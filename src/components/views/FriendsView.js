@@ -132,7 +132,6 @@ class FriendsView extends Component {
 
         return (
             <div>
-                <Header TitleOfPage={"Friends"} NewButtonIsShown={true} getUserFunction={this.getUserFunction} />
                 <NewButton propsFunction={this.getUserFunction} buttonTxt={this.state.addNewUser} class={'show_user'}/>
                 <div><h1>{this.state.confirmationMessage ? this.state.confirmationMessage : null}</h1></div>
                 
