@@ -239,11 +239,11 @@ class DisplayAddresses extends Component {
 						<input type="numeric" onChange={e => this.setState({ newPostalcode: e.target.value }, () => { this.isValidated() })} value={this.state.newPostalcode} />
 						<div className="editAddressButtonContainer">
 							{this.state.validated ?
-								<button onClick={(e) => this.addAddress()}>Submit</button>
+								<button className="addressButtons" onClick={(e) => this.addAddress()}>Submit</button>
 								:
 								<div></div>
 							}	
-							<button onClick={() => this.toggle("ADDRESS_CANCEL")}>Cancel</button>
+							<button className="addressButtons" onClick={() => this.toggle("ADDRESS_CANCEL")}>Cancel</button>
 						</div>
           </div>
           
@@ -272,7 +272,7 @@ class DisplayAddresses extends Component {
                 <div style={style} className="groupContainerFlex">
                   
                   <div className="leftContainer">
-                    <div className="groupTitle">{e.place} - {e.address1}</div>
+                    <div className="groupTitle addressLabel">{e.place} - {e.address1}</div>
                     
                   </div>
 				  {e.defaultaddress == true ?

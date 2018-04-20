@@ -94,6 +94,10 @@
   /* margin: auto; */
 }
 
+.addressLabel{
+  font-size: 25px;
+}
+
 .locationTab{
   display: flex;
 	flex-direction: row;
@@ -113,6 +117,11 @@
   color: rgb(0, 0, 0);  
 }
 
+.addressButtons{
+  background-color: #e6e6e8;
+  border: 1px solid #300032;
+}
+
 .singleAddressTab{
   background-color: #fdfdfd;  
   padding-left: 5px;
@@ -130,14 +139,14 @@
 .addressButtonContainer{
   display: flex;
   flex-direction: row;
-  width: 30%;
+  /* width: 30%; */
 }
 
 .editAddressButtonContainer{
   display: flex;
   flex-direction: row;
-  width: 50%;
-  margin: auto;
+  margin: 10px;
+  margin-left: -12px;
 }
 
 .notificationLabel{
