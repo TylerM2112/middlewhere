@@ -112,7 +112,8 @@ module.exports = {
         db.get_suggested_places([+group_id])
           .then(place=>{
             places = place;
-            db.get_user_suggested_places([+group_id,338])
+            console.log(req.session.user.user_id)
+            db.get_user_suggested_places([+group_id,req.session.user.user_id])
               .then(userPlaces=>{
                 places.map(e=>{
                   let index = userPlaces.findIndex(i=>i.place_id === e.place_id)

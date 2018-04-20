@@ -62,7 +62,6 @@ html,body{
         top: 5px;
     }
 }
-
 .navBtn{
     height:10vh;
     /* ////////////////// */
@@ -136,7 +135,7 @@ html,body{
 }
 
 #otherGroups > *{
-    margin-left:10px;
+    /* margin-left:10px; */
 }
 
 @keyframes otherGroupsAni{
@@ -180,7 +179,7 @@ html,body{
 .scrollableContainer{
     overflow:scroll;
     height:85vh;
-    margin-right:-17px;
+    /* margin-right:-17px; */
 }
 #groupScrollableContainer{
     padding-top:54px;
@@ -282,12 +281,12 @@ button{
 }
 
 .groupTitle{
-    font-family: 'Dosis';
+    font-family: 'Dosis' !important;
     font-family: bold;
 }
 
 .groupPurpose{
-    font-family: 'Open Sans';
+    font-family: 'Open Sans' !important;
     font-size:10px;
 }
 
@@ -301,4 +300,13 @@ button{
 
 .groupPicture{
 
+}
+
+.locationLabel{
+    font-family: 'Dosis' !important;
+    font-family: bold;
+}
+
+.locationLabel > button{
+    flex:0 0 ;
 }

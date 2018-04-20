@@ -141,7 +141,7 @@ class GroupEvent extends Component {
   addToSelectedPlacesInital(j){
     let newMarkers = [];
     let newSelectedPlaces = 0;
-
+    console.log("j",j)
     j.map(id=>{
       document.getElementById(id.id).style.backgroundColor = "#E53E4F";
       document.getElementById("img" + id.id).style.display = "none";
@@ -222,7 +222,8 @@ class GroupEvent extends Component {
                     <div className="groupPurpose">Based on {e.review_count} {e.review_count === 1 ? "review" : "reviews"}</div>
                   </div>
                   <div className="eventRightContainer">
-                    <div className="groupPurpose">{!this.state.isCreating ? index !== -1 ? this.state.suggestedPlaces[index].count : "0" : ""}</div>
+                        <div className="groupPurpose">{!this.state.isCreating ? index !== -1 ? this.state.suggestedPlaces[index].count : "0" : ""}</div>
+                        <a href={e.url} target="_"><div className="yelpLogoContainer"><img src={yelpLogo} /></div></a>
                   </div>
                   </div>
                   </div>
