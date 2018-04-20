@@ -317,17 +317,8 @@ class Groups extends Component {
             {this.userGroups()}
             {this.userGroups()}
             {this.userGroups()}
-<<<<<<< HEAD
-            <div id="otherGroups" className="header"><p>Groups You're A Part Of</p></div>
-=======
-            {this.userGroups()}
-            {this.userGroups()}
-            {this.userGroups()}
-            {this.userGroups()}
-            {this.userGroups()}
             {this.userGroups()}
             <div id="otherGroups"className="header"><p>Groups You're A Part Of</p></div>
->>>>>>> 2d858812e87cf05008a68bdd5df98f64dab6283a
             <div id="clearGroupDiv"></div>
             {this.otherGroups()}
             {this.otherGroups()}
