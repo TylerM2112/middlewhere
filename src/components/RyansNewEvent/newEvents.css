@@ -59,8 +59,9 @@
     .post-event-button {
         display: inline-block;
         position: relative;
-        left:0;
-        margin-left: 33%;
+        left:-3rem;
+        padding-bottom: 2rem;
+        margin-left: 35%;
         
 
     }

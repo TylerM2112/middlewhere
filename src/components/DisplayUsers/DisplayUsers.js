@@ -81,9 +81,6 @@ class DisplayUsers extends Component {
         }
     }
 
-    
-    
-    render(){
         
     
 

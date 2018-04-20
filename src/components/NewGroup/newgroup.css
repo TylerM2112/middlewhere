@@ -6,6 +6,10 @@
 /* .group-friends-option  select{
    
 } */
+.post-event-button{
+    position: relative;
+    left: -15rem;
+}
 
 
 .group-friends-option .initial {
