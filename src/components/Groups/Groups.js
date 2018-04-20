@@ -49,6 +49,11 @@ class Groups extends Component {
         }
       // this.setState({runAnimation:true})
     }
+    else{
+      if(this.state.runAnimation){
+        this.setState({loading:false,groups:[]})
+      }
+    }
   }
 
   showGroup(id) {

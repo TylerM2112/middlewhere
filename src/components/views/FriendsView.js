@@ -49,8 +49,10 @@ class FriendsView extends Component {
     //     })
     // }
     componentWillReceiveProps(props) {
-        if(props.view === 1 && props.subView === 1 && this.state.friends.length === 0){
-            if(this.props.state.user_id){
+        if(props.view === 1 && props.subView === 1){
+
+            this.setState({loaded:true})
+            if(this.props.state.user_id && this.state.friends.length === 0){
                 axios.get(`/api/friends/${this.props.state.user_id}`)
                 .then((resp) => {
                     console.log('resp.data', resp.data);
@@ -117,7 +119,6 @@ class FriendsView extends Component {
         console.log('hit from getSearch')
         axios.get(`/api/users/${userList}`)
         .then((resp) => {
-            console.log('resp', resp)
             this.setState({
                 users: resp.data
             })
@@ -160,8 +161,9 @@ class FriendsView extends Component {
                 <div><h1>{this.state.confirmationMessage ? this.state.confirmationMessage : null}</h1></div>
                 
                 {/*putting input here to fix sticky search input */}
-                {this.state.userBool ? <div><input className="friend_Search" placeholder="SEARCH " value={this.state.input} onChange={(e) => {this.trackstate(e.target.value)}} type="text"/><NewButton buttonTxt={'SEARCH'} class={'search_button'} propsFunction={() => this.getSearch(this.state.input)}/></div> : null}
-                        {this.state.userBool ? <DisplayUsers displayUserDiv={this.state.displayUserDiv} users={this.state.users} /> : <div>{displayFriends}</div>}
+                {this.state.userBool ? <div><input className="friend_Search" placeholder="SEARCH " value={this.state.input} onChange={(e) => {this.trackstate(e.target.value)}} type="text"/><button className={'search_button'} onClick={() => this.getSearch(this.state.input)}>SEARCH</button></div> : null}
+                        {this.state.userBool ? <DisplayUsers displayUserDiv={this.state.displayUserDiv} users={this.state.users} friends={this.state.friends} input={this.state.input} /> : <div>{displayFriends}</div>}
+
                 </div>        
                 :
                 ''

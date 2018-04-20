@@ -31,7 +31,9 @@ class ViewEvents extends Component {
             .catch(err=>console.log(err));
             }
             else{
-            this.setState({runAnimation:false})
+                if(this.state.runAnimation){
+            this.setState({runAnimation:true,events:[]})
+                }
             }
         }
     
