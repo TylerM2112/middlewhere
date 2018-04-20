@@ -1,0 +1,14 @@
+.mainAddEventContainer {
+    position: absolute;
+    top:0;
+    left:0;
+    text-align: center;
+    /* background-color:black; */
+    border:solid black 5px;
+    height:75px;
+    width:97.5vw;
+}
+
+.mainAddEventContainer .groupContainer{
+    transition: all .1s !important;
+}

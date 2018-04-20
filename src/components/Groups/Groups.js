@@ -6,6 +6,7 @@ import logo from './../../assets/images/mw.png'
 import ReactSwipe from 'react-swipe';
 import Header from '../Header/Header';
 import {Link} from 'react-router-dom'
+import Btn from './../Assets/Button/Btn';
 
 class Groups extends Component {
   constructor() {
@@ -44,6 +45,8 @@ class Groups extends Component {
       let timer = 0;
       let style = {};
       this.state.groups.map((e, i) => {
+
+        // this code is for staggered animation
         timer = i;
         style = { animationDelay: `${timer/20}s` }
         if (e.group_admin == this.props.state.user_id) {
@@ -71,10 +74,8 @@ class Groups extends Component {
         }
       })
 
-      //gets all gourps not admin but apart of 
-      if(html.length > 0){html.unshift(<div className="groupHeader">Groups You Made</div>)}
+      if(html.length > 0){html.unshift(<div className="groupHeader">Groups You Made <Btn link='/groups/new' label='ADD GROUP'/></div>)}
 
-      //this conditionally sets header
       html.push(<div className="groupHeader">Groups You're Apart Of</div>)
       this.state.groups.map((e, i) => {
         timer = (timer+1);
@@ -104,7 +105,7 @@ class Groups extends Component {
       })
     }
     else {
-      return (<div>No Groups</div>)
+      return (<div>No Groups<br/><Btn link='/groups/new' label='ADD GROUP'/></div>)
     }
 
     return html;
@@ -128,9 +129,10 @@ class Groups extends Component {
   }
   render() {
     // if exists force element to be width of screen 
-    {document.getElementsByClassName("react-swipe-container") ? document.getElementsByClassName("react-swipe-container").offsetWidth = window.innerWidth : ''}
+    {document.getElementsByClassName("groupDetails") ? document.getElementsByClassName("groupDetails").offsetWidth = window.innerWidth : ''}
     return (
       <div className="mainGroupContainer">
+        {this.state.loading ?
           this.displayGroups()
           :
           <div><img src={logo} /><center>LOADING</center></div>

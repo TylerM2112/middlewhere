@@ -11,6 +11,7 @@
 }
 
 .pic{
+    display:inline;
     filter:blur(1px)
 }
 
@@ -246,4 +247,8 @@
 
 .rating{
     font-size:12px;
+}
+
+.mainGroupEventContainer .groupContainer{
+    transition: all .1s !important;
 }

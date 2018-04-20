@@ -5,6 +5,7 @@ import GroupEvent from '../GroupEvent/GroupEvent'
 import Groups from '../Groups/Groups';
 import {connect} from 'react-redux'
 import './groupsview.css'
+import {Route,Switch} from 'react-router-dom'
 
 class GroupsView extends Component {
     constructor(props){
@@ -19,18 +20,14 @@ class GroupsView extends Component {
     
 
     render() {
-        const displayFriendsOptions = this.state.friends.map((elem,i) => {
-            return(
-              <input type="checkbox" value={elem}/>
-            )
-          })
         return (
             <div>
                 {/* <Header TitleOfPage={"Groups"}/> */}
-               
+               <Route exact path='/groups' component={Groups}/>
+               <Route exact path='/groups/new/' component={NewGroup}/>
                 <Groups/>
-                {/* <NewGroup/> */}
-                {/* <GroupEvent/> */}
+                <NewGroup/>
+                <GroupEvent/>
             </div>
         );
     }
