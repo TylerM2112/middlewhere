@@ -36,7 +36,31 @@
 
 .picInfoContainer{
   display: flex;
-  flex-direction: row;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+  align-content: center;
+  font-family: 'Dosis';
+  font-size:18px;
+}
+
+.btnContainer{
+  display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: space-between;
+  margin:10px;
+  /* margin-right:10px; */
+  /* padding-right:10px; */
+}
+
+.btnContainer > button{
+  margin-left:10px;
+  flex:1 1 20%;
+  width:20%;
 }
 
 .basicInfoPic{
@@ -53,23 +77,30 @@
 }
 
 .notification{
-  display: flex;
-  flex-direction: column;
-  margin: 5px 0px;
-  box-sizing: border-box;
+  /* display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between; */
+	/* align-items: center; */
+  /* align-content: center; */
+  width:100vw;
 }
 
 .notificationTab{
   background-color: #BC2C2F;
-  margin-bottom: 5px;
-  padding: 3px 0px;
-  width: 100%;
-  margin: auto;
+  /* margin-bottom: 5px; */
+  /* padding: 3px 0px; */
+  /* width: 100%; */
+  /* margin: auto; */
 }
 
 .locationTab{
   display: flex;
-  justify-content: space-between; 
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
   background-color: #BC2C2F;
   color: white;
 }
@@ -91,6 +122,9 @@
 }
 
 .addressLabelText{
+}
+.editAddress input{
+  padding:7px;
 }
 
 .addressButtonContainer{

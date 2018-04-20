@@ -58,8 +58,8 @@ class Friends extends Component {
         if(this.state.friends){
             console.log("FRIENDS",this.state.friends)
             this.state.friends.map((elem) => {
-                html.push(<div>
-                    <div>{elem.name}</div>
+                html.push(<div className="groupContainer">
+                    <div className="groupTitle">{elem.name}</div>
                     <div>{elem.email}</div>
                     <div>{elem.phone}</div>
                     <div><img src={elem.picture}/></div>
@@ -78,7 +78,7 @@ class Friends extends Component {
         return (
             <div className="display_friends_parent">
             {this.state.load ?
-                <div>
+                <div className="scrollableContainer">
                 {this.displayFriends()}
                 </div>
             :

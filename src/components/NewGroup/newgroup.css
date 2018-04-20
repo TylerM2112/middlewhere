@@ -1,6 +1,6 @@
 .group-friends-option {
     /* border:2px solid blue; */
-
+    overflow-y: hidden;
 }
 
 /* .group-friends-option  select{
@@ -35,7 +35,6 @@
 }
 
 .newGroupInput{
-    position: fixed;
     background-color:inherit;
     height:280px;
     border-bottom:solid black 2px;
@@ -64,13 +63,18 @@
     font-family: 'Dosis';
     font-weight:bold;
     position: relative;
-    margin:0 10px;
-    padding-bottom:5px;
-    margin-bottom:10px;
+    margin:0 auto;
+    width: 100%;
+    /* padding-bottom:5px; */
+    /* margin-bottom:10px; */
     /* margin-right:10px; */
     transition: all 5s;
 
 
+}
+
+.leftContainer{
+    overflow-y: visible;
 }
 
 .singleFriendDiv button{
@@ -79,6 +83,7 @@
 
 .singleFriendDiv *{
     margin:auto 10px;
+    width: 100%;
 }
 
 .friendsDiv img{
