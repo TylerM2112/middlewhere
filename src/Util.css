@@ -112,7 +112,7 @@ html,body{
 }
 
 #otherGroups > *{
-    margin-left:10px;
+    /* margin-left:10px; */
 }
 
 @keyframes otherGroupsAni{
@@ -156,7 +156,7 @@ html,body{
 .scrollableContainer{
     overflow:scroll;
     height:85vh;
-    margin-right:-17px;
+    /* margin-right:-17px; */
 }
 #groupScrollableContainer{
     padding-top:54px;

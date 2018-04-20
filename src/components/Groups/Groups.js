@@ -279,15 +279,16 @@ class Groups extends Component {
         // if(document.getElementById("clearGroupDiv").getBoundingClientRect().top >= 110){
         document.getElementById("userGroups").removeAttribute("style")
         }
-      if(document.getElementById("clearGroupDiv").getBoundingClientRect().top <= 60){
-        // document.getElementById("groupScrollableContainer").style.marginTop = "60px";
-        document.getElementById("otherGroups").style.position = "absolute";
-        document.getElementById("otherGroups").style.top = "0";
-        document.getElementById("otherGroups").style.animation="otherGroupsAni .5s forwards";
-        document.getElementById("groupScrollableContainer").style.paddingTop = "108px";
-        document.getElementById("groupScrollableContainer").style.height = "78.5vh";
-      }
-      else{
+        if (document.getElementById("clearGroupDiv").getBoundingClientRect().top <= 60) {
+          // document.getElementById("groupScrollableContainer").style.marginTop = "60px";
+          document.getElementById("otherGroups").style.position = "absolute";
+          document.getElementById("otherGroups").style.top = "0";
+          document.getElementById("otherGroups").style.animation="otherGroupsAni .5s forwards";
+          document.getElementById("groupScrollableContainer").style.paddingTop = "108px";
+          document.getElementById("groupScrollableContainer").style.height = "78.5vh";
+        }
+        else{
+          console.log('thing')
         document.getElementById("otherGroups").removeAttribute("style")
         document.getElementById("groupScrollableContainer").removeAttribute("style")
   
@@ -311,7 +312,7 @@ class Groups extends Component {
             {this.userGroups()}
             {this.userGroups()}
             {this.userGroups()}
-            <div id="otherGroups"className="header"><p>Groups You're A Part Of</p></div>
+            <div id="otherGroups" className="header"><p>Groups You're A Part Of</p></div>
             <div id="clearGroupDiv"></div>
             {this.otherGroups()}
             {this.otherGroups()}
