@@ -16,7 +16,19 @@ class DisplayUsers extends Component {
             confirmationMessage:'',
         }
         this.addToFriendsFunc = this.addToFriendsFunc.bind(this)
+        this.compare = this.compare.bind(this)
+        this.displayUsers = this.displayUsers.bind(this)
     }
+
+
+    componentDidMount() {
+        this.setState({friends:this.props.friends,users:this.props.users})
+    }
+
+    componentWillReceiveProps(props){
+        this.setState({friends:props.friends,users:props.users})
+    }
+
 
 
     addToFriendsFunc(id, index) {
@@ -32,6 +44,54 @@ class DisplayUsers extends Component {
             console.log('err', err)
         })
     }
+
+
+    compare(){
+        if(this.state.friends && this.state.users){
+            let filtered = []
+
+            this.state.users.map(f=> this.state.friends.findIndex(e=>e.friend_id == f.auto_id) == -1 ? filtered.push(f) : '')
+
+           this.setState({filtered:filtered})
+        }
+
+    }
+
+    displayUsers(){
+        if(this.state.friends && this.state.users){
+            let filtered = []
+
+            this.state.users.map(f=> this.state.friends.findIndex(e=>e.friend_id == f.auto_id) == -1 ? filtered.push(f) : '')
+
+           return  filtered.map((elem, i) => {
+                let timer = i;
+               let   style = { animationDelay: `${timer/20}s` }
+                 return (
+                     // <ReactSwipe className="carousel" swipeOptions={{ continuous: false }} key={elem.auto_id + i} id={"id" + elem.auto_id}>
+                     <div style={style} className="individual_user_div">
+                     <div className="">
+                         <div className="user_name"> {elem.name}</div>
+                         <img className="user_img" src={elem.picture}/>
+                         <PostButton  postButtonFunctionProp={() => {this.addToFriendsFunc(elem.auto_id, i)}} label={'ADD TO FRIENDS'} class={"addToFriendsButton"}/>
+                     </div>
+                     </div>
+                     //  </ReactSwipe>
+                 )   
+             })
+        }
+    }
+
+    
+    
+    render(){
+        
+    
+
+
+        // window.onscroll = function() {myFunction()};
+
+        //     var searchbar = document.getElementsByClassName("friend_Search");
+        //     var sticky = searchbar.offsetTop;
 
     
     
@@ -57,6 +117,15 @@ class DisplayUsers extends Component {
         })
 
 
+        //     function myFunction() {
+        //     if (window.pageYOffset >= sticky) {
+        //     searchbar.classList.add("sticky")
+        //         } else {
+        //         searchbar.classList.remove("sticky");
+        //     }
+        // }
+
+
         // window.onscroll = function() {myFunction()};
 
         //     var searchbar = document.getElementsByClassName("friend_Search");
@@ -70,11 +139,12 @@ class DisplayUsers extends Component {
         //     }
         // }
 
+
         return(
 
             <div className={this.props.displayUserDiv}>
             <div className="scrollableContainer">    
-                    <div>{displayUsers}</div>
+                    <div>{this.displayUsers()}</div>
              </div>       
 
             </div>

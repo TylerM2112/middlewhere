@@ -43,7 +43,7 @@ class NewGroup extends Component {
     postGroup(){
       const {groupName, groupPurpose, groupMembers,newGroupFriends,groupAdmin} = this.state
       console.log('hit new Group')
-      axios.post(`/api/new/group`, {group_admin:groupAdmin,group_title: groupName, group_members: newGroupFriends, group_purpose: groupPurpose})
+      axios.post(`/api/new/group`, {group_admin:this.props.state.user_id,group_title: groupName, group_members: newGroupFriends, group_purpose: groupPurpose})
       .then((resp) => {
         console.log('resp.data', resp.data)
         // alert(resp.data + 'has been posted to db')
@@ -141,7 +141,8 @@ class NewGroup extends Component {
   }
 
     
-     render() {
+  render() {
+    console.log(this.state);
       // const displayFriendsOptions = this.state.friends.map((elem,i) => {
       //   return(
       //     <option onClick={() => this.pushElem(elem)}>{elem.auto_id} {elem.name}</option>
@@ -151,6 +152,8 @@ class NewGroup extends Component {
             <div className="parent-newEvents-div">
               <div className="newGroupInput">
               <h2 className="new-event-h2">Make a new group</h2>
+              <h2 className="new-event-h2">Form a new group!</h2>
+
               <span><input className="newEvent-input" value={this.state.groupName} type="text" onChange={(e) => { this.setState({ groupName: e.target.value }, () => { this.isValidated() })}} placeholder="Group Name"/> </span>
               <span><input className="newEvent-input" value={this.state.groupPurpose} type="text" onChange={(e) => { this.setState({groupPurpose: e.target.value}, () => { this.isValidated() })}} placeholder="Group Purpose"/> </span>
               {/* PostButton - prop-name: postButton is Universal prop */}
