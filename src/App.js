@@ -169,9 +169,9 @@ class App extends Component {
         </SwipeableViews>
         {/* <div style={{position:'fixed',bottom:'0',width:'100vw'}}> */}
         <div className="nav_parent_div ">
-        <button className={currentView === 0 ? "navBtn redNav" : "navBtn"} onClick={()=>this.switchView(0,0)}><img className="navImages" src={add_group}/><h4 className="">GROUPS</h4></button>
-        <button className={currentView === 1 ? "navBtn redNav" : "navBtn"} onClick={()=>this.switchView(1,0)}><img className="navImages" src={bestpicture}/><h4 className="">PROFILE</h4></button>
-        <button className={currentView === 2 ? "navBtn redNav" : "navBtn"} onClick={()=>this.switchView(2,0)}><img className="navImages" src={calendar}/><h4 className="">EVENTS</h4></button>
+        <button className={currentView === 0 ? "navBtn redNav" : "navBtn"} onClick={()=>this.switchView(0,0)}><img className="navImages" src={add_group}/><h4 className="navText">GROUPS</h4></button>
+        <button className={currentView === 1 ? "navBtn redNav" : "navBtn"} onClick={()=>this.switchView(1,0)}><img className="navImages" src={bestpicture}/><h4 className="navText">PROFILE</h4></button>
+        <button className={currentView === 2 ? "navBtn redNav" : "navBtn"} onClick={()=>this.switchView(2,0)}><img className="navImages" src={calendar}/><h4 className="navText">EVENTS</h4></button>
         </div>
         </div>
         )} />
