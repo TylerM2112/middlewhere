@@ -1,6 +1,8 @@
 const iState = {
     name: '',
-    user_id: '',
+
+    user_id: null,
+
     picture: null,
     email: null,
     address_count: 0,
