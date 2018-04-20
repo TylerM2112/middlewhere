@@ -118,7 +118,7 @@ class NewGroup extends Component {
     if (count === 0) {
       this.setState({
         validated: true,
-      })
+      })``
     } else { 
       this.setState({
         validated: false,

@@ -6,6 +6,10 @@ import Profile from './components/Profile/Profile';
 import Friends from './components/Friends/Friends'
 import GroupDetails from './components/GroupDetails/GroupDetails';
 import NewGroup from './components/NewGroup/NewGroup';
+import calendar from './assets/images/white-calendar.png'
+import add_group from './assets/images/white-group.png'
+import friends from './assets/images/friends-512.png'
+import bestpicture from './assets/images/white-profile.png';
 
 import LoginView from './components/views/LoginView'
 import EventsView from './components/views/EventsView'
@@ -20,6 +24,7 @@ import AddEvent from './components/AddEvent/AddEvent';
 
 
 import GroupEvent from './components/GroupEvent/GroupEvent';
+import './components/NavBar/navbar.css'
 import './Util.css';
 import './App.css';
 
@@ -162,10 +167,11 @@ class App extends Component {
           <div>{this.displayProfileView()}</div>
           <div>{this.displayEventView()}</div>
         </SwipeableViews>
-        <div style={{position:'fixed',bottom:'0',width:'100vw'}}>
-        <button className={currentView === 0 ? "navBtn redNav" : "navBtn"} style={styles.tabs} onClick={()=>this.switchView(0,0)}>Groups</button>
-        <button className={currentView === 1 ? "navBtn redNav" : "navBtn"} style={styles.tabs} onClick={()=>this.switchView(1,0)}>Profile</button>
-        <button className={currentView === 2 ? "navBtn redNav" : "navBtn"} style={styles.tabs} onClick={()=>this.switchView(2,0)}>Events</button>
+        {/* <div style={{position:'fixed',bottom:'0',width:'100vw'}}> */}
+        <div className="nav_parent_div ">
+        <button className={currentView === 0 ? "navBtn redNav" : "navBtn"} onClick={()=>this.switchView(0,0)}><img className="navImages" src={add_group}/><h4>GROUPS</h4></button>
+        <button className={currentView === 1 ? "navBtn redNav" : "navBtn"} onClick={()=>this.switchView(1,0)}><img className="navImages" src={bestpicture}/><h4>PROFILE</h4></button>
+        <button className={currentView === 2 ? "navBtn redNav" : "navBtn"} onClick={()=>this.switchView(2,0)}><img className="navImages" src={calendar}/><h4>EVENTS</h4></button>
         </div>
         </div>
         )} />
