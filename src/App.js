@@ -144,7 +144,7 @@ class App extends Component {
 
     return (
       <div className="App">
-          {/* <Route exact path="/" component={Auth0Form}/> */}
+          <Route exact path="/" component={Auth0Form}/>
 
         <Route path="/profile" render={(props) => (
         <div>

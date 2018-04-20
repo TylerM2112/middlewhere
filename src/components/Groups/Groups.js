@@ -19,12 +19,16 @@ class Groups extends Component {
       userGroups:false,
       otherGroups:false,
     }
+    this.userGroups = this.userGroups.bind(this);
   }
   componentDidMount() {
 
 
     axios.get(`/api/getGroups/${this.props.state.user_id}`)
-      .then(res =>this.setState({ groups: res.data, loading: true }))
+      .then(res => {
+        console.log(res.data);
+        this.setState({ groups: res.data, loading: true })
+      })
       .catch(err => console.log(err));
 
 
@@ -57,12 +61,12 @@ class Groups extends Component {
     let timer = 0;
     let style = {};
     if(this.state.groups.length > 0){
-
+      // console.log(this.state.groups)
       let userGroups = this.state.groups.filter(e => e.group_admin == this.props.state.user_id);
       let otherGroups = this.state.groups.filter(e => e.group_admin != this.props.state.user_id);
 
       if(userGroups) {
-        !this.state.userGroups ? this.setState({userGroups:true}) : ''
+        // !this.state.userGroups ? this.setState({userGroups:true}) : ''
         userGroups.map((e,i) =>{
           timer = i;
           style = { animationDelay: `${timer/20}s` }
