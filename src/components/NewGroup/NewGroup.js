@@ -84,6 +84,7 @@ class NewGroup extends Component {
      }
 
      displayFriends(){
+       console.log('this.state.friends', this.state.friends)
       if(this.state.friends !== []){
         let timer = 0;
         let style = {};
@@ -94,7 +95,7 @@ class NewGroup extends Component {
 
           return(
             <SwipeableViews axis="x" style={style} resistance key={e.group_id + i} id={"id" + e.group_id} class="groupContainer">
-                <div id={+e.friend_id} style={style} className="groupContainerFlex" onClick={()=>this.addFriendToGroup(+e.friend_id)}>
+                <div id={+e.auto_id} style={style} className="groupContainerFlex" onClick={()=>this.addFriendToGroup(+e.auto_id)}>
                   
                   <div className="leftContainer">
                     <div className="groupTitle">{e.friend_name}</div>
@@ -109,20 +110,33 @@ class NewGroup extends Component {
         })
       }
      }
-  
-  isValidated() { 
-    let count = 0;
-    if (this.state.groupName === '') { count += 1 }
-    if (this.state.groupPurpose === '') { count += 1 }
-    if (this.state.newGroupFriends.length === 0) { count += 1 }
-    if (count === 0) {
+
+    //  writing callback for setState context
+
+     valid = () => {
       this.setState({
         validated: true,
-      })``
-    } else { 
+      })
+    }
+
+    notValid = () => {
       this.setState({
         validated: false,
       })
+    }
+
+
+  
+  isValidated() { 
+    let count = 0;
+    let that = this
+    if (this.state.groupName === '') { count += 1 }
+    if (this.state.groupPurpose === '') { count += 1 }
+    if (this.state.newGroupFriends.length >= 0) { count += 1 }
+    if (count === 0) {
+      this.valid()
+    } else { 
+      this.notValid()
     }
   }
 
@@ -136,7 +150,7 @@ class NewGroup extends Component {
         return (
             <div className="parent-newEvents-div">
               <div className="newGroupInput">
-              <h2 className="new-event-h2">Make a new event</h2>
+              <h2 className="new-event-h2">Make a new group</h2>
               <span><input className="newEvent-input" value={this.state.groupName} type="text" onChange={(e) => { this.setState({ groupName: e.target.value }, () => { this.isValidated() })}} placeholder="Group Name"/> </span>
               <span><input className="newEvent-input" value={this.state.groupPurpose} type="text" onChange={(e) => { this.setState({groupPurpose: e.target.value}, () => { this.isValidated() })}} placeholder="Group Purpose"/> </span>
               {/* PostButton - prop-name: postButton is Universal prop */}
@@ -148,7 +162,7 @@ class NewGroup extends Component {
               </div>
 
 
-                <div className="friendsDiv">
+                <div className="scrollableContainer">
                   {this.displayFriends()}
                 </div>
 

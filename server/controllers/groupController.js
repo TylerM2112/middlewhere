@@ -6,8 +6,7 @@ module.exports = {
     const { group_title, group_members, group_purpose, group_admin } = req.body
     let group_id = null;
 
-    db.pos
-    t_group([group_title, group_purpose, group_admin])
+    db.post_group([group_title, group_purpose, group_admin])
       .then((group) => {
         group_id = group[0].group_id
 
