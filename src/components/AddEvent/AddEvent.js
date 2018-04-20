@@ -4,6 +4,7 @@ import axios from 'axios';
 import ReactSwipe from 'react-swipe'
 import './AddEvent.css';
 import {Link} from 'react-router-dom'
+import SwipeableViews from 'react-swipeable-views';
 
 class AddEvent extends Component {
     constructor(){
@@ -19,6 +20,7 @@ class AddEvent extends Component {
             eventAdmin:null,
             isCreating: true,
             validated: false,
+            loaded:false,
         }
         this.displayGroups = this.displayGroups.bind(this);
         this.isValidated = this.isValidated.bind(this);
@@ -28,9 +30,24 @@ class AddEvent extends Component {
         // axios.get(`/api/getUserEvents/${this.props.state.user_id}`)
         //     .then(res=>console.log(res.data));
 
-        axios.get(`/api/getGroups/${this.props.state.user_id}`)
-      .then(res => { console.log(res.data); this.setState({ groups: res.data, loading: true,groupAdmin:this.props.state.user_id }) })
-      .catch(err => console.log(err));
+        
+    }
+
+    componentWillReceiveProps(props) {
+
+        if(props.subView === 2 && props.view === 2){
+
+            if(props.state.user_id){
+                axios.get(`/api/getGroups/${this.props.state.user_id}`)
+                .then(res => { console.log(res.data); this.setState({ groups: res.data, loading: true,groupAdmin:props.state.user_id,loaded:true }) })
+                .catch(err => console.log(err));
+            }
+        }
+        else{
+            if(this.state.loaded){
+                this.setState({loaded:true})
+            }
+        }
     }
 
     addGroupToEvent(id){
@@ -44,7 +61,7 @@ class AddEvent extends Component {
         }
         else{
             newGroups.splice(index,1);
-            document.getElementById(id).style.backgroundColor = "#c43235";
+            document.getElementById(id).removeAttribute("style")
         }
 
         this.setState({selectedGroups:newGroups}, () => this.isValidated())
@@ -61,21 +78,21 @@ class AddEvent extends Component {
             timer = i;
             style = { animationDelay: `${timer/20}s` }
             html.push(
-                <ReactSwipe className="carousel" swipeOptions={{ continuous: false }} key={e.group_id + i} id={"id" + e.group_id}>
-                  <div style={style} id={e.group_id} className="groupContainer" onClick={()=>this.addGroupToEvent(e.group_id)}>
-                    <div className={!e.flipCard ? "leftContainer" : "leftContainer colorChange"}>
-                      <div className="groupTitle">{e.group_title}</div>
-                      <div className="groupPurpose">{e.group_purpose}</div>
-                      <div className="groupPurpose">{e.group_member_count} {e.group_member_count == 1 ? "member" : "members"}</div>
-                
-                    </div>
-                    <div className={!e.flipCard ? "rightContainer" : "rightContainer colorChange"}>
-                      <img className="groupPicture" src={e.picture} />
-                    </div>
-                  </div>
+                <SwipeableViews axis="x" style={style} resistance key={e.group_id + i} id={"id" + e.group_id} class="groupContainer">
+                <div id={e.group_id} style={style} className="groupContainerFlex" onClick={()=>this.addGroupToEvent(e.group_id)}>
                   
-                </ReactSwipe>
-              )
+                  <div className="leftContainer">
+                    <div className="groupTitle">{e.group_title}</div>
+                    <div className="groupPurpose">{e.group_purpose}</div>
+                    <div className="groupPurpose">{e.group_member_count} {e.group_member_count == 1 ? "member" : "members"}</div>
+                  </div>
+                  <div>
+                    <img className="groupPicture" src={e.picture} />
+                  </div>
+                </div>
+                </SwipeableViews>
+            )
+        
 
           })
         }
@@ -116,7 +133,7 @@ class AddEvent extends Component {
                 {console.log("STATE FOR ADDEVENT",this.state)}
                 <input type="date" onChange={e => {this.setState({ eventDeadline: e.target.value }, () => this.isValidated() )}} />
                 {this.state.validated ?
-                    <Link to={{ pathname: '/events/select', state: this.state }} ><button>Select places</button></Link>
+                    <button onClick={()=>this.props.switchView(2,1,{e:this.state})}>Select places</button>
                     :
                     <div></div>
                 }
