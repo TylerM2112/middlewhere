@@ -6,6 +6,7 @@ import Profile from './components/Profile/Profile';
 import NewEvent from './components/Profile/NewEvents'
 import Friends from './components/Friends/Friends'
 import GroupDetails from './components/GroupDetails/GroupDetails';
+import NewGroup from './components/NewGroup/NewGroup';
 
 import LoginView from './components/views/LoginView'
 import EventsView from './components/views/EventsView'
@@ -134,6 +135,8 @@ class App extends Component {
 
       <GroupEvent subView={this.state.subView} view={this.state.goToView} switchView={this.switchView} passedState={this.state.passedState} />
 
+      <NewEvent subView={this.state.subView} view={this.state.goToView} switchView={this.switchView} passedState={this.state.passedState} />
+
       
       </SwipeableViews>
 
@@ -145,7 +148,7 @@ class App extends Component {
 
     return (
       <div className="App">
-          {/* <Route exact path="/" component={Auth0Form}/> */}
+          <Route exact path="/" component={Auth0Form}/>
 
         <Route path="/profile" render={(props) => (
         <div>

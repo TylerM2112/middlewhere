@@ -22,10 +22,12 @@ class Groups extends Component {
   }
   componentDidMount() {
 
-
+    if(this.props.state.user_id){
     axios.get(`/api/getGroups/${this.props.state.user_id}`)
       .then(res =>this.setState({ groups: res.data, loading: true }))
       .catch(err => console.log(err));
+    }
+
 
 
   }
@@ -35,7 +37,12 @@ class Groups extends Component {
 
 
     if(props.subView === 0 && props.view === 0){
-      this.setState({runAnimation:true})
+      if(this.props.state.user_id){
+        axios.get(`/api/getGroups/${this.props.state.user_id}`)
+          .then(res =>this.setState({ groups: res.data, loading: true,runAnimation:true }))
+          .catch(err => console.log(err));
+        }
+      // this.setState({runAnimation:true})
     }
   }
 
@@ -246,7 +253,7 @@ class Groups extends Component {
         {this.state.runAnimation ?
         <div>
         <div className="halfContainer">
-          <div id="userGroups" className="header"><p>Groups You've Made</p></div>
+          <div id="userGroups" className="header"><p>Groups You've Made</p><button onClick={()=>this.props.switchView(0,2)}>Click</button></div>
           <div className="scrollableContainer" id="groupScrollableContainer" >
             {this.userGroups()}
             {this.userGroups()}
