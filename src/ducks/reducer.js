@@ -1,11 +1,10 @@
 const iState = {
     name: '',
-    user_id: 111,
+    user_id: '',
     picture: null,
     email: null,
     address_count: 0,
     addresses: [],
-    // users: [],
     notifications: [],
 }
 
@@ -63,7 +62,15 @@ export function updateNotifications(data) {
         type: NOTIFICATION_UPDATE,
         payload: data,
     }
- }
+}
+const LOGOUT_USER = "LOGOUT_USER";
+export function logoutUser(data) {
+    return {
+        type: LOGOUT_USER,
+        payload: data,
+    }
+}
+ 
 
 
 //needing to dispatch action to store users in redux state in order to rerender friends
@@ -169,7 +176,19 @@ export default function (state = iState, action) {
             notificationObj.push(notificationArr[i]);
         }
         newState.notifications = notificationObj;
-        return newState;
+            return newState;
+        
+        case LOGOUT_USER:
+            return {
+            ...state,
+            name: '',
+            user_id: null,
+            picture: null,
+            email: null,
+            address_count: 0,
+            addresses: [],
+            notifications: []
+            }
         
         default:
             return state;

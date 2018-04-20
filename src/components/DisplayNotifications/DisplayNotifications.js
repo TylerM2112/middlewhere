@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { updateNotifications } from './../../ducks/reducer';
+import {Link} from 'react-router-dom';
 
+import './DisplayNotifications.css';
 class DisplayNotifications extends Component {
   constructor() { 
     super();
@@ -31,24 +33,25 @@ class DisplayNotifications extends Component {
 		switch (e.type) {
 			case "friend":
 				axios.post('/api/friends', e).then(res => {
+					this.removeNotification(e);
 				}).catch(err => {
 					console.log("Issue with friend approving", err)
 				})
-				this.removeNotification(e);
 				break;
 			case "group":
 				axios.post('/api/groups', e).then(res => {
+					this.removeNotification(e);
 				}).catch(err => {
 					console.log("Issue with group approving", err)
 				})
-				this.removeNotification(e);
 				break;
 			case "event":
+			console.log("RUNNING")	
 				axios.post('/api/events', e).then(res => {
+					this.removeNotification(e);
 				}).catch(err => {
 					console.log("Issue with event approving", err)
 				})
-				this.removeNotification(e);
 				break;
 			default:
 				return;
@@ -176,11 +179,17 @@ class DisplayNotifications extends Component {
 										</div>
 										<div className="requestInfoContainer">
 
-											{/* <p>{e.notification_name}</p>
-											{console.log("EEEEEEEEEEEEEEEEEEEEE",e)}
+											<p>{e.notification_name}</p>
+											
 											<p>On {e.event_date} at {e.event_time.substr(0, 2) < 12 ? `${e.event_time} AM` : e.event_time.substr(0, 2) - 12 + e.event_time.substr(2, 3) + "PM"}</p>
-											<button className="approveButton" onClick={() => this.approved(e)}>Approve</button>
-											<button className="declineButton" onClick={() => this.removeNotification(e)}>Decline</button> */}
+											<Link to={{
+                                                pathname: "/events/select",
+                                                state:{
+                                                    group_id:+e.type_id,
+                                                    isCreating: false}
+                                            
+                                            }}><button className="approveButton" onClick={() => this.approved(e)}>Approve</button></Link>
+											<button className="declineButton" onClick={() => this.removeNotification(e)}>Decline</button>
 										</div>
 									</div>
 								)

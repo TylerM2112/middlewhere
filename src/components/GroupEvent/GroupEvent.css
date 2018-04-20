@@ -1,254 +1,60 @@
-
-
-
-.mainYelpList{
-    margin-right: -14px !important;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    height:100vh;
-    z-index: -5;
-    /* margin-bottom:1000px; */
-}
-
-.pic{
-    display:inline;
-    filter:blur(1px)
-}
-
-.yelpList{
-    /* margin-right: -14px !important;
- overflow-y: scroll;
- overflow-x: hidden; */
- /* height:400px; */
- /* margin-top:20px; */
-
-}
-.yelpList > div{
-    width: 97%;
-    height: 50%;
-    margin-bottom:1px;
-
-    
-}
-
-.yelpListContainer{
-    font-family: 'Open Sans';
-    /* font-weight:bold; */
-    letter-spacing:1px;
-    font-size:16px;
-    position: relative;
-    overflow: hidden;
-    height:400px;
-    cursor: pointer;
-    /* border:solid transparent 8px; */
-}
-
-
-.yelpListContainer:hover{
-    /* border:solid green 8px; */
-}
-
-.yelpListContainer .detailsContainer{
-    z-index:10;
-    color:white;
-    padding:10px;
-    /* position: absolute; */
-    /* bottom:20px; */
-    /* text-align: center; */
-}
-
-.yelpListContainer .detailsContainer .yelpName{
-    text-align:center;
-    font-size:30px;
-    margin-bottom:60px;
-    text-align:center;
-    font-family: 'Dosis'
-    
-}
-
-.yelpListContainer .detailsContainer .yelpDistance{
-    font-weight: 400;
-    margin-top:10px;
-    font-size:12px;
-    display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: space-between;
-	align-items: flex-end;
-    align-content: flex-end;
-    padding-top:5px;
-    /* border: solid black 1px; */
-}
-
-.yelpListContainer .detailsContainer h2{
-    text-align:center;
-    font-family: 'Dosis'
-}
-
-.yelpListContainer img{
-    position: absolute;
-    z-index:-1;
-}
-.logo-filler{
-    margin-top: 5px;
-    margin-left: 11%;
-    width: 250px;
-    filter:blur(1px)
-}
-
-.yelpListContainer .blackout{
-    width:100%;
-    position: absolute;
-    background-color:black;
-    height:100%;
-    z-index:-1;
-    opacity: .5;
-}
-
-.detailsContainer img{
-    /* margin-top:-14px; */
-}
-
-.yelpListContainer .border{
-    width:96%;
-    position: absolute;
-    border:solid  rgb(3, 235, 3) 5px;
-    height:95%;
-    z-index:-1;
-    /* display:none; */
-    /* opacity: .5; */
-}
-
-.yelpListContainer:hover .border{
-    display:inherit;
-}
-
-::-webkit-scrollbar {
-    width: 0px;  /* remove scrollbar space */
-    background: transparent;  /* optional: just make scrollbar invisible */
-}
-
-.infoBox{
-    position: absolute;
-    /* border:solid red 10px; */
-    padding:10px;
+.eventScrollableContainer{
     background-color:white;
-    font-size:20px;
-    z-index:100;
-    color:black;
+}
+.eventLeftContainer{
+    /* z-index: 10;
+    margin-top:0px;
+    /* position: absolute; */
+    /* color:white;
+    height:10vh;
+    top:2.3vh; */ 
+    position: absolute;
+    left:0;
 }
 
-
-.mainMapContainer{
-    /* position: fixed; */
-    width:100%;
-    top:0;
-    z-index:15;
-    height:180px;
-    /* margin-bottom:200px; */
+.eventRightContainer{
+    position: absolute;
+    top:2.5vh;
+    right:0;
 }
 
-.mapMoveUp{
-    animation: mapMoveAniUp .5s;
-    animation-fill-mode: forwards;
-    animation-timing-function: linear;
-    /* height:200px; */
-    /* border:solid red 10px; */
-    position: relative;
-    overflow: hidden;
-    
-}
-
-.mapMoveDown{
-    animation: mapMoveAniDown 1s;
-    /* animation-direction: reverse; */
-    animation-fill-mode: forwards;
-    animation-timing-function: linear;
-    position: relative;
-    overflow: hidden;
-    
-}
-@keyframes mapMoveAniUp{
-    from{height:200px;} 
-    to{height:0;}
-}
-
-.mapMoveDown{
-    animation: mapMoveAniDown .5s;
-    animation-fill-mode: forwards;
-    animation-timing-function: linear;
-    height:200px;
-    /* border:solid red 10px; */
-    position: relative;
-    overflow: hidden;
-    
-}
-
-@keyframes mapMoveAniDown{
-    from{height:0px;}
-    to{height:200px;}
-}
-
-.containerForBtn{
-    background-color:black;
-    position:sticky;
+.otherFlex{
+    position: absolute;
+    top:2.3vh;
+    width:90%;
+    /* border:solid green 1px; */
     color:white;
-    padding:5px;
-    /* padding:3px 10px; */
-    /* padding-left:15%; */
+    z-index: 10;
+}
+.eventContainerFlex{
+    position: relative;
+    height:10vh !important;
+    overflow:hidden;
 }
 
-.containerForBtn button{
-    width:80px;
-    margin-left:20%;
-    margin-bottom:10px;
-    margin-right:10px;
+.imgBackground {
+    margin-left:-10px;
+    margin-top:-30px;
+    position: absolute;
+    /* width:100vw; */
+   /* height:100%; */
+   background-position-y: center;
 }
 
-.flexContainer{
-    display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: space-between;
-	align-items: flex-end;
-	align-content: flex-end;
-    /* padding: 0 10px; */
-    /* border:solid black 1px; */
+.imgBackground > img {
+    width:100vw;
+    display:block;
+    margin:auto;
+    transform: translateY(-50%)
 }
 
-.flexContainer > div{
-    bottom:0;
-}
-
-.peopleGoing{
-    border:solid rgb(3, 235, 3) 3px;
-    padding:5px;
-    border-radius: 5px;
-    margin-right:16px;
-}
-
-.byYelp{
-    width:64px;
-    font-size:12px;
-    /* margin-top:10px; */
-    padding-top:10px;
-    /* margin-left:20px; */
-    /* border:solid black 1px; */
-}
-
-.byYelp img{
-    width:64px;
-    opacity: 1;
-    margin-left:5px;
-    margin-top:-35px;
-    padding:0;
-    /* display:inline; */
-}
-
-.rating{
-    font-size:12px;
-}
-
-.mainGroupEventContainer .groupContainer{
-    transition: all .1s !important;
+.blackout{
+    background-color:black;
+    position: absolute;
+    height:100vh;
+    width:100%;
+    margin-top:-50px;
+    margin-left:-10px;
+    opacity: .8;
+    z-index:2;
 }

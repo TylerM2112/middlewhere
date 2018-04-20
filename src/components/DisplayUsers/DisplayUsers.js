@@ -17,26 +17,13 @@ class DisplayUsers extends Component {
         }
         this.addToFriendsFunc = this.addToFriendsFunc.bind(this)
     }
-    addToFriendsFunc(id, index){
-
-        console.log('index', index)
-        
+    addToFriendsFunc(id, index){   
         this.props.users.splice(index, 1)
-
         axios.post(`/api/friends/${id}`, {receiver: id, sender: this.props.state.user_id, type: 'friend'})
         .then((resp) => {
             this.setState({
                 confirmationMessage: "request has been sent to " + this.props.users[index].name,
             })
-            // axios.get('api/friends/')
-            // .then((resp) => {
-            //     this.setState({
-            //         newDBfriends: resp.data
-            //     })
-            // })
-            // .catch((err) => {
-            //     console.log('err', err)
-            // })
         })
         .catch((err) => {
             console.log('err', err)

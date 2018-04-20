@@ -10,16 +10,18 @@ class AddEvent extends Component {
         super();
 
         this.state={
-            eventName:null,
-            eventDate:null,
-            eventTime:null,
-            eventDeadline:null,
+            eventName: '',
+            eventDate: '',
+            eventTime: '',
+            eventDeadline: '',
             groups:[],
             selectedGroups:[],
             eventAdmin:null,
-            isCreating:true,
+            isCreating: true,
+            validated: false,
         }
         this.displayGroups = this.displayGroups.bind(this);
+        this.isValidated = this.isValidated.bind(this);
     }
 
     componentDidMount() {
@@ -48,7 +50,7 @@ class AddEvent extends Component {
             document.getElementById(id).style.backgroundColor = "#c43235";
         }
 
-        this.setState({selectedGroups:newGroups})
+        this.setState({selectedGroups:newGroups}, () => this.isValidated())
 
     }
 
@@ -84,20 +86,44 @@ class AddEvent extends Component {
 
         return html;
     }
+
+    isValidated() {
+        let count = 0;
+        console.log("HEEEEEEEY")
+        if ( this.state.eventName === '' ) { count += 1 };
+        if ( !this.state.eventDate ) { count += 1}
+        if ( !this.state.eventTime ) { count += 1}
+        if ( !this.state.eventDeadline ) { count += 1 }
+        console.log(this.state.selectedGroups[0])
+        if ( this.state.selectedGroups.length === 0 ) { count += 1 }
+        if ( count === 0 ) {
+            this.setState({
+                validated: true,
+            })
+        } else { 
+            this.setState({
+                validated: false,
+            })
+        }
+     }
         
     render() {
         return (
             <div className="mainAddEventContainer">
-                <input placeholder="Event Name" onChange={(e)=>this.setState({eventName:e.target.value})}/>
+                <input placeholder="Event Name" onChange={(e) => { this.setState({ eventName: e.target.value }, () => this.isValidated() )}}/>
                 <br/>
-                <input placeholder="date" type="date" onChange={(e)=>this.setState({eventDate:e.target.value})} />
+                <input placeholder="date" type="date" onChange={(e) => { this.setState({ eventDate: e.target.value }, () => this.isValidated() )}} />
                 <br />
-                <input placeholder="time" type="time" onChange={(e)=>this.setState({eventTime:e.target.value})}/>
+                <input placeholder="time" type="time" onChange={(e)=>{this.setState({eventTime:e.target.value}, () => this.isValidated() )}}/>
                 <br />
 
-                <input type="date" onChange={e=>this.setState({eventDeadline:e.target.value})}/>
-                <Link to={{pathname:'/events/select', state:this.state}} ><button>Select places</button></Link>
-
+                {console.log("STATE FOR ADDEVENT",this.state)}
+                <input type="date" onChange={e => {this.setState({ eventDeadline: e.target.value }, () => this.isValidated() )}} />
+                {this.state.validated ?
+                    <Link to={{ pathname: '/events/select', state: this.state }} ><button>Select places</button></Link>
+                    :
+                    <div></div>
+                }
                 {this.displayGroups()}
             </div>
         );
