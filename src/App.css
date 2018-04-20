@@ -6,6 +6,9 @@
   /* overflow:hidden; */
   background-color:#e6e6e8;
   width:100vw;
+  height:100vh;
+  overflow-y: hidden !important;
+  
 }
 
 .App-logo {

@@ -10,8 +10,8 @@
 }
 
 .addToFriendsButton{
-    background-color: #C43235;
-    color: white;
+    background-color: #e6e6e8;
+    color: #300032;
     border: 1px;
     height: 3rem;
     position: relative;
@@ -21,7 +21,15 @@
     border-radius: 5px;
 }
 
+@media(max-width: 770px){
+    .addToFriendsButton{
+        left: 10%;
+        top: -3rem;
+    }
+}
+
 .DeleteButton{
+
     background-color: #C43235;
     color: white;
     border: 1px;
@@ -32,12 +40,30 @@
     /* border: 3px solid red; */
     border: 1px;
     color: white;
-    height: 3.6rem;
-    width: 31%;
-    background-color: #C43235;
-    position: fixed;
-    left: 68%;
+    height: 3.35rem;
+    width: 35%;
+    background-color: #490C4C;
+    position: sticky;
+    top:200px;
+    /* top: 89.7vh; */
+    left: 66.4%;
     z-index: 20;
+}
+
+
+.show_user{
+    text-align: center;
+    width: 50%;
+    height: 3rem;
+    border-radius: 5px;
+    position: relative;
+    left: 25%;
+    background-color: #C43235;
+    color: white;
+}
+
+@media(min-width: 1000px){
+    
 }
 
 
@@ -55,3 +81,10 @@ i need to know so I can start working on that code. */
 /* thinking about changing button file names to FunctionalButton and LinkButton for dryer code 
 potential use: 
 <FunctnlBttn label="SAVE GROUP"  FunctnlButtonFunctionProp={this.postGroup} class={"post-event-button"}/> */
+
+
+
+
+
+
+

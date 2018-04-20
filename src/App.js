@@ -124,7 +124,7 @@ class App extends Component {
 
         <Profile subView={this.state.subView} view={this.state.goToView} switchView={this.switchView} passedState={this.state.passedState} />
 
-        <Friends subView={this.state.subView} view={this.state.goToView} switchView={this.switchView} passedState={this.state.passedState} />
+        <FriendsView subView={this.state.subView} view={this.state.goToView} switchView={this.switchView} passedState={this.state.passedState} />
 
         
       </SwipeableViews>

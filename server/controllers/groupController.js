@@ -6,7 +6,8 @@ module.exports = {
     const { group_title, group_members, group_purpose, group_admin } = req.body
     let group_id = null;
 
-    db.post_group([group_title, group_purpose, group_admin])
+    db.pos
+    t_group([group_title, group_purpose, group_admin])
       .then((group) => {
         group_id = group[0].group_id
 
@@ -63,7 +64,6 @@ module.exports = {
   getGroups: (req, res) => {
     const db = req.app.get('db');
     const { user_id } = req.params;
-    console.log("HEY LOOK",req.params);
     db.get_user_groups(user_id)
       .then(groups => res.status(200).send(groups))
       .catch(err => {
@@ -76,6 +76,7 @@ module.exports = {
   getGroupMembers: (req, res) => {
     const db = req.app.get('db');
     const { group_id } = req.params;
+    console.log('group_id', group_id)
     db.get_group_members([+group_id])
       .then(users => res.status(200).send(users))
       .catch(err => {

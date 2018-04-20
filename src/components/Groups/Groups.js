@@ -65,6 +65,7 @@ class Groups extends Component {
 
   userGroups(){
     let html = [];
+
     let timer = 0;
     let style = {};
     if(this.state.groups.length > 0){
@@ -98,7 +99,7 @@ class Groups extends Component {
                       this.props.switchView(0,1,{e});
                       }}
                       >SHOW GROUP</button>
-                    <button className="btn2" onClick={()=>this.deleteGroup(e.group_id)}>DELETE GROUP</button>
+                    <button className="btn2" onClick={()=>this.leaveGroup(e.group_id)}>DELETE GROUP</button>
                   </div>
                 </SwipeableViews>
               
@@ -192,10 +193,10 @@ class Groups extends Component {
   leaveGroup(group_id){
     document.getElementById("id"+ group_id).style.animation = "removeGroupAni .7s linear"
     document.getElementById("id"+ group_id).style.animationFillMode = "forwards"
-    // document.getElementById("id2"+ group_id).style.animation = "removeGroupAni 5s"
-      // axios.delete(`/api/deleteUserFromGroup/${group_id}/${this.props.state.user_id}`)
-      // .then(res=>{console.log("AXIOS GET",res.data);this.setState({groups:res.data})})
-      // .catch(err=>console.log(err))
+    document.getElementById("id2"+ group_id).style.animation = "removeGroupAni 5s"
+      axios.delete(`/api/deleteUserFromGroup/${group_id}/${this.props.state.user_id}`)
+      .then(res=>{console.log("AXIOS GET",res.data);this.setState({groups:res.data})})
+      .catch(err=>console.log(err))
     
   }
 

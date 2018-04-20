@@ -1,18 +1,46 @@
 .display_users_parent_div{
-    width: 98%;
-    height: 30rem;
-    border: 5px solid gray;
-    border-radius: 7px;
-    border-top:;
-    overflow: scroll;
+    width: 100%;
+    /* height: 100vh; */
+    /* border: 5px solid gray; */
     position: absolute;
     /* left: 40%; */
-    background-color: black;
+    background-color: #E6E6E8;
+    color: white;
+    
+}
+
+.secondary_users_parent_div {
+    width: 100%;
+    height: 54vh;
+    padding-bottom:100px;
+    border-radius: 7px;
+    /* overflow: scroll; */
+    overflow:hidden;
+    /* position: absolute; */
+    background-color: #E6E6E8;
     color: white;
 }
 
 .individual_user_div {
     border-top: 1px solid gray;
+    background-color:#c43235;
+    height: 10rem;
+    width: 100%;
+    overflow:hidden;
+    animation: displayUserAni .3s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+.user_name{
+    position: relative;
+    left: 10rem;
+    top: 5rem;
+}
+
+@keyframes displayUserAni{
+    from{margin-left:-500px;display:none;}
+    to{margin-left:0;display:block;}
 }
 
 .display_users_parent_div img {
@@ -21,19 +49,39 @@
     /* width:90px; */
 }
 
+.user_img{
+    height: 128px;
+    width: 128px;
+}
+
 .postButton {
     height: 13rem;
+    border: 2px solid #e6e6e8;
 }
 
 .friend_Search{
     height: 3rem;
     width: 66%;
     font-size: 2.75rem;
-    position: fixed;
-    border: 4px solid red;
+    position: sticky;
+    top: 20rem;
+    /* border: 4px solid red; */
     z-index: 20;
 }
 
-.x-box{
-    /* border: 4px solid red; */
+.user_img{
+    width: 60px;
 }
+
+
+@media(max-width: 770px){
+   
+/* button starts to cover name this bumps up name when the button gets too close */
+    .user_name{
+        top: 2rem;
+    }
+    .postButton{
+        border: 2px solid white;
+    }
+} 
+

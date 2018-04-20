@@ -25,9 +25,9 @@ class GroupsView extends Component {
                 {/* <Header TitleOfPage={"Groups"}/> */}
                <Route exact path='/groups' component={Groups}/>
                <Route exact path='/groups/new/' component={NewGroup}/>
-                {/* <Groups/> */}
-                {/* <NewGroup/> */}
-                {/* <GroupEvent/> */}
+                <Groups/>
+                <NewGroup/>
+                <GroupEvent/>
             </div>
         );
     }

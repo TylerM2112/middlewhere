@@ -3,12 +3,21 @@
     border-bottom: 1px solid black;
     text-align: center;
     font-family: 'Dosis', sans-serif;
-    height: 7rem;
+    height: 4rem;
     width: 100%;
 }
 
 .pageTitle {
     display: inline-block;
     position: absolute;
-    left: 45%;
+    top: -1rem;
+    left: 39%;
+}
+
+/* media query adjusts title at different screen widths */
+
+@media(min-width: 1000px){
+    .pageTitle {
+        left: 48%;
+    }
 }

@@ -10,7 +10,6 @@ export default class Header extends Component {
       pageTitle: '',
     }
   }
-
   componentDidMount(){
     if(this.props.TitleOfPage){
 

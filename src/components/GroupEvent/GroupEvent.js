@@ -43,31 +43,7 @@ class GroupEvent extends Component {
     this.addSelectedPlacesToEvent = this.addSelectedPlacesToEvent.bind(this);
     this.addMiddlepoint = this.addMiddlepoint.bind(this);
   }
-
-  componentDidMount() {
-    // const {isCreating} = this.props.location.state
-    // if(isCreating === true){
-    //   const {groupAdmin,eventDate,eventTime,eventDeadline,selectedGroups,isCreating,eventName} = this.props.location.state
-    //   axios.post('/api/createEvent',this.props.location.state)
-    //     .then(res=>{
-    //       console.log(res.data)
-    //       this.setState({users:res.data,
-    //         groupAdmin:groupAdmin,
-    //         eventDate:eventDate,
-    //         eventTime:eventTime,
-    //         eventDeadline:eventDeadline,
-    //         isCreating:isCreating,
-    //         userId:this.props.state.user_id,
-    //         eventName:eventName})})
-    //     .catch(err=>console.log("CDMCDM",err));
-    // }
-    // else{
-    //   axios.get(`/api/getEventDetails/${this.props.location.state.group_id}`)
-    //     .then(res=>{console.log("SP DATA",res.data);this.setState({users:res.data.users,suggestedPlaces:res.data.places})})
-    //     .catch(err=>console.log(err))
-    // }
-  }
-
+  
   componentWillReceiveProps(props){
     if(props.view === 2 && props.subView === 1 && props.passedState){
       console.log("i am here")
@@ -118,6 +94,7 @@ class GroupEvent extends Component {
 
   // displayBorder(e){
   //   let newYelp = this.state.yelp.slice();
+
   //   let index = newYelp.findIndex(i=>i.id === e);
     
   //   newYelp[index].checked = !newYelp[index].checked
@@ -180,7 +157,9 @@ class GroupEvent extends Component {
 
   addToSelectedPlaces(id){
     let newMarkers = this.state.markers.slice();
+    //copies markers array from state
     let newSelectedPlaces = this.state.selectedPlaces
+    //initializing variable for selected places count 
     let index = newMarkers.findIndex(e=>e.placeId === id.id);
     let suggestedPlace = this.state.suggestedPlaces.slice();
 
@@ -198,10 +177,13 @@ class GroupEvent extends Component {
       else{
         suggestedPlace[index2].count = +suggestedPlace[index2].count +1;
       }
+      
       newSelectedPlaces += 1;
+      //add one to selected placesa
     }
     else{
       newMarkers.splice(index,1);
+      
       document.getElementById(id.id).removeAttribute("style")
       document.getElementById("img" + id.id).removeAttribute("style")
       document.getElementById("blackout" + id.id).removeAttribute("style")
@@ -216,7 +198,9 @@ class GroupEvent extends Component {
 
   displayYelp(){
     if(this.state.yelp){
+      //if yelp is true
       let timer = 0;
+
           let style = {};
       return this.state.yelp.map((e,i)=>{
           timer = i;
@@ -247,7 +231,9 @@ class GroupEvent extends Component {
             )
         return (
         <ReactSwipe className="carousel" swipeOptions={{ continuous: false }} key={e.ids} id={"id" + e.group_id}> 
+        {/* from what I remember the swipe continuous === false does now allow user to swipe on selected component */}
           <div style={style} className="groupContainer" id ={e.id} onClick={()=>this.addToSelectedPlaces(e)}>
+          {/* when div is selected addToSelectedPlaces is invoked */}
             <div className="yelpName">{e.name}</div>
             <div> {!this.state.isCreating ? index !== -1 ? this.state.suggestedPlaces[index].count : "0" : ""}</div>
           </div>

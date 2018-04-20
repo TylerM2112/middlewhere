@@ -37,16 +37,22 @@ module.exports = {
 
     //Does the dynamic insert statement to get all the group member addresses
     let get = ["SELECT DISTINCT mw_address.user_id,mw_address.lat,mw_address.long FROM group_members JOIN mw_address ON mw_address.user_id = group_members.user_id WHERE("];
-
+    //query string as array in order to map over 
+    /////////////////////////***need help with this block\/\/\/ */
     selectedGroups.map(e => {
+      //maps over selected groups and creates the where clause for query to db
       get.push(` group_id = ${e} OR`)
+      // pushes string to get to complete query statement
     })
+
     get = get.join("")
     get = get.substr(0, get.length - 2)
     get += ") AND mw_address.defaultaddress = true"
 
-    // console.log("get in CREATE EVENT",get);
+    //using string as sql query
     db.run(get)
+    //runs get query
+      /////////////////////***need help with this block/\/\/\ */
       .then(users => {res.status(200).send(users) })
       .catch(err => { 
         console.log("eventController.createEvent",err)

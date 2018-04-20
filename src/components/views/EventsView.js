@@ -3,6 +3,7 @@ import Header from '../Header/Header';
 import Map from '../Map/Map';
 import ViewEvents from './../../components/ViewEvents/ViewEvents';
 import AddEvent from './../../components/AddEvent/AddEvent';
+import NewEvents from '../RyansNewEvent/NewEvents'
 import GroupEvent from './../../components/GroupEvent/GroupEvent';
 import {Route} from 'react-router-dom'
 export default class EventsView extends Component {
@@ -11,10 +12,13 @@ export default class EventsView extends Component {
             <div>
                 {/* <Header TitleOfPage={"Events"}/>  */}
                 {/* <ViewEvents /> */}
-                
+          
                 <Route exact path='/events/' component={ViewEvents}/>
                 <Route exact path='/events/select' component={GroupEvent}/>
 
+               {/* <NewEvents/> */}
+                {/* <GroupEvent/> */}
+                 {/* need help displaying component to learn how it works? */}
                 {/* <AddEvent /> */}
             </div>
         );
