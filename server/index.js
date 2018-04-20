@@ -57,8 +57,9 @@ app.get('/auth/callback', (req, res) => { //from here Get request to
           if (users.length) {
 
             const user = users[0];
-
-            req.session.user = {user_id: user.auto_id, email: user.email, name: user.name, phone: user.phone, picture: user.picture };
+            console.log(user)
+            req.session.user = { user_id: user.auto_id, email: user.email, name: user.name, phone: user.phone, picture: user.picture };
+            console.log(req.session.user)
             res.redirect('/profile');
 
           } else {
@@ -85,6 +86,7 @@ app.get('/auth/callback', (req, res) => { //from here Get request to
 
 //USER CONTROLLER
 app.get('/api/getUserInfo/', userController.getUserInfo)
+app.post('/api/logout', userController.logoutUser)
 //FIND USER
 app.get('/api/users:users', userController.search_user)
 
@@ -156,6 +158,7 @@ app.post('/api/yelp/search', yc.search)
 // app.get('*', (req, res)=>{
 // res.sendFile(path.join(__dirname, '../build/index.html'));
 // }) 
+
 
 const PORT = process.env.SERVER_PORT || 4000;
 app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));

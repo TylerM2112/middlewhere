@@ -6,10 +6,8 @@ module.exports = {
 
     var addresses = '';
     let userInfo = '';
-    console.log(req.session.user)
     db.get_user_info([req.session.user.user_id])
       .then(user => {
-
         //if the user has addresses gets them from the database
         user[0].address_count = +user[0].address_count
         userInfo = user[0];
@@ -114,7 +112,7 @@ module.exports = {
     console.log(req.params)
     db.get_notifications([+user_id])
       .then(arr => {
-        // console.log("HAHAHAHAHAHAHAHAHAHA", arr);
+
         let friendArr = arr.filter(e => e.type === "friend")
         let groupArr = arr.filter(e => e.type === "group")
         let eventArr = arr.filter(e => e.type === "event")
@@ -180,5 +178,9 @@ module.exports = {
         console.log("userController.updateDefaults", err);
         res.status(500).send(err);
       })
-  }
+  }, 
+
+  logoutUser: (req, res) => {
+    req.session.destroy();
+   }
 }
