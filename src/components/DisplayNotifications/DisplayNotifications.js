@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { updateNotifications } from './../../ducks/reducer';
 import {Link} from 'react-router-dom';
 
+import './DisplayNotifications.css';
 class DisplayNotifications extends Component {
   constructor() { 
     super();
@@ -32,24 +33,25 @@ class DisplayNotifications extends Component {
 		switch (e.type) {
 			case "friend":
 				axios.post('/api/friends', e).then(res => {
+					this.removeNotification(e);
 				}).catch(err => {
 					console.log("Issue with friend approving", err)
 				})
-				this.removeNotification(e);
 				break;
 			case "group":
 				axios.post('/api/groups', e).then(res => {
+					this.removeNotification(e);
 				}).catch(err => {
 					console.log("Issue with group approving", err)
 				})
-				this.removeNotification(e);
 				break;
 			case "event":
+			console.log("RUNNING")	
 				axios.post('/api/events', e).then(res => {
+					this.removeNotification(e);
 				}).catch(err => {
 					console.log("Issue with event approving", err)
 				})
-				this.removeNotification(e);
 				break;
 			default:
 				return;

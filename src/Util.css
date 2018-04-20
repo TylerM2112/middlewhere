@@ -1,0 +1,192 @@
+.App {
+    /* position: fixed;
+    top:0; */
+    box-sizing: border-box;
+    height:100vh;
+    background-color:#E53E4F !important;
+}
+
+html,body{
+    overflow: hidden;
+    height:100vh;
+}
+/*Just removing default browser padding/margin*/
+.navBtn{
+    height:10vh;
+}
+
+.redNav{
+    background-color:#E53E4F !important;
+    outline:solid white 3px;
+
+    /* background-size:100% 100%; */
+    animation: redNavAni .3s linear forwards;
+}
+
+@keyframes redNavAni{
+    from{background-color:white;}
+    to{background-color:#E53E4F}
+}
+
+
+/* GROUPS */
+.mainGroupDetailsContainer{
+    background-color:#E53E4F;
+}
+
+.mainGroupContainer{
+    background-color:#E53E4F;
+    height:100vh;
+    overflow: hidden;
+    /* border:solid black 1px; */
+}
+
+.halfContainer{
+    height:90vh;
+    /* overflow:hidden; */
+    /* border:solid black 1px; */
+
+}
+
+#userGroups{
+    position: absolute;
+    top:0px;
+    width:100vw;
+    /* z-index: 100; */
+    border:none;
+    background-color:#E53E4F;
+    /* border-bottom:solid #E53E4F 4px; */
+}
+
+#otherGroups{
+    /* position:sticky; */
+    background-color:#490C4C;
+    padding:1px;
+    z-index:200 !important;
+    width:100vw;
+    /* border-bottom:solid rgb(123, 33, 128) 4px; */
+}
+
+@keyframes otherGroupsAni{
+    from{background-color:#E53E4F}
+    to{ background-color:#490C4C;}
+}
+
+
+.header{
+    font-family: 'Dosis';
+    font-weight: bold;
+    background-color:black;
+    /* height:5vh; */
+    color:white;
+    /* border:solid transparent 1px; */
+    margin:0;
+    padding:0;
+    z-index:100 !important;
+    /* border-bottom:solid #E53E4F 4px; */
+}
+
+.header > p{
+    margin-left:5px;
+}
+
+
+
+
+.scrollableContainer{
+    overflow:scroll;
+    height:85vh;
+}
+#groupScrollableContainer{
+    padding-top:54px;
+    padding-bottom:54px !important;
+    /* z-index: 20; */
+    /* padding-bottom:30vh; */
+}
+
+
+.groupContainer{
+    /* margin-top:-10p */
+    background-color:#E53E4F;
+    margin-bottom:1px;
+}
+
+.groupContainerFlex{
+    background-color:#e6e6e8;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: flex-end;
+    padding:10px;
+    animation: groupContainerAni .5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    /* width:100vw !important; */
+    margin-bottom:1px;
+    will-change: transform;
+}
+
+
+
+.rightAni{
+    /* margin-top:-10px; */
+    /* margin-bottom:-17px; */
+    animation: rightAni .5s;
+    animation-timing-function: linear alternate infinite;
+    animation-fill-mode: forwards;
+}
+@keyframes rightAni{
+    from{transform:translateX(100%);margin-bottom:-17px;}
+    to{transform:translateX(0%);display:block;margin-bottom:1px;}
+}
+
+@keyframes groupContainerAni{
+    from{transform:translateX(-100%);display:none;}
+    to{transform:translateX(0%);display:block;}
+}
+
+.groupDetails{
+    /* opacity: 0; */
+    height:100%;
+    background-color:#E53E4F;
+    /* animation: groupDetailsAni 1s; */
+    /* animation-fill-mode: forwards; */
+}
+
+@keyframes groupDetailsAni{
+    0%{opacity: 0;}
+    90%{opacity: 0;}
+    100%{opacity: 1;}
+}
+
+.groupPicture{
+    border-radius:50%;
+    width:60px;
+}
+
+
+.leftContainer{
+    
+}
+
+.groupTitle{
+
+}
+
+.groupPurpose{
+
+}
+
+.leftContainer{
+
+}
+
+.rightContainer{
+
+}
+
+.groupPicture{
+
+}

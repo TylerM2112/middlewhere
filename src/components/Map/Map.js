@@ -15,35 +15,73 @@ export default class Map extends Component {
       infoBoxX:0,
       infoBoxY:0,
       infoBoxName:null,
+      loaded:false,
     }
     this.displayMap = this.displayMap.bind(this);
     this.displayYelp = this.displayYelp.bind(this);
     this.displayInfoBox = this.displayInfoBox.bind(this)
     this.setInfoBox = this.setInfoBox.bind(this)
   }
+  componentDidMount() {
+    if(this.props.subView === 1 && this.props.view === 2){
+      console.log("CDM")
+    if(typeof this.props.locations === 'undefined' || this.props.locations.length === 0 || this.state.yelp !== null ){console.log("what");return true }
+      if(this.state.loaded){return}
+      let mp = middlepoint(this.props.locations);
+      this.props.addMiddlepoint(mp);
+      this.setState({
+        middlepoint: mp,locations:this.props.location,loaded:true
+      }, () => {
+        //Makes a call to server-side to initiate Yelp API call.
+        axios.post('/api/yelp/search', this.state)
+        .then(res => {
+          console.log("YELP",res.data)
+          this.props.getYelp(res.data)
+
+          this.setState({
+            yelp: res.data,
+            loaded:true,
+          })
+        }).catch(error => { console.log("Yelp API Error", error) })
+      })
+    }
+    else{
+      if(this.state.loaded){
+        this.setState({loaded:false,yelp:null})
+      }
+    }
+  }
 
   componentWillReceiveProps(props){
-    console.log("CWRP",this.state)
-    if(typeof this.state.locations === 'undefined' || this.state.locations.length !== 0 ){return }
+    console.log("CWRP",props)
+    if(props.subView === 1 && props.view === 2){
+      if(typeof props.locations === 'undefined' || props.locations.length === 0 || this.state.yelp !== null ){console.log("what");return true }
+      if(this.state.loaded){return}
+      let mp = middlepoint(props.locations);
+      props.addMiddlepoint(mp);
+      this.setState({
+        middlepoint: mp,locations:props.location,loaded:true
+      }, () => {
+        //Makes a call to server-side to initiate Yelp API call.
+        axios.post('/api/yelp/search', this.state)
+        .then(res => {
+          console.log("YELP",res.data)
+          props.getYelp(res.data)
 
-    let mp = middlepoint(props.locations);
-    console.log("middlepoint",mp)
-    this.props.addMiddlepoint(mp);
-
-    this.setState({
-      middlepoint: mp,locations:props.location
-    }, () => {
-      //Makes a call to server-side to initiate Yelp API call.
-      axios.post('/api/yelp/search', this.state)
-      .then(res => {
-        console.log("YELP",res.data)
-        props.getYelp(res.data)
-        this.setState({
-          yelp: res.data
-        })
-      }).catch(error => { console.log("Yelp API Error", error) })
-    })
+          this.setState({
+            yelp: res.data,
+            loaded:true,
+          })
+        }).catch(error => { console.log("Yelp API Error", error) })
+      })
+    }
+      else{
+        if(this.state.loaded){
+          this.setState({loaded:false,yelp:null})
+        }
+      }
   }
+
 
   setInfoBox(e){
     if(this.state.infoBoxName !== e.name){
@@ -91,6 +129,11 @@ export default class Map extends Component {
 
   displayYelp() {
     // console.log(this.state.yelp);
+    if (this.state.yelp === false) { 
+      return (
+        <div>No results were found!</div>
+      )
+    }
     if (this.state.yelp !== null) {
       return(
       this.state.yelp.businesses.map(e => {

@@ -11,7 +11,8 @@ export default class EventsView extends Component {
             <div>
                 {/* <Header TitleOfPage={"Events"}/>  */}
                 {/* <ViewEvents /> */}
-                <Route exact path='/events/' component={AddEvent}/>
+                
+                <Route exact path='/events/' component={ViewEvents}/>
                 <Route exact path='/events/select' component={GroupEvent}/>
 
                 {/* <AddEvent /> */}

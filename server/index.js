@@ -4,6 +4,7 @@ const massive = require('massive');
 const session = require('express-session');
 const axios = require('axios');
 
+
 //CONTROLLERS
 const userController = require('./controllers/userController');
 const eventController = require('./controllers/eventController')
@@ -41,9 +42,9 @@ app.get('/auth/callback', (req, res) => { //from here Get request to
       client_secret: process.env.REACT_APP_AUTH0_CLIENT_SECRET,
       code: req.query.code,
       grant_type: 'authorization_code',
-      redirect_uri: `https://${req.headers.host}/auth/callback`,
+      redirect_uri: `http://${req.headers.host}/auth/callback`,
     }).then(accessTokenResponse => {
-      console.log('req.headers', req.headers)
+      // console.log('req.headers', req.headers)
       const accessToken = accessTokenResponse.data.access_token;
     // *** Q: what does  this \/ do???? 
       return axios.get(`https://${process.env.REACT_APP_AUTH0_DOMAIN}/userinfo/?access_token=${accessToken}`).then(userInfoResponse => {
@@ -56,8 +57,9 @@ app.get('/auth/callback', (req, res) => { //from here Get request to
           if (users.length) {
 
             const user = users[0];
-
-            req.session.user = {user_id: user.auto_id, email: user.email, name: user.name, phone: user.phone, picture: user.picture };
+            console.log(user)
+            req.session.user = { user_id: user.auto_id, email: user.email, name: user.name, phone: user.phone, picture: user.picture };
+            console.log(req.session.user)
             res.redirect('/profile');
 
           } else {
@@ -84,6 +86,7 @@ app.get('/auth/callback', (req, res) => { //from here Get request to
 
 //USER CONTROLLER
 app.get('/api/getUserInfo/', userController.getUserInfo)
+app.post('/api/logout', userController.logoutUser)
 //FIND USER
 app.get('/api/users:users', userController.search_user)
 
@@ -131,6 +134,8 @@ app.post('/api/createEvent',eventController.createEvent);
 //creates the event,notifications and the group admin suggested places
 app.post('/api/createEventFinal',eventController.createEventFinal);
 app.get('/api/getEventDetails/:group_id',eventController.getEventDetails);
+app.post('/api/updateEvent',eventController.updateEvent);
+app.get('/api/getUserEvents/:user_id',eventController.getUserEvents);
 
 //POST GROUP
 app.post('/api/new/group', checkBody, groupController.post_group)
@@ -149,6 +154,11 @@ app.delete('/api/removeAddress/:auto_id', userController.removeAddress);
 app.post('/api/yelp/search', yc.search)
 
  const path = require('path')
+app.get('*', (req, res)=>{
+res.sendFile(path.join(__dirname, '../build/index.html'));
+}) 
+
+const path = require('path')
 app.get('*', (req, res)=>{
 res.sendFile(path.join(__dirname, '../build/index.html'));
 }) 

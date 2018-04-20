@@ -1,0 +1,7 @@
+.validationError{
+  height: 100px;
+  width: 100vw;
+  position: absolue;
+  top: 0px;
+  background-color: black;
+}

@@ -35,14 +35,15 @@ class DisplayUsers extends Component {
     addToFriendsFunc(id, index){
 
         console.log('index', index)
-        
+        console.log(this.props.state)
         this.state.users.splice(index, 1)
 
         axios.post(`/api/friends/${id}`, {receiver: id, sender: this.props.state.user_id, type: 'friend'})
         .then((resp) => {
-            this.setState({
-                confirmationMessage: "request has been sent to " + this.state.users[index].name,
-            })
+            // this.setState({
+                // confirmationMessage: "request has been sent to " + this.state.users[index].name,
+            // })
+
             // axios.get('api/friends/')
             // .then((resp) => {
             //     this.setState({
