@@ -3,7 +3,6 @@ import logo from './logo.svg';
 import NavBar from './components/NavBar/NavBar.js'
 import Header from './components/Header/Header.js'
 import Profile from './components/Profile/Profile';
-import NewEvent from './components/Profile/NewEvents'
 import Friends from './components/Friends/Friends'
 import GroupDetails from './components/GroupDetails/GroupDetails';
 
