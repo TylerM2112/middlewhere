@@ -16,6 +16,16 @@ class DisplayUsers extends Component {
             confirmationMessage:'',
         }
         this.addToFriendsFunc = this.addToFriendsFunc.bind(this)
+        this.compare = this.compare.bind(this)
+        this.displayUsers = this.displayUsers.bind(this)
+    }
+
+    componentDidMount() {
+        this.setState({friends:this.props.friends,users:this.props.users})
+    }
+
+    componentWillReceiveProps(props){
+        this.setState({friends:props.friends,users:props.users})
     }
 
 
@@ -33,28 +43,46 @@ class DisplayUsers extends Component {
         })
     }
 
+    compare(){
+        if(this.state.friends && this.state.users){
+            let filtered = []
+
+            this.state.users.map(f=> this.state.friends.findIndex(e=>e.friend_id == f.auto_id) == -1 ? filtered.push(f) : '')
+
+           this.setState({filtered:filtered})
+        }
+
+    }
+
+    displayUsers(){
+        if(this.state.friends && this.state.users){
+            let filtered = []
+
+            this.state.users.map(f=> this.state.friends.findIndex(e=>e.friend_id == f.auto_id) == -1 ? filtered.push(f) : '')
+
+           return  filtered.map((elem, i) => {
+                let timer = i;
+               let   style = { animationDelay: `${timer/20}s` }
+                 return (
+                     // <ReactSwipe className="carousel" swipeOptions={{ continuous: false }} key={elem.auto_id + i} id={"id" + elem.auto_id}>
+                     <div style={style} className="individual_user_div">
+                     <div className="">
+                         <div className="user_name"> {elem.name}</div>
+                         <img className="user_img" src={elem.picture}/>
+                         <PostButton  postButtonFunctionProp={() => {this.addToFriendsFunc(elem.auto_id, i)}} label={'ADD TO FRIENDS'} class={"addToFriendsButton"}/>
+                     </div>
+                     </div>
+                     //  </ReactSwipe>
+                 )   
+             })
+        }
+    }
+
     
     
     render(){
-        let filteredUsers = this.props.users.filter((user) => {
-            return  user.name.indexOf(this.state.input) !== -1;
-        })
-        console.log('this.state', this.state)
-        const displayUsers = this.props.users.map((elem, i) => {
-           let timer = i;
-          let   style = { animationDelay: `${timer/20}s` }
-            return (
-                // <ReactSwipe className="carousel" swipeOptions={{ continuous: false }} key={elem.auto_id + i} id={"id" + elem.auto_id}>
-                <div style={style} className="individual_user_div">
-                <div className="">
-                    <div className="user_name"> {elem.name}</div>
-                    <img className="user_img" src={elem.picture}/>
-                    <PostButton  postButtonFunctionProp={() => {this.addToFriendsFunc(elem.auto_id, i)}} label={'ADD TO FRIENDS'} class={"addToFriendsButton"}/>
-                </div>
-                </div>
-                //  </ReactSwipe>
-            )   
-        })
+        
+    
 
 
         // window.onscroll = function() {myFunction()};
@@ -74,7 +102,7 @@ class DisplayUsers extends Component {
 
             <div className={this.props.displayUserDiv}>
             <div className="scrollableContainer">    
-                    <div>{displayUsers}</div>
+                    <div>{this.displayUsers()}</div>
              </div>       
 
             </div>
