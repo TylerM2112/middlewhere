@@ -49,7 +49,7 @@ module.exports = {
     const { receiver, type_id } = req.body
 
     db.confirm_group([+receiver, +type_id])
-      .then(res => {
+      .then(response => {
         res.status(200).end()
       })
       .catch(err => {
@@ -63,7 +63,7 @@ module.exports = {
   getGroups: (req, res) => {
     const db = req.app.get('db');
     const { user_id } = req.params;
-
+    console.log("HEY LOOK",req.params);
     db.get_user_groups(user_id)
       .then(groups => res.status(200).send(groups))
       .catch(err => {

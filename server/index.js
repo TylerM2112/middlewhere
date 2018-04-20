@@ -57,8 +57,9 @@ app.get('/auth/callback', (req, res) => { //from here Get request to
           if (users.length) {
 
             const user = users[0];
-
-            req.session.user = {user_id: user.auto_id, email: user.email, name: user.name, phone: user.phone, picture: user.picture };
+            console.log(user)
+            req.session.user = { user_id: user.auto_id, email: user.email, name: user.name, phone: user.phone, picture: user.picture };
+            console.log(req.session.user)
             res.redirect('/profile');
 
           } else {

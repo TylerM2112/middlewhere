@@ -25,7 +25,8 @@ class Profile extends Component {
 	componentDidMount() {
 		this.setState({loaded:true,setTimestamp:new Date().getTime()})
     axios.get(`/api/getUserInfo/`)
-    .then(res => {
+			.then(res => {
+				console.log(res);
       this.props.updateUser(res.data)
       
       axios.get(`/api/notifications/${this.props.state.user_id}`)
@@ -76,8 +77,6 @@ class Profile extends Component {
 			<div className="ProfileMainContainer">
 
 				{this.displayProfile()}
-				{/* {this.displayNotifications()} */}
-				{/* {this.displayLocations()} */}
 				<DisplayNotifications notifications={this.state.notifications} />
 				<DisplayAddresses />
 			</div>

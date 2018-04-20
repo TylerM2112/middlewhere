@@ -39,10 +39,8 @@ class GroupEvent extends Component {
       loaded:false,
 
     }
-
-    this.getYelp = this.getYelp.bind(this)
-    
-    this.addSelectedPlacesToEvent = this.addSelectedPlacesToEvent.bind(this)
+    this.getYelp = this.getYelp.bind(this);
+    this.addSelectedPlacesToEvent = this.addSelectedPlacesToEvent.bind(this);
     this.addMiddlepoint = this.addMiddlepoint.bind(this);
   }
 
