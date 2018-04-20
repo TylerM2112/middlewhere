@@ -118,27 +118,28 @@ class AddEvent extends Component {
     render() {
         return (
             <div className="mainAddEventContainer">
-                {this.state.loaded ?    
-            <div>        
-                <input placeholder="Event Name" onChange={(e) => { this.setState({ eventName: e.target.value }, () => this.isValidated() )}}/>
+                {/* {this.state.loaded ?     */}
+            <div className="inputParentDiv">        
+                <input className="newEvent-input" placeholder="Event Name" onChange={(e) => { this.setState({ eventName: e.target.value }, () => this.isValidated() )}}/>
                 <br/>
-                <input placeholder="date" type="date" onChange={(e) => { this.setState({ eventDate: e.target.value }, () => this.isValidated() )}} />
+                <input className="newEvent-input" placeholder="date" type="date" onChange={(e) => { this.setState({ eventDate: e.target.value }, () => this.isValidated() )}} />
                 <br />
-                <input placeholder="time" type="time" onChange={(e)=>{this.setState({eventTime:e.target.value}, () => this.isValidated() )}}/>
+                <input className="newEvent-input" placeholder="time" type="time" onChange={(e)=>{this.setState({eventTime:e.target.value}, () => this.isValidated() )}}/>
                 <br />
 
                 {console.log("STATE FOR ADDEVENT",this.state)}
-                <input type="date" onChange={e => {this.setState({ eventDeadline: e.target.value }, () => this.isValidated() )}} />
-                {this.state.validated ?
-                    <button onClick={()=>this.props.switchView(2,1,{e:this.state})}>Select places</button>
-                    :
+                <input className="newEvent-input" type="date" onChange={e => {this.setState({ eventDeadline: e.target.value }, () => this.isValidated() )}} />
+                {/* {this.state.validated ? */}
+                
+                    <button className="submitM" onClick={()=>this.props.switchView(2,1,{e:this.state})}>Select places</button>
+                    
                     <div></div>
-                        }
+                        
                 <div className="scrollableContainer">        
                             {this.displayGroups()}
                 </div>            
                 </div>
-                : ''}
+                {/* : ''} */}
             </div>
         );
     }
