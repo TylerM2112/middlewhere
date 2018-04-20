@@ -119,7 +119,6 @@ class FriendsView extends Component {
         console.log('hit from getSearch')
         axios.get(`/api/users/${userList}`)
         .then((resp) => {
-            
             this.setState({
                 users: resp.data
             })
@@ -164,6 +163,7 @@ class FriendsView extends Component {
                 {/*putting input here to fix sticky search input */}
                 {this.state.userBool ? <div><input className="friend_Search" placeholder="SEARCH " value={this.state.input} onChange={(e) => {this.trackstate(e.target.value)}} type="text"/><button className={'search_button'} onClick={() => this.getSearch(this.state.input)}>SEARCH</button></div> : null}
                         {this.state.userBool ? <DisplayUsers displayUserDiv={this.state.displayUserDiv} users={this.state.users} friends={this.state.friends} input={this.state.input} /> : <div>{displayFriends}</div>}
+
                 </div>        
                 :
                 ''

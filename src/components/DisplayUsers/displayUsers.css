@@ -14,9 +14,11 @@
     height: 54vh;
     padding-bottom:100px;
     border-radius: 7px;
+
     /* overflow: scroll; */
     overflow:hidden;
     /* position: absolute; */
+
     background-color: #E6E6E8;
     color: white;
 }
