@@ -287,12 +287,16 @@ class GroupEvent extends Component {
   addSelectedPlacesToEvent(){
     if(this.state.isCreating){
     axios.post(`/api/createEventFinal/`,this.state)
-      .then()
+      .then(
+        this.props.switchView(1,0)
+      )
       .catch(err=>console.log(err));
     }
     else{
       axios.post(`/api/updateEvent`,this.state)
-        .then()
+        .then(
+        this.props.switchView(1,0)          
+        )
         .catch(err=>console.log(err));
     }
   }

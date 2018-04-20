@@ -182,13 +182,7 @@ class DisplayNotifications extends Component {
 											<p>{e.notification_name}</p>
 											
 											<p>On {e.event_date} at {e.event_time.substr(0, 2) < 12 ? `${e.event_time} AM` : e.event_time.substr(0, 2) - 12 + e.event_time.substr(2, 3) + "PM"}</p>
-											<Link to={{
-                                                pathname: "/events/select",
-                                                state:{
-                                                    group_id:+e.type_id,
-                                                    isCreating: false}
-                                            
-                                            }}><button className="approveButton" onClick={() => this.approved(e)}>Approve</button></Link>
+											<button className="approveButton" onClick={() => this.approved(e)}>Approve</button>
 											<button className="declineButton" onClick={() => this.removeNotification(e)}>Decline</button>
 										</div>
 									</div>

@@ -123,7 +123,7 @@ app.delete('/api/friends/:id', friendController.delete_friend)
 //get groups for that user
 app.get('/api/getGroups/:user_id', groupController.getGroups)
 //adds a group to the db
-app.post('/api/new/group', checkBody, groupController.post_group)
+app.post('/api/new/group', groupController.post_group)
 //send the notification to the users for a new group
 app.post('/api/groups', groupController.approve_group)
 //GET GROUPS FOR USER
@@ -136,7 +136,7 @@ app.delete('/api/deleteUserFromGroup/:group_id/:user_id',groupController.deleteU
 //EVENTS CONTROLLER
 
 // app.post('/api/new/event', eventController.post_event)
-// app.post('/api/events', eventController.approve_event)
+app.post('/api/events', eventController.approve_event)
 //gets all the users of the selected groups for an event
 app.post('/api/createEvent',eventController.createEvent);
 //creates the event,notifications and the group admin suggested places

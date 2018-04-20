@@ -4,6 +4,7 @@ module.exports = {
   post_group: (req, res) => {
     const db = req.app.get('db')
     const { group_title, group_members, group_purpose, group_admin } = req.body
+    console.log("LOOK AT ME", req.body)
     let group_id = null;
 
     db.post_group([group_title, group_purpose, group_admin])
