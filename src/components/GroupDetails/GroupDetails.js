@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import './GroupDetails.css';
+// import './GroupDetails.css';
 import ReactSwipe from 'react-swipe';
+import SwipeableViews from 'react-swipeable-views'
 
 class GroupDetails extends Component {
     constructor(){
@@ -14,31 +15,36 @@ class GroupDetails extends Component {
             isGroupAdmin:false,
         }
 
-        this.dis
     }
-    componentDidMount() {
-        axios.get(`/api/getGroupMembers/${this.props.location.state.e.group_id}`)
-            .then(res=> this.setState({groupDetails:this.props.location.state.e,groupMembers:res.data,isGroupAdmin:this.props.location.state.e.group_admin == this.props.state.user_id},()=>console.log(this.state)))
+    componentWillReceiveProps(props) {
+        console.log(props)
+        if(props.subView === 1 && props.view === 0 && props.passedState){
+            console.log(props.passedState.e)
+            this.setState({loaded:true})
+            axios.get(`/api/getGroupMembers/${props.passedState.e.group_id}`)
+            .then(res=> this.setState({groupDetails:props.passedState.e,
+                groupMembers:res.data,
+                isGroupAdmin:props.passedState.e.group_admin == props.state.user_id}))
             .catch(err=>console.log(err));
-
-            console.log(this.state)
+        }
     }
 
     displayDetails(){
         if(this.state.groupDetails){
             let e = this.state.groupDetails;
             return(
-                <ReactSwipe className="carousel" swipeOptions={{ continuous: false }}>
-                <div className="groupContainer absHeader">
-                <div className={!e.flipCard ? "leftContainer" : "leftContainer colorChange"}>
-                  <div className="groupTitle">{e.group_title}</div>
-                  <div className="groupPurpose">{e.group_purpose}</div>
-                  <div className="groupPurpose">{e.group_member_count} {e.group_member_count == 1 ? "member" : "members"}</div>
+            <SwipeableViews axis="x" resistance key={e.group_id} id={"id" + e.group_id} class="groupContainer">
+                <div className="groupContainerFlex">
+                  
+                  <div className="leftContainer">
+                    <div className="groupTitle">{e.group_title}</div>
+                    <div className="groupPurpose">{e.group_purpose}</div>
+                    <div className="groupPurpose">{e.group_member_count} {e.group_member_count == 1 ? "member" : "members"}</div>
+                  </div>
+                  <div>
+                    <img className="groupPicture" src={e.picture} />
+                  </div>
                 </div>
-                <div className={!e.flipCard ? "rightContainer" : "rightContainer colorChange"}>
-                  <img className="groupPicture" src={e.picture} />
-                </div>
-              </div>
               
               <div className="absHeader2">
                   {this.state.isGroupAdmin ? 
@@ -47,7 +53,7 @@ class GroupDetails extends Component {
                         <div><button onClick={()=>this.leaveGroup()}>Leave Group</button></div> }
               
               </div>
-              </ReactSwipe>
+              </SwipeableViews>
             )
         }
     }
@@ -60,18 +66,23 @@ class GroupDetails extends Component {
                 timer = i;
                 style = { animationDelay: `${timer/20}s` }
                 return(
-                    <ReactSwipe className="carousel" swipeOptions={{ continuous: false }}>
-                    <div style={style} className="groupContainer groupMemberContainer">
-                        <div className="groupTitle">{e.name}</div>
-                        <img src={e.picture}/>
-                    </div>
+                    <SwipeableViews axis="x" style={style} resistance key={e.group_id + i} id={"id" + e.group_id} class="groupContainer">
+                <div style={style} className="groupContainerFlex">
+                  
+                  <div className="leftContainer">
+                    <div className="groupTitle">{e.name}</div>
+                  </div>
+                  <div>
+                    <img className="groupPicture" src={e.picture} />
+                  </div>
+                </div>
                     {this.state.isGroupAdmin ? 
                     //some use for possible conditional admin rendering 
                             <div className="groupMemberContainerRight"><button className="groupContainerButton" onClick={()=>this.removeUser(e.auto_id)}>Remove User</button></div>
                         :
                             ''
                     }
-                    </ReactSwipe>
+                    </SwipeableViews>
                 )
             })
         }
@@ -82,6 +93,7 @@ class GroupDetails extends Component {
                 {this.displayDetails()}
                 <div className="mainGroupMembersContainer">
                 {this.displayGroupMembers()}
+                hi
                 </div>
             </div>
         );
