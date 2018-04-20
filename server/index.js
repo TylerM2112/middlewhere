@@ -42,7 +42,7 @@ app.get('/auth/callback', (req, res) => { //from here Get request to
       client_secret: process.env.REACT_APP_AUTH0_CLIENT_SECRET,
       code: req.query.code,
       grant_type: 'authorization_code',
-      redirect_uri: `https://${req.headers.host}/auth/callback`,
+      redirect_uri: `http://${req.headers.host}/auth/callback`,
     }).then(accessTokenResponse => {
       // console.log('req.headers', req.headers)
       const accessToken = accessTokenResponse.data.access_token;

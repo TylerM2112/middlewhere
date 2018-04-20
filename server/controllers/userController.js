@@ -6,15 +6,15 @@ module.exports = {
 
     var addresses = '';
     let userInfo = '';
-    
-    db.get_user_info([req.session.user.user_id])
+    console.log(req.session.user)
+    db.get_user_info([338])
       .then(user => {
 
         //if the user has addresses gets them from the database
         user[0].address_count = +user[0].address_count
         userInfo = user[0];
         if (userInfo.address_count !== 0 || typeof userInfo.address_count !== 'undefined') {
-          db.get_user_addresses([req.session.user.user_id])
+          db.get_user_addresses([338])
             .then(address => {
               let userObj = Object.assign({}, userInfo);
               userObj.addresses = [];
@@ -25,14 +25,14 @@ module.exports = {
 
               res.status(200).send(userObj);
             })
-            .catch(err =>{ console.log("userController.getUserInfo get_user_addresses",err);})
+            .catch(err => { console.log("userController.getUserInfo get_user_addresses", err); })
         }
         else {
           res.status(200).send(user[0]);
         }
       })
       .catch(err => {
-        console.log("userController.getUserInfo",err);
+        console.log("userController.getUserInfo", err);
         res.status(500).send(err);
       })
 
@@ -76,10 +76,10 @@ module.exports = {
     const { user_id } = req.params;
     const db = req.app.get('db');
 
-    db.add_user_address([ newAddress1, newCity, newState, newPostalcode, newPlaceName, newLat, newLong, user_id, defaultaddress ])
+    db.add_user_address([newAddress1, newCity, newState, newPostalcode, newPlaceName, newLat, newLong, user_id, defaultaddress])
       .then(response => res.status(200).send(response))
       .catch(err => {
-        console.log("userController.addUserAddress",err);
+        console.log("userController.addUserAddress", err);
         res.status(500).send(err);
       })
   },
@@ -91,7 +91,7 @@ module.exports = {
     db.get_users()
       .then((users) => { res.status(200).send(users) })
       .catch((err) => {
-        console.log("userController.get_users",err);
+        console.log("userController.get_users", err);
         res.status(500).send(err);
       })
   },
@@ -101,9 +101,9 @@ module.exports = {
     const db = req.app.get('db');
 
     db.remove_address([auto_id])
-      .then(response => {res.status(200).send(response.auto_id) })
+      .then(response => { res.status(200).send(response.auto_id) })
       .catch(err => {
-        console.log("userController.removeAddress",err);
+        console.log("userController.removeAddress", err);
         res.status(500).send(err);
       });
   },
@@ -126,58 +126,58 @@ module.exports = {
 
         res.status(200).send(notificationArr);
       }).catch(error => {
-        console.log("userController.getNotifications",err);
+        console.log("userController.getNotifications", err);
         res.status(500).send(err);
       })
-  }, 
+  },
 
   remove_notification: (req, res) => {
     const db = req.app.get('db');
     let { notification_id } = req.params
 
     db.remove_notification([notification_id])
-      .then(()=>res.status(200).end())
+      .then(() => res.status(200).end())
       .catch(error => {
-        console.log("userController.remove_notification",err);
+        console.log("userController.remove_notification", err);
         res.status(500).send(err);
       })
-  }, 
-  
+  },
+
   editAddress: (req, res) => {
     const db = req.app.get('db');
     let { auto_id } = req.params
     const { newAddress1, newCity, newState, newPostalcode, newPlaceName, newLat, newLong } = req.body;
 
-    db.edit_address([ auto_id, newAddress1, newCity, newState, newPostalcode, newLong, newLat, newPlaceName ])
+    db.edit_address([auto_id, newAddress1, newCity, newState, newPostalcode, newLong, newLat, newPlaceName])
       .then(response => { res.status(200).send(response) })
       .catch(err => {
-        console.log("userController.editAddress",err);
+        console.log("userController.editAddress", err);
         res.status(500).send(err);
       })
-   },
+  },
 
-   search_user: (req, res) => {
+  search_user: (req, res) => {
     const db = req.app.get('db');
     let { users } = req.params
 
     db.search_user([users])
       .then((usersFromDb) => { res.status(200).send(usersFromDb) })
       .catch((err) => {
-        console.log("userController.search_user",err);
+        console.log("userController.search_user", err);
         res.status(500).send(err);
       })
   },
-    
+
   //updates the default address
   updateDefaults: (req, res) => {
     const db = req.app.get('db');
     const { auto_id } = req.body;
     const { user_id } = req.params
-    
+
     db.update_defaults([user_id, auto_id])
       .then(response => { res.status(200).send(response) })
-      .catch(err => { 
-        console.log("userController.updateDefaults",err);
+      .catch(err => {
+        console.log("userController.updateDefaults", err);
         res.status(500).send(err);
       })
   }

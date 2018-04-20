@@ -64,7 +64,7 @@ module.exports = {
     const db = req.app.get('db');
     const { user_id } = req.params;
 
-    db.get_user_groups(+user_id)
+    db.get_user_groups(user_id)
       .then(groups => res.status(200).send(groups))
       .catch(err => {
         console.log("groupController.getGroups",err)

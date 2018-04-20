@@ -97,16 +97,16 @@ module.exports = {
   getEventDetails:(req,res)=>{
     const db = req.app.get('db');
     const {group_id} = req.params
-
+    console.log("get event details",req.params)
     let obj = {};
     let places = [];
-    db.get_event_member_locations([group_id])
+    db.get_event_member_locations([+group_id])
       .then(users=>{
         obj.users = users;
-        db.get_suggested_places([group_id])
+        db.get_suggested_places([+group_id])
           .then(place=>{
             places = place;
-            db.get_user_suggested_places([group_id,338])
+            db.get_user_suggested_places([+group_id,338])
               .then(userPlaces=>{
                 places.map(e=>{
                   let index = userPlaces.findIndex(i=>i.place_id === e.place_id)
@@ -119,6 +119,7 @@ module.exports = {
                 })
 
                 obj.places = places;
+                console.log(obj)
                 res.status(200).send(obj)
               })
           })
@@ -134,7 +135,7 @@ module.exports = {
   updateEvent:(req,res)=>{
     const {middlepoint,markers,users} = req.body
     const db = req.app.get('db');
-
+    console.log(markers)
     let lat = middlepoint[0]
     let long = middlepoint[1]
     let event_id = +users[0].event_id
