@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Map from './../Map/Map';
 import SwipeableViews from 'react-swipeable-views'
-import './GroupEvent.css'
+// import './GroupEvent.css'
 import logo from '../../assets/images/mw.png';
 import yelpLogo from './../../assets/images/yelpLogo/Yelp_trademark_RGB.png'
 import zero from './../../assets/images/yelp stars/small/small_0.png';
@@ -324,11 +324,17 @@ class GroupEvent extends Component {
           <div>
         {console.log("groupevent loaded",this.state.users)}
           <div className="containerForBtn">
-          <button onClick={(e)=>{(e)=>e.preventDefault(); this.setState({showMap:!this.state.showMap})}} href="#">Hide Map</button>
-          {this.state.selectedPlaces} {this.state.selectedPlaces === 1 ? "place" : "places"} selected
-          <button onClick={()=>this.addSelectedPlacesToEvent()}>Add Selected Places</button>
-          <div className="mapContainer mapMoveDown">
           <Map addMiddlepoint={this.addMiddlepoint} locations={this.state.users} getYelp={this.getYelp} getMarkers={this.state.markers} getSelectedInfoBox={this.getSelectedInfoBox} suggestedPlaces={this.state.suggestedPlaces} subView={this.props.subView} view={this.props.view}/>
+            <div className="selectedPlacesText">
+              <span>
+          {this.state.selectedPlaces} {this.state.selectedPlaces === 1 ? "place" : "places"} selected</span>
+          </div>
+          <div className="flexer">
+          <button onClick={(e)=>{(e)=>e.preventDefault(); this.setState({showMap:!this.state.showMap})}} href="#">Hide Map</button>
+          <button onClick={()=>this.addSelectedPlacesToEvent()}>Create Event</button>
+          </div>
+
+          <div className="mapContainer mapMoveDown">
           </div>
           </div>
           <div className="scrollableContainer eventScrollableContainer">
