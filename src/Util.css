@@ -38,7 +38,6 @@ html,body{
     top: 5px;
 }
 
-@media(min-width: ){}
 
 .navBtn{
     height:10vh;
@@ -259,12 +258,12 @@ button{
 }
 
 .groupTitle{
-    font-family: 'Dosis';
+    font-family: 'Dosis' !important;
     font-family: bold;
 }
 
 .groupPurpose{
-    font-family: 'Open Sans';
+    font-family: 'Open Sans' !important;
     font-size:10px;
 }
 
@@ -278,4 +277,13 @@ button{
 
 .groupPicture{
 
+}
+
+.locationLabel{
+    font-family: 'Dosis' !important;
+    font-family: bold;
+}
+
+.locationLabel > button{
+    flex:0 0 ;
 }

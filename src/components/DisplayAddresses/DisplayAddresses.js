@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { addAddress, removeAddress, updateAddress, updateAllAddresses, forceDefault } from './../../ducks/reducer';
 
 import logo from "../../assets/images/mwLogoSmallpng.png";
+import SwipeableViews from 'react-swipeable-views';
 
 
 class DisplayAddresses extends Component {
@@ -262,30 +263,56 @@ class DisplayAddresses extends Component {
 			if (index === -1) {
 				this.props.forceDefault();
 			}
-			this.props.state.addresses.map(e => {
-        html.push(
-          
-					<div className="singleAddressTab" >
-						<div className="singleAddressLabel" onClick={() => this.toggle("ADDRESS")}>
-              <div className="addressLabelText">{e.place} - {e.address1}</div>
+			
+			this.props.state.addresses.map((e,i) => {
+				let timer = i;
+         	 	let style = { animationDelay: `${timer/20}s` }
+				html.push(
+					<SwipeableViews axis="x" style={style} resistance key={e.group_id + i} id={"id" + e.group_id} class="groupContainer">
+                <div style={style} className="groupContainerFlex">
+                  
+                  <div className="leftContainer">
+                    <div className="groupTitle">{e.place} - {e.address1}</div>
+                    
+                  </div>
+				  {e.defaultaddress == true ?
+                  <div>
+                    <img className="groupPicture" src={logo} />
+                  </div>
+				  : ''}
+                </div>
+                
 
-              {e.defaultaddress == true ?
-                  <div><img src={logo} alt="logo" /></div>
-                :
-                  <div></div>}
-						</div>
-
-						<div className={this.state.toggleAddress ? "singleAddressContainer" : "addressOff"}>
-							<div>{e.city}, {e.state} {e.postalcode}</div>
-							<div className="addressButtonContainer">
-								<button onClick={() => this.toggle("EDIT_ADDRESS", e)}>Edit</button>
-								<button onClick={() => this.removeAddress(e.auto_id)}>Remove</button>
-								<button onClick={() => this.setAsDefault(e)}>Set as Default</button>
-							</div>
-            </div>
-            
-					</div>
+                <div className="groupDetails">
+					<button onClick={() => this.toggle("EDIT_ADDRESS", e)}>Edit</button>
+		 			<button onClick={() => this.removeAddress(e.auto_id)}>Remove</button>
+		 			<button onClick={() => this.setAsDefault(e)}>Set as Default</button>
+                  </div>
+                </SwipeableViews>
 				)
+        // html.push(
+          
+		// 			<div className="singleAddressTab" >
+		// 				<div className="singleAddressLabel" onClick={() => this.toggle("ADDRESS")}>
+        //       <div className="addressLabelText">{e.place} - {e.address1}</div>
+
+        //       {e.defaultaddress == true ?
+        //           <div><img src={logo} alt="logo" /></div>
+        //         :
+        //           <div></div>}
+		// 				</div>
+
+		// 				<div className={this.state.toggleAddress ? "singleAddressContainer" : "addressOff"}>
+		// 					<div>{e.city}, {e.state} {e.postalcode}</div>
+		// 					<div className="addressButtonContainer">
+		// 						<button onClick={() => this.toggle("EDIT_ADDRESS", e)}>Edit</button>
+		// 						<button onClick={() => this.removeAddress(e.auto_id)}>Remove</button>
+		// 						<button onClick={() => this.setAsDefault(e)}>Set as Default</button>
+		// 					</div>
+        //     </div>
+            
+		// 			</div>
+		// 		)
 				return html;
 			})
 		}
@@ -299,8 +326,10 @@ class DisplayAddresses extends Component {
   render() {
     return (
       <div>
-      {this.props.state.user_id ?   
-        this.displayLocations()
+      {this.props.state.user_id ?
+	  <div className="scrollableContainer">   
+        {this.displayLocations()}
+		</div>
       :
         '' } 
       </div>  
