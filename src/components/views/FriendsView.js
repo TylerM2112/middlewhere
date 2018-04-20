@@ -142,7 +142,7 @@ class FriendsView extends Component {
             return (
                 <SwipeableViews resistance>
                 <div className="display_friends_array">
-                    <div><img src={elem.friend_picture}/></div>
+                    <div><img className="groupPicture" src={elem.friend_picture}/></div>
                     <div> {elem.auto_id}</div>
                     <div> {elem.friend_name}</div>
                     <DeleteButton propsFunction={() => this.deleteFriends(elem.auto_id)} className="deleteButton" buttonTxt={'delete friend'}/>
