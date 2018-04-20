@@ -64,7 +64,12 @@ html,body{
     padding:1px;
     z-index:200 !important;
     width:100vw;
+    display:inline-block;
     /* border-bottom:solid rgb(123, 33, 128) 4px; */
+}
+
+#otherGroups > *{
+    margin-left:10px;
 }
 
 @keyframes otherGroupsAni{
@@ -83,7 +88,19 @@ html,body{
     margin:0;
     padding:0;
     z-index:100 !important;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
     /* border-bottom:solid #E53E4F 4px; */
+}
+
+.purple{
+    background-color:#490C4C !important;
+    color:white;
+
 }
 
 .header > p{
@@ -113,6 +130,7 @@ html,body{
 }
 
 .groupContainerFlex{
+    width:90vw;
     background-color:#e6e6e8;
     display: flex;
 	flex-direction: row;
@@ -120,7 +138,8 @@ html,body{
 	justify-content: space-between;
 	align-items: center;
 	align-content: flex-end;
-    padding:10px;
+    /* padding:10px; */
+    padding:5px 20px;
     animation: groupContainerAni .5s;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
@@ -148,10 +167,17 @@ html,body{
     to{transform:translateX(0%);display:block;}
 }
 
-.groupDetails{
+.groupDetails ,.groupMemberContainerRight{
     /* opacity: 0; */
     height:100%;
     background-color:#E53E4F;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+    align-content: center;
+    width:100vw;
     /* animation: groupDetailsAni 1s; */
     /* animation-fill-mode: forwards; */
 }
@@ -167,17 +193,34 @@ html,body{
     width:60px;
 }
 
+button{
+    /* display: inline; */
+    /* margin:10px; */
+    padding:5px 40px;
+    border:none;
+    flex: 0 0;
+    font-family: 'Dosis';
+    border-radius: 10px;
+}
+
+.containerForBtn{
+    padding:0;
+
+}
+
 
 .leftContainer{
     
 }
 
 .groupTitle{
-
+    font-family: 'Dosis';
+    font-family: bold;
 }
 
 .groupPurpose{
-
+    font-family: 'Open Sans';
+    font-size:10px;
 }
 
 .leftContainer{

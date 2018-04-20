@@ -34,7 +34,7 @@ class GroupDetails extends Component {
             let e = this.state.groupDetails;
             return(
             <SwipeableViews axis="x" resistance key={e.group_id} id={"id" + e.group_id} class="groupContainer">
-                <div className="groupContainerFlex">
+                <div className="groupContainerFlex purple">
                   
                   <div className="leftContainer">
                     <div className="groupTitle">{e.group_title}</div>
@@ -93,6 +93,7 @@ class GroupDetails extends Component {
                 {this.displayDetails()}
                 <div className="scrollableContainer">
                 {this.displayGroupMembers()}
+
                 </div>
             </div>
         );

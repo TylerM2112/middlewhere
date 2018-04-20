@@ -58,3 +58,23 @@
     opacity: .8;
     z-index:2;
 }
+
+.containerForBtn {
+    padding-bottom:10px !important;
+    background-color:#490C4C;
+    color:white;
+    font-family: 'Dosis';
+}
+
+.flexer{
+    display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+    align-content: center;
+}
+
+.flexer > button{
+    width:30% !important ;
+}
