@@ -20,6 +20,7 @@ class Groups extends Component {
       otherGroups:false,
     }
     this.userGroups = this.userGroups.bind(this);
+    this.otherGroups = this.otherGroups.bind(this);
   }
   componentDidMount() {
 
@@ -115,6 +116,53 @@ class Groups extends Component {
 
     return html;
   }
+  otherGroups(){
+    let htmlTwo = [];
+
+    let timer = 0;
+    let style = {};
+    if(this.state.groups.length > 0){
+      // console.log(this.state.groups)
+      let userGroups = this.state.groups.filter(e => e.group_admin == this.props.state.user_id);
+      let otherGroups = this.state.groups.filter(e => e.group_admin != this.props.state.user_id);
+
+      if(otherGroups) {
+        // !this.state.otherGroups ? this.setState({otherGroups:true}) : ''
+        otherGroups.map((e,i) =>{
+          timer = i;
+          style = { animationDelay: `${timer/20}s` }
+            htmlTwo.push( 
+              <SwipeableViews axis="x" style={style} resistance key={e.group_id + i} id={"id" + e.group_id} class="groupContainer">
+                <div style={style} className="groupContainerFlex">
+                  
+                  <div className="leftContainer">
+                    <div className="groupTitle">{e.group_title}</div>
+                    <div className="groupPurpose">{e.group_purpose}</div>
+                    <div className="groupPurpose">{e.group_member_count} {e.group_member_count == 1 ? "member" : "members"}</div>
+                  </div>
+                  <div>
+                    <img className="groupPicture" src={e.picture} />
+                  </div>
+                </div>
+                
+
+                <div className="groupDetails">
+                  <button className="btn1" 
+                    onClick={()=>{
+                      this.props.switchView(0,1,{e});
+                      }}
+                      >SHOW GROUP</button>
+                    <button className="btn2" onClick={()=>this.leaveGroup(e.group_id)}>DELETE GROUP</button>
+                  </div>
+                </SwipeableViews>
+              
+              )
+        });
+      }
+    }
+
+    return htmlTwo;
+  }
 
 
   // displayGroups(){
@@ -198,7 +246,7 @@ class Groups extends Component {
   leaveGroup(group_id){
     document.getElementById("id"+ group_id).style.animation = "removeGroupAni .7s linear"
     document.getElementById("id"+ group_id).style.animationFillMode = "forwards"
-    document.getElementById("id2"+ group_id).style.animation = "removeGroupAni 5s"
+    // document.getElementById("id2"+ group_id).style.animation = "removeGroupAni 5s"
       axios.delete(`/api/deleteUserFromGroup/${group_id}/${this.props.state.user_id}`)
       .then(res=>{console.log("AXIOS GET",res.data);this.setState({groups:res.data})})
       .catch(err=>console.log(err))
@@ -268,25 +316,12 @@ class Groups extends Component {
             {this.userGroups()}
             {this.userGroups()}
             {this.userGroups()}
-            {this.userGroups()}
-            {this.userGroups()}
-            {this.userGroups()}
-            {this.userGroups()}
-            {this.userGroups()}
-            {this.userGroups()}
             <div id="otherGroups"className="header"><p>Groups You're A Part Of</p></div>
             <div id="clearGroupDiv"></div>
-            {this.userGroups()}
-            {this.userGroups()}
-            {this.userGroups()}
-            {this.userGroups()}
-            {this.userGroups()}
-            {this.userGroups()}
-            {this.userGroups()}
-            {this.userGroups()}
-            {this.userGroups()}
-            {this.userGroups()}
-            {this.userGroups()}
+            {this.otherGroups()}
+            {this.otherGroups()}
+            {this.otherGroups()}
+            {this.otherGroups()}
 
           </div>
         </div>
