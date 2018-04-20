@@ -48,25 +48,33 @@ app.get('/auth/callback', (req, res) => { //from here Get request to
       const accessToken = accessTokenResponse.data.access_token;
     // *** Q: what does  this \/ do???? 
       return axios.get(`https://${process.env.REACT_APP_AUTH0_DOMAIN}/userinfo/?access_token=${accessToken}`).then(userInfoResponse => {
+        // gets user info 
         const userData = userInfoResponse.data;
 
     // console.log('userData', userData);
     // console.log('req.header.host', req.headers.host)
     
         return req.app.get('db').find_user_by_auth0_id(userData.sub).then(users => {
+          //look in database for user with the same auto_id
           if (users.length) {
-
+            //checks if user array has a length
             const user = users[0];
             console.log(user)
             req.session.user = { user_id: user.auto_id, email: user.email, name: user.name, phone: user.phone, picture: user.picture };
             console.log(req.session.user)
             res.redirect('/profile');
-
+            //redirects to user specified route
           } else {
+            //alternate code block
             const createData = [userData.sub, userData.name, userData.email, userData.phone, userData.picture];
+            //setting this to an array to send to db
             return req.app.get('db').create_user(createData).then(newUsers => {
+            //sends createData to db
               const user = newUsers[0];
+              
+            //first index of user Array stored to variable
               req.session.user = {user_id: user.auto_id, name: user.name, email: user.email, phone: user.phone, picture: user.picture };
+            // sets user object to session
               res.redirect('/profile');
             })
           }

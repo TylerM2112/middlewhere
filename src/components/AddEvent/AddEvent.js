@@ -26,13 +26,6 @@ class AddEvent extends Component {
         this.isValidated = this.isValidated.bind(this);
     }
 
-    componentDidMount() {
-        // axios.get(`/api/getUserEvents/${this.props.state.user_id}`)
-        //     .then(res=>console.log(res.data));
-
-        
-    }
-
     componentWillReceiveProps(props) {
 
         if(props.subView === 2 && props.view === 2){
@@ -53,6 +46,7 @@ class AddEvent extends Component {
     addGroupToEvent(id){
         
         let newGroups = this.state.selectedGroups.slice();
+        //copy of selected groups
         let index = this.state.selectedGroups.indexOf(id);
 
         if(index === -1){
@@ -69,6 +63,7 @@ class AddEvent extends Component {
     }
 
     displayGroups(){
+        // implementing ReactSwipe
         let html = [];
         if (this.state.groups.length > 0 ) {
           let timer = 0;

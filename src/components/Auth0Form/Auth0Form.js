@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import Auth0Lock from 'auth0-lock';
 
+
 export default class Auth0Form extends Component {
   constructor(props){
     super(props)

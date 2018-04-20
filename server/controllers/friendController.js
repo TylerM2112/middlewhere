@@ -30,7 +30,7 @@ module.exports = {
         db.confirm_friend([+receiver, +sender])
             .then(()=> res.status(200).end() )
             .catch(err => { 
-                console.log("friendController.confirm_friend",err)
+                console.log("friendController.confirm_friend", err)
                 res.status(200).send(err) 
             })
     },
@@ -42,7 +42,7 @@ module.exports = {
         db.delete_friend([id])
             .then(() => { res.status(200).send('friend deleted') })
             .catch(err => { 
-                console.log("friendController.delete_friend",err)
+                console.log("friendController.delete_friend", err)
                 res.status(500).send(err) 
             });
     }

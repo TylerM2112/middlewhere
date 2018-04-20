@@ -65,6 +65,7 @@ class Groups extends Component {
 
   userGroups(){
     let html = [];
+
     let timer = 0;
     let style = {};
     if(this.state.groups.length > 0){
