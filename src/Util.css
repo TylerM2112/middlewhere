@@ -35,8 +35,10 @@ html,body{
 .navText{
     margin: 0 auto;
     position: relative;
-    top: 7px;
+    top: 5px;
 }
+
+@media(min-width: ){}
 
 .navBtn{
     height:10vh;
@@ -56,12 +58,11 @@ html,body{
     /* text-align: center; */
     color: white;
    
+   
 }
 
 .redNav{
     background-color:#E53E4F !important;
-    outline:solid white 3px;
-
     /* background-size:100% 100%; */
     animation: redNavAni .3s linear forwards;
 }
@@ -189,6 +190,7 @@ html,body{
     /* width:100vw !important; */
     margin-bottom:1px;
     will-change: transform;
+    overflow: hidden;
 }
 
 
@@ -267,7 +269,7 @@ button{
 }
 
 .leftContainer{
-
+    
 }
 
 .rightContainer{
