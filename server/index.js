@@ -19,7 +19,7 @@ require('dotenv').config();
 
 massive(process.env.CONNECTION_STRING).then(db => app.set('db', db)).catch(e => console.log("massive error", e));
 const app = express();
-// app.use( express.static( `${__dirname}/../build` ) );
+app.use( express.static( `${__dirname}/../build` ) );
 
 app.use(bodyParser.json());
 app.use(session({
@@ -162,10 +162,10 @@ app.delete('/api/removeAddress/:auto_id', userController.removeAddress);
 app.post('/api/yelp/search', yc.search)
 
 
-// const path = require('path')
-// app.get('*', (req, res)=>{
-// res.sendFile(path.join(__dirname, '../build/index.html'));
-// }) 
+const path = require('path')
+app.get('*', (req, res)=>{
+res.sendFile(path.join(__dirname, '../build/index.html'));
+}) 
 
 
 const PORT = process.env.SERVER_PORT || 4000;
