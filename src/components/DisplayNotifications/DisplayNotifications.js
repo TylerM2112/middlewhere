@@ -111,11 +111,11 @@ class DisplayNotifications extends Component {
   displayNotifications() {
 		if (this.state.notifications.length !== 0) {
 			return (
-
+				<div className="scrollableNotificationContainer">
 				<div className="notificationsContainer" >
 					{this.state.notifications[0].length > 0 &&
 						<div className="notification">
-
+							
 							<div className="notificationTab" onClick={() => this.toggle("FRIENDS")}>
 								<div className="notificationLabel">
 									<span>	New Friend Request! ({this.state.notifications[0].length}) </span>
@@ -133,6 +133,7 @@ class DisplayNotifications extends Component {
 											<button className="declineButton" onClick={() => this.removeNotification(e)}>Decline</button>
 										</div>
 									</div>
+									
 								)
 							})}
 						</div>
@@ -159,13 +160,14 @@ class DisplayNotifications extends Component {
 											<button className="declineButton" onClick={() => this.removeNotification(e)}>Decline</button>
 										</div>
 									</div>
+									
 								)
 							})}
 						</div>
 					}
 					{this.state.notifications[2].length > 0 &&
 						<div className="notification">
-
+						
 							<div className="notificationTab" onClick={() => this.toggle("EVENTS")}>
 								<div className="notificationLabel">
 									<span>	New Event Request! ({this.state.notifications[2].length}) </span>
@@ -186,11 +188,13 @@ class DisplayNotifications extends Component {
 											<button className="declineButton" onClick={() => this.removeNotification(e)}>Decline</button>
 										</div>
 									</div>
+								
 								)
 							})}
 						</div>
 					}
-				</div>
+					</div>
+				</div>	
 			)
 		}
 	}

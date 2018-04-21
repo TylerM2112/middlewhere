@@ -31,7 +31,7 @@ class Profile extends Component {
 				console.log(res);
       this.props.updateUser(res.data)
       
-      axios.get(`/api/notifications/${this.props.state.user_id}`)
+      axios.get(`/api/notifications/336`)
         .then(res => {
           this.setState({ notifications: res.data })
         })

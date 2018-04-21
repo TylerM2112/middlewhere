@@ -225,7 +225,7 @@ class DisplayAddresses extends Component {
 					<button onClick={() => this.toggle("ADDRESS_ADD")}>Add Address</button>
         </div>
         
-				<div className={this.state.toggleLocations ? "addressesContainer" : "eventsOff"}>
+				<div className="addressesContainer">
 					<div className={this.state.toggleAddAddress ? "editAddress" : "addAddressOff"}>
 						<label>Location Label</label>
 						<input type="text" onChange={e => this.setState({ newPlaceName: e.target.value }, () => { this.isValidated() })} value={this.state.newPlaceName} />

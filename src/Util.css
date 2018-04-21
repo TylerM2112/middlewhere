@@ -4,6 +4,7 @@
     box-sizing: border-box;
     height:100vh;
     background-color:#E53E4F !important;
+    transform: translate3d(0, 0, 0);
 }
 
 html,body{
@@ -24,6 +25,10 @@ html,body{
     width: 99.7%;
     bottom: 0;
     
+}
+
+.vh{
+    height:10vh;
 }
 .navImages {
     max-width: 100%;
@@ -179,11 +184,14 @@ html,body{
 .scrollableContainer{
     overflow:scroll;
     height:85vh;
+    /* -webkit-overflow-scrolling: touch; */
+    
     /* margin-right:-17px; */
 }
 #groupScrollableContainer{
     padding-top:54px;
     padding-bottom:54px !important;
+    /* -webkit-overflow-scrolling: touch; */
     /* z-index: 20; */
     /* padding-bottom:30vh; */
 }
@@ -268,6 +276,7 @@ button{
     flex: 0 0;
     font-family: 'Dosis';
     border-radius: 10px;
+    background-color: #e6e6e8;
 }
 
 .containerForBtn{

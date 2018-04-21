@@ -108,11 +108,12 @@ module.exports = {
 
   getNotifications: (req, res) => {
     const { user_id } = req.params;
+    console.log(user_id)
     const db = req.app.get('db');
     console.log(req.params)
     db.get_notifications([+user_id])
       .then(arr => {
-
+        console.log(arr)
         let friendArr = arr.filter(e => e.type === "friend")
         let groupArr = arr.filter(e => e.type === "group")
         let eventArr = arr.filter(e => e.type === "event")
