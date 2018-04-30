@@ -111,7 +111,7 @@ export default class Map extends Component {
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSrFGEyQytdhP2uxK_GEuYK_Qj1zPnn4c&v=3.exp&libraries=geometry,drawing,places"
 
           loadingElement={<div style={{ height: `100%`,width:`100vw` }} />}
-          containerElement={<div style={{ height: `200px`,width:`100vw` }} />}
+          containerElement={<div style={{ height: `500px`,width:`100vw` }} />}
 
           mapElement={<div style={{ height: `100%` }} />}
           array={this.state.locations}
